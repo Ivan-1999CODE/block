@@ -91,10 +91,10 @@ const PHONICS_DATA = {
     tips: "單母音 (a, e, i, o, u) 就像是注音符號的母音。每個字母在單字裡發出短而輕的聲音喔！例如 <b>a</b> 發 /æ/（嘴巴張大，像貓咪 cat），<b>e</b> 發 /ɛ/（像筆 pen），<b>i</b> 發 /ɪ/（像小豬 pig），<b>o</b> 發 /ɑ/（像熱 hot），<b>u</b> 發 /ʌ/（像杯子 cup）。",
     sounds: {
       a: "a",
-      e: "e",
-      i: "i",
-      o: "o",
-      u: "u"
+      e: "eh",
+      i: "ih",
+      o: "ah",
+      u: "uh"
     }
   },
   vowels_double: {
