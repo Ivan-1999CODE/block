@@ -117,14 +117,14 @@ const PHONICS_DATA = {
     tips: "子音組合有時會<b>發出一個全新的音</b>（如 sh, ch, th, ph, wh），有時則是兩個字母的<b>發音快速滑過去</b>（如 tr, dr, br, cr）。例如：<br>• <b>sh</b> 發 /ʃ/（像叫人安靜的『噓』，如 ship）<br>• <b>ch</b> 發 /tʃ/（像火車『七』，如 chip）<br>• <b>th</b> 發 /θ/（要把舌頭夾在牙齒中間發音喔，如 three）<br>• <b>ph</b> 發 /f/（發『夫』的音，如 phone）<br>• <b>wh</b> 發 /w/ (發『烏』，如 whale)<br>• <b>tr</b> /tr/, <b>dr</b> /dr/, <b>br</b> /br/, <b>cr</b> /cr/ 則是把兩個聲母連著快速唸出來！",
     sounds: {
       sh: "shh",
-      ch: "ch",
-      th: "th",
-      ph: "ff",
-      wh: "w",
-      tr: "trr",
-      dr: "drr",
-      br: "brr",
-      cr: "crr"
+      ch: "chuh",
+      th: "thuh",
+      ph: "fuh",
+      wh: "wuh",
+      tr: "truh",
+      dr: "druh",
+      br: "bruh",
+      cr: "cruh"
     }
   }
 };
