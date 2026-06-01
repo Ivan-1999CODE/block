@@ -101,14 +101,14 @@ const PHONICS_DATA = {
     title: "雙母音組 📖 學習樂園",
     tips: "雙母音是兩個母音字母<b>「手牽手在一起」</b>發出的新發音喔！例如：<br>• <b>ou</b> 與 <b>ow</b> 發 /aʊ/（大聲說『凹』的音，如 cloud, cow）<br>• <b>au</b> 與 <b>aw</b> 發 /ɔ/（像嘴巴張圓發『歐』，如 sauce, draw）<br>• <b>oo</b> 發 /ʊ/ 或 /u/（像『屋』，如 book, zoo）<br>• <b>ee</b> 與 <b>ea</b> 發長音 /i/（拉長音『衣』，如 tree, leaf）<br>• <b>oi</b> 與 <b>oy</b> 發 /ɔɪ/（『歐義』連著發音，如 coin, toy）",
     sounds: {
-      ou: "ou",
+      ou: "ow",
       ow: "ow",
-      au: "au",
+      au: "aw",
       aw: "aw",
-      oo: "oo",
+      oo: "ooh",
       ee: "ee",
-      ea: "ea",
-      oi: "oi",
+      ea: "ee",
+      oi: "oy",
       oy: "oy"
     }
   },
@@ -116,15 +116,15 @@ const PHONICS_DATA = {
     title: "子音與輔音群 📖 學習樂園",
     tips: "子音組合有時會<b>發出一個全新的音</b>（如 sh, ch, th, ph, wh），有時則是兩個字母的<b>發音快速滑過去</b>（如 tr, dr, br, cr）。例如：<br>• <b>sh</b> 發 /ʃ/（像叫人安靜的『噓』，如 ship）<br>• <b>ch</b> 發 /tʃ/（像火車『七』，如 chip）<br>• <b>th</b> 發 /θ/（要把舌頭夾在牙齒中間發音喔，如 three）<br>• <b>ph</b> 發 /f/（發『夫』的音，如 phone）<br>• <b>wh</b> 發 /w/ (發『烏』，如 whale)<br>• <b>tr</b> /tr/, <b>dr</b> /dr/, <b>br</b> /br/, <b>cr</b> /cr/ 則是把兩個聲母連著快速唸出來！",
     sounds: {
-      sh: "sh",
+      sh: "shh",
       ch: "ch",
       th: "th",
-      ph: "ph",
-      wh: "wh",
-      tr: "tr",
-      dr: "dr",
-      br: "br",
-      cr: "cr"
+      ph: "ff",
+      wh: "w",
+      tr: "trr",
+      dr: "drr",
+      br: "brr",
+      cr: "crr"
     }
   }
 };
