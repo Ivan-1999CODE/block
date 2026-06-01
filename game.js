@@ -90,41 +90,41 @@ const PHONICS_DATA = {
     title: "單母音組 📖 學習樂園",
     tips: "單母音 (a, e, i, o, u) 就像是注音符號的母音。每個字母在單字裡發出短而輕的聲音喔！例如 <b>a</b> 發 /æ/（嘴巴張大，像貓咪 cat），<b>e</b> 發 /ɛ/（像筆 pen），<b>i</b> 發 /ɪ/（像小豬 pig），<b>o</b> 發 /ɑ/（像熱 hot），<b>u</b> 發 /ʌ/（像杯子 cup）。",
     sounds: {
-      a: "a, says /æ/ as in cat.",
-      e: "e, says /ɛ/ as in pen.",
-      i: "i, says /ɪ/ as in pig.",
-      o: "o, says /ɑ/ as in hot.",
-      u: "u, says /ʌ/ as in cup."
+      a: "a",
+      e: "e",
+      i: "i",
+      o: "o",
+      u: "u"
     }
   },
   vowels_double: {
     title: "雙母音組 📖 學習樂園",
     tips: "雙母音是兩個母音字母<b>「手牽手在一起」</b>發出的新發音喔！例如：<br>• <b>ou</b> 與 <b>ow</b> 發 /aʊ/（大聲說『凹』的音，如 cloud, cow）<br>• <b>au</b> 與 <b>aw</b> 發 /ɔ/（像嘴巴張圓發『歐』，如 sauce, draw）<br>• <b>oo</b> 發 /ʊ/ 或 /u/（像『屋』，如 book, zoo）<br>• <b>ee</b> 與 <b>ea</b> 發長音 /i/（拉長音『衣』，如 tree, leaf）<br>• <b>oi</b> 與 <b>oy</b> 發 /ɔɪ/（『歐義』連著發音，如 coin, toy）",
     sounds: {
-      ou: "o-u, says /aʊ/ as in cloud.",
-      ow: "o-w, says /aʊ/ as in cow.",
-      au: "a-u, says /ɔ/ as in sauce.",
-      aw: "a-w, says /ɔ/ as in draw.",
-      oo: "o-o, says /ʊ/ as in book.",
-      ee: "e-e, says /i/ as in tree.",
-      ea: "e-a, says /i/ as in leaf.",
-      oi: "o-i, says /ɔɪ/ as in coin.",
-      oy: "o-y, says /ɔɪ/ as in toy."
+      ou: "ou",
+      ow: "ow",
+      au: "au",
+      aw: "aw",
+      oo: "oo",
+      ee: "ee",
+      ea: "ea",
+      oi: "oi",
+      oy: "oy"
     }
   },
   consonants: {
     title: "子音與輔音群 📖 學習樂園",
     tips: "子音組合有時會<b>發出一個全新的音</b>（如 sh, ch, th, ph, wh），有時則是兩個字母的<b>發音快速滑過去</b>（如 tr, dr, br, cr）。例如：<br>• <b>sh</b> 發 /ʃ/（像叫人安靜的『噓』，如 ship）<br>• <b>ch</b> 發 /tʃ/（像火車『七』，如 chip）<br>• <b>th</b> 發 /θ/（要把舌頭夾在牙齒中間發音喔，如 three）<br>• <b>ph</b> 發 /f/（發『夫』的音，如 phone）<br>• <b>wh</b> 發 /w/ (發『烏』，如 whale)<br>• <b>tr</b> /tr/, <b>dr</b> /dr/, <b>br</b> /br/, <b>cr</b> /cr/ 則是把兩個聲母連著快速唸出來！",
     sounds: {
-      sh: "s-h, says /ʃ/ as in ship.",
-      ch: "c-h, says /tʃ/ as in chip.",
-      th: "t-h, says /θ/ as in three.",
-      ph: "p-h, says /f/ as in phone.",
-      wh: "w-h, says /w/ as in whale.",
-      tr: "t-r, says /tr/ as in tree.",
-      dr: "d-r, says /dr/ as in drum.",
-      br: "b-r, says /br/ as in bread.",
-      cr: "c-r, says /cr/ as in crab."
+      sh: "sh",
+      ch: "ch",
+      th: "th",
+      ph: "ph",
+      wh: "wh",
+      tr: "tr",
+      dr: "dr",
+      br: "br",
+      cr: "cr"
     }
   }
 };
@@ -978,7 +978,13 @@ function startStudy(category) {
   const tilesContainer = document.getElementById("study-tiles-container");
   tilesContainer.innerHTML = "";
 
-  // 「全部」按鈕
+  // 「全部」按鈕獨立放上面
+  const allTileWrapper = document.createElement("div");
+  allTileWrapper.style.width = "100%";
+  allTileWrapper.style.display = "flex";
+  allTileWrapper.style.justifyContent = "center";
+  allTileWrapper.style.marginBottom = "15px";
+
   const allTile = document.createElement("div");
   allTile.className = "study-tile active";
   allTile.textContent = "🌟 全部";
@@ -989,33 +995,108 @@ function startStudy(category) {
     currentFilteredLetter = "";
     renderStudyWords();
   });
-  tilesContainer.appendChild(allTile);
+  allTileWrapper.appendChild(allTile);
+  tilesContainer.appendChild(allTileWrapper);
 
-  // 提取該分類獨特的母音/子音組合
-  const allWords = WORD_DATABASE[category];
-  const uniqueLetters = [...new Set(allWords.map(w => w.missing))];
+  if (category === "vowels_single") {
+    // 長母音列
+    const longRow = document.createElement("div");
+    longRow.style.width = "100%";
+    longRow.style.display = "flex";
+    longRow.style.gap = "14px";
+    longRow.style.justifyContent = "center";
+    longRow.style.alignItems = "center";
+    longRow.style.marginBottom = "15px";
 
-  uniqueLetters.forEach(letter => {
-    const tile = document.createElement("div");
-    tile.className = "study-tile";
-    tile.textContent = letter;
+    const longLabel = document.createElement("div");
+    longLabel.textContent = "長母音";
+    longLabel.style.fontWeight = "bold";
+    longLabel.style.color = "#576574";
+    longLabel.style.fontSize = "1.1rem";
+    longRow.appendChild(longLabel);
 
-    tile.addEventListener("click", () => {
-      playSound("click");
-      document.querySelectorAll(".study-tile").forEach(t => t.classList.remove("active"));
-      tile.classList.add("active");
-
-      // 唸出該字母組合的引導發音
-      const guideText = studyData.sounds[letter] || `${letter} says Phonics sound`;
-      speakWord(guideText);
-
-      // 過濾單字
-      currentFilteredLetter = letter;
-      renderStudyWords();
+    ["a", "e", "i", "o", "u"].forEach(letter => {
+      const tile = document.createElement("div");
+      tile.className = "study-tile";
+      tile.textContent = letter;
+      tile.addEventListener("click", () => {
+        playSound("click");
+        document.querySelectorAll(".study-tile").forEach(t => t.classList.remove("active"));
+        tile.classList.add("active");
+        // 長母音直接發字母本身的音
+        speakWord(letter);
+        currentFilteredLetter = letter;
+        renderStudyWords();
+      });
+      longRow.appendChild(tile);
     });
+    tilesContainer.appendChild(longRow);
 
-    tilesContainer.appendChild(tile);
-  });
+    // 短母音列
+    const shortRow = document.createElement("div");
+    shortRow.style.width = "100%";
+    shortRow.style.display = "flex";
+    shortRow.style.gap = "14px";
+    shortRow.style.justifyContent = "center";
+    shortRow.style.alignItems = "center";
+
+    const shortLabel = document.createElement("div");
+    shortLabel.textContent = "短母音";
+    shortLabel.style.fontWeight = "bold";
+    shortLabel.style.color = "#576574";
+    shortLabel.style.fontSize = "1.1rem";
+    shortRow.appendChild(shortLabel);
+
+    ["a", "e", "i", "o", "u"].forEach(letter => {
+      const tile = document.createElement("div");
+      tile.className = "study-tile";
+      tile.textContent = letter;
+      tile.addEventListener("click", () => {
+        playSound("click");
+        document.querySelectorAll(".study-tile").forEach(t => t.classList.remove("active"));
+        tile.classList.add("active");
+        speakWord(studyData.sounds[letter] || letter);
+        currentFilteredLetter = letter;
+        renderStudyWords();
+      });
+      shortRow.appendChild(tile);
+    });
+    tilesContainer.appendChild(shortRow);
+
+  } else {
+    // 預設 (雙母音或子音) 的生成方式
+    const defaultRow = document.createElement("div");
+    defaultRow.style.width = "100%";
+    defaultRow.style.display = "flex";
+    defaultRow.style.gap = "14px";
+    defaultRow.style.justifyContent = "center";
+    defaultRow.style.flexWrap = "wrap";
+
+    const allWords = WORD_DATABASE[category];
+    const uniqueLetters = [...new Set(allWords.map(w => w.missing))];
+
+    uniqueLetters.forEach(letter => {
+      const tile = document.createElement("div");
+      tile.className = "study-tile";
+      tile.textContent = letter;
+
+      tile.addEventListener("click", () => {
+        playSound("click");
+        document.querySelectorAll(".study-tile").forEach(t => t.classList.remove("active"));
+        tile.classList.add("active");
+
+        const guideText = studyData.sounds[letter] || `${letter} says Phonics sound`;
+        speakWord(guideText);
+
+        currentFilteredLetter = letter;
+        renderStudyWords();
+      });
+
+      defaultRow.appendChild(tile);
+    });
+    
+    tilesContainer.appendChild(defaultRow);
+  }
 
   // 2. 渲染單字發音卡
   renderStudyWords();
