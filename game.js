@@ -1022,7 +1022,7 @@ function startStudy(category) {
 
     ["a", "e", "i", "o", "u"].forEach(letter => {
       const tile = document.createElement("div");
-      tile.className = "study-tile";
+      tile.className = "study-tile long-vowel";
       tile.textContent = letter;
       tile.addEventListener("click", () => {
         playSound("click");
@@ -1054,7 +1054,7 @@ function startStudy(category) {
 
     ["a", "e", "i", "o", "u"].forEach(letter => {
       const tile = document.createElement("div");
-      tile.className = "study-tile";
+      tile.className = "study-tile short-vowel";
       tile.textContent = letter;
       tile.addEventListener("click", () => {
         playSound("click");

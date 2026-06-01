@@ -31,7 +31,7 @@ body {
   font-family: var(--font-family);
   background: var(--bg-sky);
   min-height: 100vh;
-  overflow: hidden;
+  overflow: auto;
   color: var(--color-text-dark);
   display: flex;
   flex-direction: column;
@@ -870,6 +870,26 @@ body {
   background: linear-gradient(135deg, #ff7675, #ff4757);
   color: #ffffff;
   box-shadow: 0 6px 0 #c0392b, 0 8px 16px rgba(255, 118, 117, 0.2);
+}
+
+.study-tile.long-vowel {
+  background: linear-gradient(135deg, #81ecec, #00cec9);
+  box-shadow: 0 6px 0 #00b894, 0 8px 16px rgba(0, 0, 0, 0.08);
+  color: #2c3e50;
+}
+
+.study-tile.long-vowel:hover {
+  box-shadow: 0 9px 0 #00b894, 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.study-tile.long-vowel:active {
+  box-shadow: 0 3px 0 #00b894, 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.study-tile.long-vowel.active {
+  background: linear-gradient(135deg, #0984e3, #74b9ff);
+  box-shadow: 0 6px 0 #0984e3, 0 8px 16px rgba(9, 132, 227, 0.2);
+  color: #ffffff;
 }
 
 .study-word-card {
