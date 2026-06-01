@@ -92,7 +92,7 @@ const PHONICS_DATA = {
     sounds: {
       a: "a",
       e: "eh",
-      i: "ih",
+      i: "yi",
       o: "ah",
       u: "uh"
     }
