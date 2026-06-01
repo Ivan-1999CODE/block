@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>拼磚塊英文拼字大冒險</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 漂浮背景雲朵 -->
+  <div class="bg-cloud bg-cloud-1"></div>
+  <div class="bg-cloud bg-cloud-2"></div>
+  <div class="bg-cloud bg-cloud-3"></div>
+
+  <!-- 粒子特效畫布 -->
+  <canvas id="particle-canvas"></canvas>
+
+  <div class="app-container">
+    
+    <!-- 頂部 HUD (主選單隱藏，遊戲中顯示) -->
+    <div id="game-hud" class="hud hidden">
+      <div class="hud-left">
+        <button id="btn-home" class="btn-icon" title="返回主選單">🏠</button>
+        <button id="btn-sound" class="btn-icon" title="切換音效">🔊</button>
+      </div>
+      <div id="hearts-container" class="hud-center">
+        <!-- JS 動態插入心形 ❤️ -->
+      </div>
+      <div class="hud-right">
+        <div class="hud-item">
+          <span>⏱️</span>
+          <span id="timer-text">30s</span>
+        </div>
+        <div class="hud-item">
+          <span>⭐</span>
+          <span id="score-text">0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 大廳/主選單畫面 -->
+    <div id="lobby-screen" class="screen">
+      <h1 class="game-title">拼磚塊冒險</h1>
+      <p class="game-subtitle">聽聽發音，把正確的字母拼圖拉進雲朵裡吧！</p>
+      
+      <div class="category-list">
+        <!-- 單母音 -->
+        <div class="category-card card-vowels_single" data-category="vowels_single">
+          <span class="category-icon">🅰️</span>
+          <h2 class="category-name">單母音組</h2>
+          <p class="category-desc">練習 a, e, i, o, u 的短母音與基礎單字拼法</p>
+          <div class="category-stats">
+            <span class="score-badge">最高: <span id="high-vowels_single">0</span></span>
+            <div class="stars-badge" id="stars-vowels_single">
+              <span>☆</span><span>☆</span><span>☆</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 雙母音 -->
+        <div class="category-card card-vowels_double" data-category="vowels_double">
+          <span class="category-icon">🅱️</span>
+          <h2 class="category-name">雙母音組</h2>
+          <p class="category-desc">挑戰 ou, ow, au, aw, oo, ee, ea, oi 等雙母音組合</p>
+          <div class="category-stats">
+            <span class="score-badge">最高: <span id="high-vowels_double">0</span></span>
+            <div class="stars-badge" id="stars-vowels_double">
+              <span>☆</span><span>☆</span><span>☆</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 子音/輔音群 -->
+        <div class="category-card card-consonants" data-category="consonants">
+          <span class="category-icon">🆃</span>
+          <h2 class="category-name">輔音群/子音組</h2>
+          <p class="category-desc">練習 sh, ch, th, ph, wh 以及 tr, dr, br 輔音群</p>
+          <div class="category-stats">
+            <span class="score-badge">最高: <span id="high-consonants">0</span></span>
+            <div class="stars-badge" id="stars-consonants">
+              <span>☆</span><span>☆</span><span>☆</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 遊戲主畫面 -->
+    <div id="game-screen" class="screen hidden">
+      <!-- 關卡進度條 -->
+      <div class="progress-container">
+        <div id="game-progress" class="progress-bar"></div>
+      </div>
+
+      <!-- 雲朵放置區 -->
+      <div class="word-cloud-container">
+        <!-- Combo 提示 -->
+        <div id="combo-badge" class="combo-banner">Combo x3! 🔥</div>
+
+        <div class="cloud-wrapper">
+          <div class="main-cloud"></div>
+          <div class="cloud-patch"></div>
+          <div class="cloud-content">
+            <div id="word-container" class="word-display">
+              <!-- JS 動態生成單字，例如 cl[放置區]d -->
+            </div>
+            <button id="btn-speak" class="btn-speak-cloud" title="聽單字發音">🔊</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 底部積木選擇區 -->
+      <div class="bottom-area">
+        <div class="grass-deco"></div>
+        <div id="options-container" class="blocks-container">
+          <!-- JS 動態生成積木 -->
+        </div>
+      </div>
+    </div>
+
+    <!-- 學習模式畫面 -->
+    <div id="study-screen" class="screen hidden" style="flex-direction: column; justify-content: flex-start; overflow-y: auto; padding: 10px 10px 40px 10px; width: 100%;">
+      <!-- 頂部導覽 HUD -->
+      <div class="hud" style="margin-bottom: 20px; width: 100%;">
+        <div class="hud-left">
+          <button id="btn-study-home" class="btn-icon" title="返回主選單">🏠</button>
+        </div>
+        <div class="hud-center">
+          <h2 id="study-title" style="font-size: 1.4rem; font-weight: 700; color: var(--color-text-dark);">雙母音組 學習樂園</h2>
+        </div>
+        <div class="hud-right">
+          <button id="btn-study-start-game" class="btn-primary" style="font-size: 1rem; padding: 8px 16px; border-radius: 12px; box-shadow: 0 4px 0 #c0392b; border: 2px solid #fff;">
+            🎮 開始挑戰
+          </button>
+        </div>
+      </div>
+
+      <!-- 拼音小知識卡片 -->
+      <div id="phonics-info-card" style="width: 100%; max-width: 800px; background: rgba(255, 255, 255, 0.95); border: 4px solid #fff; border-radius: 24px; padding: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.05); margin-bottom: 20px;">
+        <h3 style="font-size: 1.2rem; color: #ff7675; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+          💡 發音小知識 (Phonics Tips)
+        </h3>
+        <p id="phonics-intro" style="font-size: 1.05rem; line-height: 1.6; color: #576574; font-weight: 500;">
+          讀音小幫手說明載入中...
+        </p>
+      </div>
+
+      <!-- 拼音積木點擊學習區 -->
+      <div style="width: 100%; max-width: 800px; text-align: center; margin-bottom: 25px;">
+        <p style="font-size: 1rem; color: #576574; margin-bottom: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 6px;">
+          <span>👉</span> 點選字母組合，聽聽發音與口訣：
+        </p>
+        <div id="study-tiles-container" style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+          <!-- 動態載入字母組合積木 -->
+        </div>
+      </div>
+
+      <!-- 單字發音學習卡片區 -->
+      <div style="width: 100%; max-width: 800px; flex-grow: 1; display: flex; flex-direction: column;">
+        <p style="font-size: 1rem; color: #576574; margin-bottom: 12px; font-weight: 700; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px;">
+          <span>👉</span> 點選單字卡片，聽聽單字發音：
+        </p>
+        <div id="study-words-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px; max-height: 280px; overflow-y: auto; padding: 10px; background: rgba(255,255,255,0.4); border-radius: 20px; border: 2px dashed rgba(255,255,255,0.8);">
+          <!-- 動態載入單字發音卡 -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 遊戲結束/結算彈窗模組 -->
+  <div id="modal-overlay" class="modal-overlay hidden">
+    <!-- 模式選擇 (學習/遊戲) -->
+    <div id="modal-mode-select" class="modal-card hidden">
+      <h2 class="modal-title" style="color: #0984e3;">🌟 模式選擇</h2>
+      <div class="modal-body">
+        <p>你要先讀讀發音規則，還是直接挑戰拼字遊戲呢？</p>
+      </div>
+      <div class="modal-buttons" style="flex-direction: column; gap: 15px; width: 100%;">
+        <button id="btn-mode-learn" class="btn-secondary" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; font-size:1.3rem; padding: 16px;">
+          <span>📖</span> 學習樂園 (先看教學)
+        </button>
+        <button id="btn-mode-play" class="btn-primary" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; font-size:1.3rem; padding: 16px;">
+          <span>🎮</span> 拼磚挑戰 (直接遊戲)
+        </button>
+      </div>
+    </div>
+
+    <!-- 關卡挑戰成功 -->
+    <div id="modal-clear" class="modal-card success hidden">
+      <h2 class="modal-title">🎉 關卡完成！</h2>
+      <div class="modal-stars">
+        <span class="modal-star" data-star="1">★</span>
+        <span class="modal-star" data-star="2">★</span>
+        <span class="modal-star" data-star="3">★</span>
+      </div>
+      <div class="modal-body">
+        <p>你做得太棒了！所有單字都拼對了！</p>
+        <div class="modal-score">本次得分：<span id="clear-score">0</span></div>
+        <div class="modal-score" style="background:#eaf2f8; font-size:1.1rem;">歷史最高分：<span id="clear-highscore">0</span></div>
+      </div>
+      <div class="modal-buttons">
+        <button id="btn-clear-retry" class="btn-primary">再玩一次</button>
+        <button id="btn-clear-lobby" class="btn-secondary">回關卡選單</button>
+      </div>
+    </div>
+
+    <!-- 挑戰失敗 (生命值歸零) -->
+    <div id="modal-gameover" class="modal-card fail hidden">
+      <h2 class="modal-title">😢 再接再厲！</h2>
+      <div style="font-size: 4rem; margin: 15px 0;">💔</div>
+      <div class="modal-body">
+        <p>好可惜，生命值用完了。別灰心，多練習幾次一定可以成功的！</p>
+        <div class="modal-score">本次得分：<span id="fail-score">0</span></div>
+      </div>
+      <div class="modal-buttons">
+        <button id="btn-fail-retry" class="btn-primary">重新挑戰</button>
+        <button id="btn-fail-lobby" class="btn-secondary">回關卡選單</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
