@@ -56,9 +56,12 @@ const WORD_DATABASE = {
     { word: "chip", missing: "ch", clue: ["", "ip"] },
     { word: "chair", missing: "ch", clue: ["", "air"] },
     { word: "peach", missing: "ch", clue: ["pea", ""] },
-    { word: "three", missing: "th", clue: ["", "ree"] },
-    { word: "thin", missing: "th", clue: ["", "in"] },
-    { word: "bath", missing: "th", clue: ["ba", ""] },
+    { word: "three", missing: "th [θ]", clue: ["", "ree"] },
+    { word: "thin", missing: "th [θ]", clue: ["", "in"] },
+    { word: "bath", missing: "th [θ]", clue: ["ba", ""] },
+    { word: "this", missing: "th [ð]", clue: ["", "is"] },
+    { word: "that", missing: "th [ð]", clue: ["", "at"] },
+    { word: "brother", missing: "th [ð]", clue: ["bro", "er"] },
     { word: "phone", missing: "ph", clue: ["", "one"] },
     { word: "photo", missing: "ph", clue: ["", "oto"] },
     { word: "dolphin", missing: "ph", clue: ["dol", "in"] },
@@ -114,11 +117,12 @@ const PHONICS_DATA = {
   },
   consonants: {
     title: "子音與輔音群 📖 學習樂園",
-    tips: "子音組合有時會<b>發出一個全新的音</b>（如 sh, ch, th, ph, wh），有時則是兩個字母的<b>發音快速滑過去</b>（如 tr, dr, br, cr）。例如：<br>• <b>sh</b> 發 /ʃ/（像叫人安靜的『噓』，如 ship）<br>• <b>ch</b> 發 /tʃ/（像火車『七』，如 chip）<br>• <b>th</b> 發 /θ/（要把舌頭夾在牙齒中間發音喔，如 three）<br>• <b>ph</b> 發 /f/（發『夫』的音，如 phone）<br>• <b>wh</b> 發 /w/ (發『烏』，如 whale)<br>• <b>tr</b> /tr/, <b>dr</b> /dr/, <b>br</b> /br/, <b>cr</b> /cr/ 則是把兩個聲母連著快速唸出來！",
+    tips: "子音組合有時會<b>發出一個全新的音</b>（如 sh, ch, th, ph, wh），有時則是兩個字母的<b>發音快速滑過去</b>（如 tr, dr, br, cr）。例如：<br>• <b>sh</b> 發 /ʃ/（像叫人安靜的『噓』，如 ship）<br>• <b>ch</b> 發 /tʃ/（像火車『七』，如 chip）<br>• <b>th [θ]</b> 發無聲的 /θ/（要把舌頭夾在牙齒中間發音喔，如 three）<br>• <b>th [ð]</b> 發有聲的 /ð/（喉嚨會震動，如 this）<br>• <b>ph</b> 發 /f/（發『夫』的音，如 phone）<br>• <b>wh</b> 發 /w/ (發『烏』，如 whale)<br>• <b>tr</b> /tr/, <b>dr</b> /dr/, <b>br</b> /br/, <b>cr</b> /cr/ 則是把兩個聲母連著快速唸出來！",
     sounds: {
       sh: "shh",
       ch: "chuh",
-      th: "thuh",
+      "th [θ]": "thuh",
+      "th [ð]": "the",
       ph: "fuh",
       wh: "wuh",
       tr: "truh",
@@ -782,7 +786,8 @@ function handleDrop(letter) {
     createCelebrationBurst();
 
     // 更新 UI 狀態
-    dropZone.textContent = letter;
+    const displayLetter = letter.replace(/ \[.*?\]/, "");
+    dropZone.textContent = displayLetter;
     dropZone.className = "drop-zone correct";
     updateHUD();
 
@@ -1117,7 +1122,8 @@ function renderStudyWords() {
     card.className = "study-word-card";
 
     // 格式化單字，高亮目標拼音部分（如 cl<u>ou</u>d）
-    const highlightedHtml = `${word.clue[0]}<u>${word.missing}</u>${word.clue[1]}`;
+    const displayMissing = word.missing.replace(/ \[.*?\]/, "");
+    const highlightedHtml = `${word.clue[0]}<u>${displayMissing}</u>${word.clue[1]}`;
 
     card.innerHTML = `
       <div class="study-word-text">${highlightedHtml}</div>
