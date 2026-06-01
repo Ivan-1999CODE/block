@@ -146,6 +146,7 @@ let timer = 30;
 let timerInterval = null;
 let combo = 0;
 let isCurrentQuestionAnswered = false;
+let isEasyMode = true;
 
 // 儲存至本地的資料
 let highScores = { vowels_single: 0, vowels_double: 0, consonants: 0 };
@@ -611,9 +612,17 @@ function setupGameControlEvents() {
     startStudy(selectedCategory);
   });
 
-  document.getElementById("btn-mode-play").addEventListener("click", () => {
+  document.getElementById("btn-mode-play-easy").addEventListener("click", () => {
     playSound("click");
     hideModal();
+    isEasyMode = true;
+    startGame(selectedCategory);
+  });
+
+  document.getElementById("btn-mode-play-hard").addEventListener("click", () => {
+    playSound("click");
+    hideModal();
+    isEasyMode = false;
     startGame(selectedCategory);
   });
 
@@ -703,10 +712,16 @@ function loadQuestion() {
   // 生成選項積木
   generateOptions(currentQ);
 
-  // 自動發音
-  setTimeout(() => {
-    speakWord(currentQ.word);
-  }, 300);
+  // 自動發音 (僅限簡單模式)
+  const btnSpeakCloud = document.getElementById("btn-speak");
+  if (isEasyMode) {
+    btnSpeakCloud.style.display = "flex"; // 顯示按鈕
+    setTimeout(() => {
+      speakWord(currentQ.word);
+    }, 300);
+  } else {
+    btnSpeakCloud.style.display = "none"; // 隱藏按鈕
+  }
 
   // 計時器初始化
   timer = 30;
@@ -798,8 +813,10 @@ function handleDrop(letter) {
       comboBadge.classList.add("show");
     }
 
-    // 播放發音
-    speakWord(currentQ.word);
+    // 播放發音 (僅限簡單模式，或過關後給予回饋)
+    if (isEasyMode) {
+      speakWord(currentQ.word);
+    }
 
     // 延遲 1.8 秒進入下一題
     setTimeout(() => {
