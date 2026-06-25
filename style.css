@@ -247,6 +247,10 @@ body {
 .card-vowels_single::before { background: linear-gradient(90deg, #ff7675, #ffb8b8); }
 .card-vowels_double::before { background: linear-gradient(90deg, #0984e3, #74b9ff); }
 .card-consonants::before { background: linear-gradient(90deg, #00b894, #55efc4); }
+.card-short_vowels::before { background: linear-gradient(90deg, #f1c40f, #ffe08a); }
+.card-long_vowels::before { background: linear-gradient(90deg, #00cec9, #81ecec); }
+.card-special_vowels::before { background: linear-gradient(90deg, #a29bfe, #d6a2ff); }
+.card-schwa::before { background: linear-gradient(90deg, #636e72, #b2bec3); }
 
 .category-card:hover {
   transform: translateY(-8px) scale(1.03);
@@ -257,6 +261,10 @@ body {
 .card-vowels_single:hover { box-shadow: 0 20px 40px rgba(255, 118, 117, 0.15); }
 .card-vowels_double:hover { box-shadow: 0 20px 40px rgba(9, 132, 227, 0.15); }
 .card-consonants:hover { box-shadow: 0 20px 40px rgba(0, 184, 148, 0.15); }
+.card-short_vowels:hover { box-shadow: 0 20px 40px rgba(241, 196, 15, 0.15); }
+.card-long_vowels:hover { box-shadow: 0 20px 40px rgba(0, 206, 201, 0.15); }
+.card-special_vowels:hover { box-shadow: 0 20px 40px rgba(162, 155, 254, 0.15); }
+.card-schwa:hover { box-shadow: 0 20px 40px rgba(99, 110, 114, 0.15); }
 
 .category-icon {
   font-size: 3.5rem;
@@ -935,6 +943,493 @@ body {
 .study-word-card:hover .study-word-speaker {
   color: #0984e3;
 }
+
+/* 雙母音發音分類表格 */
+.vowel-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  font-weight: 700;
+}
+
+.vowel-table thead th {
+  font-size: 0.95rem;
+  color: #576574;
+  padding: 4px 12px;
+  text-align: left;
+}
+
+.vt-row td {
+  background: #ffffff;
+  padding: 12px 14px;
+  vertical-align: middle;
+  border-top: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.vt-row td:first-child {
+  border-left: 3px solid #fff;
+  border-radius: 16px 0 0 16px;
+}
+
+.vt-row td:last-child {
+  border-right: 3px solid #fff;
+  border-radius: 0 16px 16px 0;
+}
+
+/* 每種發音給一條彩色左緣，方便視覺分組 */
+.vt-row-loud  td:first-child { border-left: 8px solid #00cec9; }
+.vt-row-saw   td:first-child { border-left: 8px solid #e67e22; }
+.vt-row-tree  td:first-child { border-left: 8px solid #2ecc71; }
+.vt-row-bread td:first-child { border-left: 8px solid #fdcb6e; }
+.vt-row-book  td:first-child { border-left: 8px solid #a29bfe; }
+.vt-row-moon  td:first-child { border-left: 8px solid #6c5ce7; }
+.vt-row-boat  td:first-child { border-left: 8px solid #0984e3; }
+.vt-row-rain  td:first-child { border-left: 8px solid #fd79a8; }
+.vt-row-coin  td:first-child { border-left: 8px solid #e84393; }
+
+.vt-sound {
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.vt-sound:hover { background: #f0f9ff; }
+
+.vt-ipa {
+  display: block;
+  font-size: 1.3rem;
+  color: var(--color-text-dark);
+}
+
+.vt-note {
+  display: block;
+  font-size: 0.9rem;
+  color: #95a5a6;
+}
+
+.vt-combos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.vt-combo {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+  color: #2c3e50;
+  font-size: 1.15rem;
+  border-radius: 12px;
+  border: 2px solid #fff;
+  box-shadow: 0 3px 0 #e67e22;
+  cursor: pointer;
+  transition: transform 0.12s;
+}
+
+.vt-combo:hover { transform: translateY(-2px); }
+.vt-combo:active { transform: translateY(2px); box-shadow: 0 1px 0 #e67e22; }
+
+.vt-words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+}
+
+.vt-word {
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: var(--color-text-dark);
+  padding: 2px 4px;
+  border-radius: 8px;
+  transition: background 0.15s, transform 0.12s;
+}
+
+.vt-word u {
+  color: #ff7675;
+  text-underline-offset: 3px;
+  font-weight: 800;
+}
+
+.vt-word:hover {
+  background: #fff5f5;
+  transform: scale(1.05);
+}
+
+/* 長/短母音對照表（兩頁共用） */
+.vowel-compare {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.vc-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 18px;
+  border: 3px solid transparent;
+}
+
+.vc-label {
+  min-width: 92px;
+  font-weight: 800;
+  color: #576574;
+  font-size: 1.05rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.vc-active {
+  border-color: #0984e3;
+  background: rgba(9, 132, 227, 0.06);
+  box-shadow: 0 6px 18px rgba(9, 132, 227, 0.12);
+}
+
+.vc-badge {
+  font-size: 0.72rem;
+  color: #fff;
+  background: #0984e3;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.vc-row .study-tile {
+  flex: 1;
+  padding: 10px 0;
+  font-size: 1.4rem;
+}
+
+/* 母音分組區塊（長 / 短母音頁） */
+.vgroup {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto 16px;
+  background: #fff;
+  border-radius: 20px;
+  border: 3px solid #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.vgroup-head {
+  padding: 12px 18px;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #2c3e50;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.long-head { background: linear-gradient(135deg, #81ecec, #00cec9); }
+.short-head { background: linear-gradient(135deg, #ffeaa7, #fdcb6e); }
+
+.vgroup-body {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.patt-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.patt-tag {
+  flex-shrink: 0;
+  min-width: 108px;
+  text-align: center;
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #fff;
+}
+
+.tag-cvc { background: #0984e3; }
+.tag-vc { background: #e17055; }
+.tag-basic { background: #00b894; }
+.tag-adv { background: #a29bfe; }
+
+.patt-tag.tappable { cursor: pointer; transition: transform 0.12s, filter 0.12s; }
+.patt-tag.tappable:hover { transform: translateY(-2px); filter: brightness(1.05); }
+.patt-tag.tappable:active { transform: translateY(1px); }
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+}
+
+.word-chip {
+  cursor: pointer;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #2c3e50;
+  padding: 2px 6px;
+  border-radius: 8px;
+  transition: background 0.15s, transform 0.12s;
+}
+
+.word-chip u {
+  color: #ff7675;
+  font-weight: 800;
+  text-underline-offset: 3px;
+}
+
+.word-chip:hover {
+  background: #fff5f5;
+  transform: scale(1.06);
+}
+
+/* 進階拼法：預設收合 */
+.adv-row { display: none; }
+.show-adv .adv-row { display: flex; }
+
+.btn-advanced {
+  display: block;
+  margin: 0 auto 18px;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 5px 0 #5b4bcf;
+}
+
+.btn-advanced:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #5b4bcf;
+}
+
+/* 弱化母音 schwa */
+.schwa-demo {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto 20px;
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.schwa-demo-card {
+  background: #fff;
+  border-radius: 18px;
+  border: 3px solid #fff;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+  padding: 14px 18px;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.15s;
+}
+
+.schwa-demo-card:hover { transform: translateY(-3px); }
+
+.schwa-word {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #2c3e50;
+  letter-spacing: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.schwa-char { padding: 0 1px; }
+.schwa-target { color: #e74c3c; }
+
+.schwa-zh {
+  margin-top: 6px;
+  font-size: 0.95rem;
+  color: #95a5a6;
+  font-weight: 700;
+}
+
+/* schwa 模式分頁 */
+.schwa-mode-tabs {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 0 auto 20px;
+  max-width: 420px;
+}
+
+.schwa-tab {
+  flex: 1;
+  font-family: inherit;
+  cursor: pointer;
+  border: 3px solid #fff;
+  border-radius: 16px;
+  background: #fff;
+  color: #576574;
+  font-weight: 800;
+  font-size: 1.05rem;
+  padding: 12px 10px;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.06);
+  transition: transform 0.12s;
+}
+
+.schwa-tab:hover { transform: translateY(-2px); }
+
+.schwa-tab.active {
+  background: linear-gradient(135deg, #74b9ff, #0984e3);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(9, 132, 227, 0.25);
+}
+
+/* schwa 學習模式 */
+.schwa-learn-tip {
+  max-width: 700px;
+  margin: 0 auto 18px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #576574;
+  line-height: 1.6;
+}
+
+.schwa-learn-grid {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 14px;
+}
+
+.schwa-learn-card {
+  background: #fff;
+  border: 3px solid #fff;
+  border-radius: 18px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+  padding: 16px 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.schwa-learn-card:hover { transform: translateY(-3px); border-color: #ffeaa7; }
+
+.sl-break { font-size: 1.6rem; margin-bottom: 8px; }
+.sl-syll { padding: 2px 4px; border-radius: 8px; }
+.sl-weak { background: #ecf0f1; color: #95a5a6; }
+.sl-dot { color: #b2bec3; margin: 0 2px; font-weight: 400; }
+.sl-note { font-size: 0.95rem; color: #2c3e50; font-weight: 600; margin-bottom: 4px; }
+
+.schwa-quiz {
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 24px;
+  border: 4px solid #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  padding: 22px;
+}
+
+.schwa-quiz-head {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 800;
+  color: #576574;
+  margin-bottom: 8px;
+}
+
+.schwa-prompt {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 16px;
+}
+
+.schwa-quiz .schwa-word {
+  font-size: 2.6rem;
+  margin-bottom: 18px;
+  gap: 4px;
+}
+
+.schwa-vbtn {
+  font-family: inherit;
+  cursor: pointer;
+  border: 3px solid #fff;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+  color: #2c3e50;
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1;
+  padding: 6px 12px;
+  box-shadow: 0 5px 0 #e67e22;
+  transition: transform 0.12s;
+}
+
+.schwa-vbtn:hover:not(:disabled) { transform: translateY(-3px); }
+.schwa-vbtn:disabled { cursor: default; }
+
+.schwa-correct {
+  background: linear-gradient(135deg, #55efc4, #00b894) !important;
+  color: #fff !important;
+  box-shadow: 0 5px 0 #1e8449 !important;
+}
+
+.schwa-wrong {
+  background: linear-gradient(135deg, #ff7675, #d63031) !important;
+  color: #fff !important;
+  box-shadow: 0 5px 0 #a02020 !important;
+}
+
+.schwa-bar { text-align: center; margin-bottom: 12px; }
+
+.btn-replay {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: 12px;
+  background: #0984e3;
+  color: #fff;
+  font-weight: 800;
+  font-size: 1rem;
+  padding: 10px 18px;
+  box-shadow: 0 4px 0 #0768b3;
+}
+
+.btn-replay:active { transform: translateY(2px); box-shadow: 0 2px 0 #0768b3; }
+
+.schwa-feedback {
+  text-align: center;
+  min-height: 24px;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.schwa-feedback.ok { color: #00b894; }
+.schwa-feedback.no { color: #e17055; }
+
+.schwa-result { text-align: center; }
+.schwa-result h3 { font-size: 1.5rem; color: #0984e3; margin-bottom: 10px; }
+.schwa-result-score { font-size: 1.15rem; color: #2c3e50; }
+.schwa-result-high { color: #95a5a6; margin: 6px 0 16px; }
+.btn-schwa-again { background: #00b894; box-shadow: 0 4px 0 #1e8449; }
+.btn-schwa-again:active { box-shadow: 0 2px 0 #1e8449; }
 
 /* 響應式調整 */
 @media (max-width: 600px) {

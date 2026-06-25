@@ -45,35 +45,61 @@
       <p class="game-subtitle">聽聽發音，把正確的字母拼圖拉進雲朵裡吧！</p>
       
       <div class="category-list">
-        <!-- 單母音 -->
-        <div class="category-card card-vowels_single" data-category="vowels_single">
-          <span class="category-icon">🅰️</span>
-          <h2 class="category-name">單母音組</h2>
-          <p class="category-desc">練習 a, e, i, o, u 的短母音與基礎單字拼法</p>
+        <!-- ① 短母音 -->
+        <div class="category-card card-short_vowels" data-category="short_vowels">
+          <span class="category-icon">😺</span>
+          <h2 class="category-name">短母音組</h2>
+          <p class="category-desc">a e i o u 的短音，練子母子（cat）和母子（at）</p>
           <div class="category-stats">
-            <span class="score-badge">最高: <span id="high-vowels_single">0</span></span>
-            <div class="stars-badge" id="stars-vowels_single">
+            <span class="score-badge">最高: <span id="high-short_vowels">0</span></span>
+            <div class="stars-badge" id="stars-short_vowels">
               <span>☆</span><span>☆</span><span>☆</span>
             </div>
           </div>
         </div>
 
-        <!-- 雙母音 -->
-        <div class="category-card card-vowels_double" data-category="vowels_double">
-          <span class="category-icon">🅱️</span>
-          <h2 class="category-name">雙母音組</h2>
-          <p class="category-desc">挑戰 ou, ow, au, aw, oo, ee, ea, oi 等雙母音組合</p>
+        <!-- ② 長母音 -->
+        <div class="category-card card-long_vowels" data-category="long_vowels">
+          <span class="category-icon">🍰</span>
+          <h2 class="category-name">長母音組</h2>
+          <p class="category-desc">母音唸名字！ai/ay、magic-e、開音節，含進階拼法</p>
           <div class="category-stats">
-            <span class="score-badge">最高: <span id="high-vowels_double">0</span></span>
-            <div class="stars-badge" id="stars-vowels_double">
+            <span class="score-badge">最高: <span id="high-long_vowels">0</span></span>
+            <div class="stars-badge" id="stars-long_vowels">
               <span>☆</span><span>☆</span><span>☆</span>
             </div>
           </div>
         </div>
 
-        <!-- 子音/輔音群 -->
+        <!-- ③ 特殊母音 -->
+        <div class="category-card card-special_vowels" data-category="special_vowels">
+          <span class="category-icon">🪙</span>
+          <h2 class="category-name">特殊母音組</h2>
+          <p class="category-desc">au/aw、oi/oy、ou/ow、oo 等特殊滑音</p>
+          <div class="category-stats">
+            <span class="score-badge">最高: <span id="high-special_vowels">0</span></span>
+            <div class="stars-badge" id="stars-special_vowels">
+              <span>☆</span><span>☆</span><span>☆</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ④ 弱化母音 schwa -->
+        <div class="category-card card-schwa" data-category="schwa">
+          <span class="category-icon">😴</span>
+          <h2 class="category-name">弱化母音 schwa</h2>
+          <p class="category-desc">聽音找輕聲！找出偷懶唸 /ə/ 的那個母音</p>
+          <div class="category-stats">
+            <span class="score-badge">最高: <span id="high-schwa">0</span></span>
+            <div class="stars-badge" id="stars-schwa">
+              <span>☆</span><span>☆</span><span>☆</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ⑤ 子音/輔音群 -->
         <div class="category-card card-consonants" data-category="consonants">
-          <span class="category-icon">🆃</span>
+          <span class="category-icon">🚂</span>
           <h2 class="category-name">輔音群/子音組</h2>
           <p class="category-desc">練習 sh, ch, th, ph, wh 以及 tr, dr, br 輔音群</p>
           <div class="category-stats">
@@ -148,7 +174,7 @@
 
       <!-- 拼音積木點擊學習區 -->
       <div style="width: 100%; max-width: 800px; text-align: center; margin-bottom: 25px;">
-        <p style="font-size: 1rem; color: #576574; margin-bottom: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 6px;">
+        <p id="study-tiles-prompt" style="font-size: 1rem; color: #576574; margin-bottom: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 6px;">
           <span>👉</span> 點選字母組合，聽聽發音與口訣：
         </p>
         <div id="study-tiles-container" style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
@@ -157,7 +183,7 @@
       </div>
 
       <!-- 單字發音學習卡片區 -->
-      <div style="width: 100%; max-width: 800px; flex-grow: 1; display: flex; flex-direction: column;">
+      <div id="study-words-section" style="width: 100%; max-width: 800px; flex-grow: 1; display: flex; flex-direction: column;">
         <p style="font-size: 1rem; color: #576574; margin-bottom: 12px; font-weight: 700; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px;">
           <span>👉</span> 點選單字卡片，聽聽單字發音：
         </p>
@@ -182,10 +208,7 @@
           <span>📖</span> 學習樂園 (先看教學)
         </button>
         <button id="btn-mode-play-easy" class="btn-primary" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; font-size:1.3rem; padding: 16px; background: linear-gradient(135deg, #2ecc71, #27ae60); box-shadow: 0 6px 0 #1e8449;">
-          <span>🎮</span> 簡單模式 (有發音)
-        </button>
-        <button id="btn-mode-play-hard" class="btn-primary" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; font-size:1.3rem; padding: 16px;">
-          <span>🔥</span> 困難模式 (無發音)
+          <span>🎮</span> 開始挑戰 (有發音)
         </button>
       </div>
     </div>
