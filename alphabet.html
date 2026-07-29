@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A–Z 英文字母發音總表</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap");
+
+    :root {
+      --ink: #2c3e50;
+      --muted: #657485;
+      --purple: #6c5ce7;
+      --purple-dark: #51348f;
+      --sky: #dff4ff;
+      --card: rgba(255, 255, 255, 0.94);
+      --line: #e5e9f2;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: "Fredoka", "Noto Sans TC", sans-serif;
+      background:
+        radial-gradient(circle at 12% 12%, rgba(255,255,255,.9) 0 7%, transparent 7.5%),
+        radial-gradient(circle at 88% 22%, rgba(255,255,255,.7) 0 9%, transparent 9.5%),
+        linear-gradient(180deg, #87d4ff 0%, var(--sky) 42%, #f6fbff 100%);
+      background-attachment: fixed;
+    }
+
+    button, a {
+      font: inherit;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 22px 0 60px;
+    }
+
+    .hero {
+      position: relative;
+      padding: 26px 24px 22px;
+      text-align: center;
+      background: var(--card);
+      border: 4px solid #fff;
+      border-radius: 28px;
+      box-shadow: 0 14px 38px rgba(58, 90, 120, .14);
+    }
+
+    .home-link {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 13px;
+      color: #536273;
+      font-weight: 700;
+      text-decoration: none;
+      background: #f5f7fb;
+      border: 2px solid #e1e6ef;
+      border-radius: 15px;
+      box-shadow: 0 3px 0 #d4dae5;
+    }
+
+    h1 {
+      margin: 6px 0 7px;
+      color: var(--purple);
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      line-height: 1.05;
+      text-shadow: 2px 3px 0 #ebe8ff;
+    }
+
+    .subtitle {
+      margin: 0 auto;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 14px;
+      padding: 8px 14px;
+      color: #5a4ac8;
+      font-weight: 700;
+      background: #f0edff;
+      border-radius: 999px;
+    }
+
+    .letter-nav {
+      position: sticky;
+      top: 8px;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: repeat(13, minmax(34px, 1fr));
+      gap: 7px;
+      margin: 18px 0;
+      padding: 12px;
+      background: rgba(255,255,255,.9);
+      border: 3px solid #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(58, 90, 120, .12);
+      backdrop-filter: blur(10px);
+    }
+
+    .letter-nav a {
+      display: grid;
+      place-items: center;
+      min-height: 34px;
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+      background: linear-gradient(135deg, #8e7cf3, var(--purple));
+      border-radius: 10px;
+      box-shadow: 0 3px 0 var(--purple-dark);
+    }
+
+    .letter-nav a:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 var(--purple-dark);
+    }
+
+    .alphabet-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .letter-card {
+      scroll-margin-top: 126px;
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      overflow: hidden;
+      background: var(--card);
+      border: 3px solid #fff;
+      border-radius: 24px;
+      box-shadow: 0 8px 24px rgba(58, 90, 120, .1);
+    }
+
+    .letter-side {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 7px;
+      padding: 18px 10px;
+      color: #fff;
+      background: linear-gradient(165deg, #8e7cf3, var(--purple));
+    }
+
+    .letter-button {
+      padding: 0;
+      color: inherit;
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1;
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .letter-lower {
+      font-size: 1.25rem;
+      opacity: .88;
+    }
+
+    .letter-name {
+      font-size: .78rem;
+      font-weight: 700;
+      opacity: .9;
+    }
+
+    .sound-list {
+      display: flex;
+      flex-direction: column;
+      padding: 8px 14px;
+    }
+
+    .sound-row {
+      display: grid;
+      grid-template-columns: minmax(84px, .8fr) minmax(76px, .55fr) minmax(0, 1.8fr);
+      align-items: center;
+      gap: 9px;
+      min-height: 48px;
+      padding: 8px 0;
+      border-bottom: 2px dashed var(--line);
+    }
+
+    .sound-row:last-child {
+      border-bottom: 0;
+    }
+
+    .spelling {
+      color: #5445c2;
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .ipa {
+      color: #e05b68;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .words {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .word-button {
+      padding: 6px 9px;
+      color: #34495e;
+      font-weight: 600;
+      background: #f7f9fc;
+      border: 2px solid #e3e8f0;
+      border-radius: 11px;
+      cursor: pointer;
+      box-shadow: 0 2px 0 #d7dde7;
+    }
+
+    .word-button .focus {
+      color: #e44d61;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 2px;
+    }
+
+    .word-button:hover, .word-button:focus-visible {
+      color: #3f32aa;
+      background: #f0edff;
+      border-color: #c7bfff;
+      outline: none;
+    }
+
+    .word-button:active {
+      transform: translateY(1px);
+      box-shadow: 0 1px 0 #d7dde7;
+    }
+
+    .speaking {
+      color: #fff;
+      background: #2ecc71;
+      border-color: #27ae60;
+    }
+
+    .status {
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      z-index: 20;
+      max-width: calc(100% - 28px);
+      padding: 9px 14px;
+      color: #fff;
+      font-weight: 700;
+      background: rgba(44, 62, 80, .9);
+      border-radius: 12px;
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: .2s ease;
+    }
+
+    .status.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        width: min(100% - 18px, 620px);
+        padding-top: 10px;
+      }
+
+      .hero {
+        padding: 64px 16px 20px;
+      }
+
+      .home-link {
+        top: 13px;
+        left: 13px;
+      }
+
+      .letter-nav {
+        grid-template-columns: repeat(7, minmax(32px, 1fr));
+        gap: 6px;
+      }
+
+      .alphabet-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .letter-card {
+        scroll-margin-top: 214px;
+        grid-template-columns: 72px 1fr;
+      }
+
+      .letter-button {
+        font-size: 2.35rem;
+      }
+
+      .sound-row {
+        grid-template-columns: minmax(75px, .9fr) minmax(62px, .6fr);
+      }
+
+      .words {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .letter-nav {
+        grid-template-columns: repeat(6, minmax(30px, 1fr));
+      }
+
+      .letter-card {
+        grid-template-columns: 62px 1fr;
+      }
+
+      .sound-list {
+        padding-inline: 10px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <a class="home-link" href="index.html">🏠 回主選單</a>
+      <h1>A–Z 發音總表</h1>
+      <p class="subtitle">從 A 到 Z 整理常見的單字母、字母組合、母音與雙母音發音。點字母可聽字母名稱，點任何例字可直接聽美式英文發音。</p>
+      <div class="hint">👆 每個例字都可以點</div>
+    </header>
+
+    <nav id="letter-nav" class="letter-nav" aria-label="快速跳到指定字母"></nav>
+    <section id="alphabet-grid" class="alphabet-grid" aria-label="A 到 Z 發音總表"></section>
+  </main>
+
+  <div id="speech-status" class="status" role="status" aria-live="polite"></div>
+
+  <script>
+    const ALPHABET_DATA = [
+      { letter: "A", sounds: [
+        { spelling: "a", ipa: "/æ/", words: [["apple", "a"], ["cat", "a"]] },
+        { spelling: "a-e, ai, ay", ipa: "/eɪ/", words: [["cake", "a"], ["rain", "ai"], ["day", "ay"]] },
+        { spelling: "ar", ipa: "/ɑr/", words: [["car", "ar"], ["star", "ar"]] },
+        { spelling: "au, aw", ipa: "/ɔ/", words: [["sauce", "au"], ["draw", "aw"]] }
+      ]},
+      { letter: "B", sounds: [
+        { spelling: "b", ipa: "/b/", words: [["book", "b"], ["rabbit", "b"]] },
+        { spelling: "bl, br", ipa: "/bl/, /br/", words: [["blue", "bl"], ["bread", "br"]] }
+      ]},
+      { letter: "C", sounds: [
+        { spelling: "c", ipa: "/k/", words: [["cat", "c"], ["music", "c"]] },
+        { spelling: "c", ipa: "/s/", words: [["city", "c"], ["face", "c"]] },
+        { spelling: "ch", ipa: "/tʃ/", words: [["chair", "ch"], ["peach", "ch"]] },
+        { spelling: "ch", ipa: "/k/", words: [["chorus", "ch"], ["school", "ch"]] }
+      ]},
+      { letter: "D", sounds: [
+        { spelling: "d", ipa: "/d/", words: [["dog", "d"], ["red", "d"]] },
+        { spelling: "dr", ipa: "/dr/", words: [["drum", "dr"], ["drink", "dr"]] }
+      ]},
+      { letter: "E", sounds: [
+        { spelling: "e", ipa: "/ɛ/", words: [["egg", "e"], ["bed", "e"]] },
+        { spelling: "e, ee, ea", ipa: "/i/", words: [["he", "e"], ["tree", "ee"], ["eat", "ea"]] },
+        { spelling: "er", ipa: "/ɝ/", words: [["her", "er"], ["term", "er"]] },
+        { spelling: "e（不發音）", ipa: "silent", words: [["cake", "e"], ["bike", "e"]] }
+      ]},
+      { letter: "F", sounds: [
+        { spelling: "f", ipa: "/f/", words: [["fish", "f"], ["leaf", "f"]] },
+        { spelling: "ph", ipa: "/f/", words: [["phone", "ph"], ["dolphin", "ph"]] }
+      ]},
+      { letter: "G", sounds: [
+        { spelling: "g", ipa: "/g/", words: [["goat", "g"], ["bag", "g"]] },
+        { spelling: "g", ipa: "/dʒ/", words: [["giant", "g"], ["gym", "g"]] },
+        { spelling: "gh", ipa: "/f/", words: [["laugh", "gh"], ["cough", "gh"]] },
+        { spelling: "gh（不發音）", ipa: "silent", words: [["night", "gh"], ["light", "gh"]] }
+      ]},
+      { letter: "H", sounds: [
+        { spelling: "h", ipa: "/h/", words: [["hat", "h"], ["home", "h"]] },
+        { spelling: "sh", ipa: "/ʃ/", words: [["ship", "sh"], ["dish", "sh"]] },
+        { spelling: "h（不發音）", ipa: "silent", words: [["hour", "h"], ["honest", "h"]] }
+      ]},
+      { letter: "I", sounds: [
+        { spelling: "i", ipa: "/ɪ/", words: [["ink", "i"], ["pig", "i"]] },
+        { spelling: "i-e, igh", ipa: "/aɪ/", words: [["bike", "i"], ["night", "igh"]] },
+        { spelling: "ie", ipa: "/i/", words: [["field", "ie"], ["thief", "ie"]] }
+      ]},
+      { letter: "J", sounds: [
+        { spelling: "j", ipa: "/dʒ/", words: [["jam", "j"], ["jump", "j"]] }
+      ]},
+      { letter: "K", sounds: [
+        { spelling: "k, ck", ipa: "/k/", words: [["kite", "k"], ["duck", "ck"]] },
+        { spelling: "kn", ipa: "/n/", words: [["knee", "kn"], ["knife", "kn"]] }
+      ]},
+      { letter: "L", sounds: [
+        { spelling: "l", ipa: "/l/", words: [["leg", "l"], ["light", "l"]] },
+        { spelling: "l（字尾）", ipa: "/ɫ/", words: [["ball", "ll"], ["milk", "l"]] },
+        { spelling: "l（不發音）", ipa: "silent", words: [["walk", "l"], ["calm", "l"]] }
+      ]},
+      { letter: "M", sounds: [
+        { spelling: "m", ipa: "/m/", words: [["map", "m"], ["moon", "m"]] }
+      ]},
+      { letter: "N", sounds: [
+        { spelling: "n", ipa: "/n/", words: [["nose", "n"], ["sun", "n"]] },
+        { spelling: "ng", ipa: "/ŋ/", words: [["sing", "ng"], ["ring", "ng"]] },
+        { spelling: "n + k", ipa: "/ŋ/", words: [["ink", "n"], ["thank", "n"]] },
+        { spelling: "n（不發音）", ipa: "silent", words: [["autumn", "n"], ["column", "n"]] }
+      ]},
+      { letter: "O", sounds: [
+        { spelling: "o", ipa: "/ɑ/", words: [["hot", "o"], ["ox", "o"]] },
+        { spelling: "o-e, oa", ipa: "/oʊ/", words: [["home", "o"], ["boat", "oa"]] },
+        { spelling: "oi, oy", ipa: "/ɔɪ/", words: [["coin", "oi"], ["toy", "oy"]] },
+        { spelling: "ou, ow", ipa: "/aʊ/", words: [["house", "ou"], ["cow", "ow"]] },
+        { spelling: "oo", ipa: "/ʊ/", words: [["book", "oo"], ["foot", "oo"]] },
+        { spelling: "oo", ipa: "/u/", words: [["moon", "oo"], ["zoo", "oo"]] }
+      ]},
+      { letter: "P", sounds: [
+        { spelling: "p", ipa: "/p/", words: [["pen", "p"], ["map", "p"]] },
+        { spelling: "ph", ipa: "/f/", words: [["photo", "ph"], ["phone", "ph"]] },
+        { spelling: "p（不發音）", ipa: "silent", words: [["psychology", "p"], ["receipt", "p"]] }
+      ]},
+      { letter: "Q", sounds: [
+        { spelling: "qu", ipa: "/kw/", words: [["queen", "qu"], ["quick", "qu"]] },
+        { spelling: "que", ipa: "/k/", words: [["antique", "que"], ["unique", "que"]] }
+      ]},
+      { letter: "R", sounds: [
+        { spelling: "r", ipa: "/r/", words: [["red", "r"], ["rain", "r"]] },
+        { spelling: "ar", ipa: "/ɑr/", words: [["car", "ar"], ["garden", "ar"]] },
+        { spelling: "er, ir, ur", ipa: "/ɝ/", words: [["her", "er"], ["bird", "ir"], ["turn", "ur"]] }
+      ]},
+      { letter: "S", sounds: [
+        { spelling: "s", ipa: "/s/", words: [["sun", "s"], ["bus", "s"]] },
+        { spelling: "s", ipa: "/z/", words: [["rose", "s"], ["music", "s"]] },
+        { spelling: "sh", ipa: "/ʃ/", words: [["ship", "sh"], ["shop", "sh"]] },
+        { spelling: "s", ipa: "/ʒ/", words: [["vision", "s"], ["usual", "s"]] }
+      ]},
+      { letter: "T", sounds: [
+        { spelling: "t", ipa: "/t/", words: [["top", "t"], ["cat", "t"]] },
+        { spelling: "th", ipa: "/θ/", words: [["thin", "th"], ["bath", "th"]] },
+        { spelling: "th", ipa: "/ð/", words: [["this", "th"], ["brother", "th"]] },
+        { spelling: "tion", ipa: "/ʃən/", words: [["nation", "tion"], ["station", "tion"]] },
+        { spelling: "tch", ipa: "/tʃ/", words: [["watch", "tch"], ["kitchen", "tch"]] }
+      ]},
+      { letter: "U", sounds: [
+        { spelling: "u", ipa: "/ʌ/", words: [["up", "u"], ["cup", "u"]] },
+        { spelling: "u-e", ipa: "/ju/", words: [["cute", "u"], ["cube", "u"]] },
+        { spelling: "u-e, ue", ipa: "/u/", words: [["rule", "u"], ["blue", "ue"]] },
+        { spelling: "u", ipa: "/ʊ/", words: [["put", "u"], ["full", "u"]] },
+        { spelling: "ur", ipa: "/ɝ/", words: [["turn", "ur"], ["nurse", "ur"]] }
+      ]},
+      { letter: "V", sounds: [
+        { spelling: "v", ipa: "/v/", words: [["van", "v"], ["five", "v"]] }
+      ]},
+      { letter: "W", sounds: [
+        { spelling: "w, wh", ipa: "/w/", words: [["wet", "w"], ["whale", "wh"]] },
+        { spelling: "w（不發音）", ipa: "silent", words: [["write", "w"], ["wrong", "w"]] },
+        { spelling: "ow", ipa: "/aʊ/", words: [["cow", "ow"], ["town", "ow"]] },
+        { spelling: "ow", ipa: "/oʊ/", words: [["snow", "ow"], ["yellow", "ow"]] }
+      ]},
+      { letter: "X", sounds: [
+        { spelling: "x", ipa: "/ks/", words: [["box", "x"], ["six", "x"]] },
+        { spelling: "x", ipa: "/gz/", words: [["exam", "x"], ["exact", "x"]] },
+        { spelling: "x（字首）", ipa: "/z/", words: [["xylophone", "x"], ["xenon", "x"]] }
+      ]},
+      { letter: "Y", sounds: [
+        { spelling: "y（字首）", ipa: "/j/", words: [["yes", "y"], ["yellow", "y"]] },
+        { spelling: "y", ipa: "/ɪ/", words: [["gym", "y"], ["myth", "y"]] },
+        { spelling: "y", ipa: "/aɪ/", words: [["my", "y"], ["cry", "y"]] },
+        { spelling: "y（字尾）", ipa: "/i/", words: [["happy", "y"], ["baby", "y"]] }
+      ]},
+      { letter: "Z", sounds: [
+        { spelling: "z, zz", ipa: "/z/", words: [["zoo", "z"], ["buzz", "zz"]] },
+        { spelling: "z", ipa: "/ʒ/", words: [["azure", "z"], ["seizure", "z"]] }
+      ]}
+    ];
+
+    const nav = document.getElementById("letter-nav");
+    const grid = document.getElementById("alphabet-grid");
+    const status = document.getElementById("speech-status");
+    let voices = [];
+    let activeButton = null;
+    let statusTimer = null;
+
+    function loadVoices() {
+      if (!window.speechSynthesis) return;
+      voices = window.speechSynthesis.getVoices();
+    }
+
+    function preferredVoice() {
+      return voices.find((voice) => voice.lang === "en-US" && /Samantha|Ava|Google US English/i.test(voice.name))
+        || voices.find((voice) => voice.lang === "en-US")
+        || voices.find((voice) => voice.lang.startsWith("en"))
+        || null;
+    }
+
+    function showStatus(message) {
+      clearTimeout(statusTimer);
+      status.textContent = message;
+      status.classList.add("show");
+      statusTimer = setTimeout(() => status.classList.remove("show"), 1600);
+    }
+
+    function clearSpeakingState() {
+      if (activeButton) activeButton.classList.remove("speaking");
+      activeButton = null;
+    }
+
+    function speak(text, button) {
+      if (!window.speechSynthesis || !window.SpeechSynthesisUtterance) {
+        showStatus("這個瀏覽器不支援語音播放");
+        return;
+      }
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "en-US";
+      utterance.rate = 0.78;
+      utterance.pitch = 1.05;
+      const voice = preferredVoice();
+      if (voice) utterance.voice = voice;
+
+      clearSpeakingState();
+      activeButton = button;
+      if (activeButton) activeButton.classList.add("speaking");
+      showStatus(`🔊 ${text}`);
+
+      utterance.onend = clearSpeakingState;
+      utterance.onerror = clearSpeakingState;
+
+      const begin = () => window.speechSynthesis.speak(utterance);
+      if (window.speechSynthesis.speaking || window.speechSynthesis.pending) {
+        window.speechSynthesis.cancel();
+        setTimeout(begin, 60);
+      } else {
+        begin();
+      }
+    }
+
+    function highlightedWord(word, focus) {
+      const start = word.toLowerCase().indexOf(focus.toLowerCase());
+      if (start < 0) return word;
+      const before = word.slice(0, start);
+      const marked = word.slice(start, start + focus.length);
+      const after = word.slice(start + focus.length);
+      return `${before}<span class="focus">${marked}</span>${after}`;
+    }
+
+    function renderTable() {
+      ALPHABET_DATA.forEach(({ letter, sounds }) => {
+        const navLink = document.createElement("a");
+        navLink.href = `#letter-${letter}`;
+        navLink.textContent = letter;
+        nav.appendChild(navLink);
+
+        const card = document.createElement("article");
+        card.id = `letter-${letter}`;
+        card.className = "letter-card";
+
+        const side = document.createElement("div");
+        side.className = "letter-side";
+        const letterButton = document.createElement("button");
+        letterButton.type = "button";
+        letterButton.className = "letter-button";
+        letterButton.setAttribute("aria-label", `播放字母 ${letter} 的名稱`);
+        letterButton.textContent = letter;
+        letterButton.addEventListener("click", () => speak(letter, letterButton));
+        side.appendChild(letterButton);
+        side.insertAdjacentHTML("beforeend", `<span class="letter-lower">${letter.toLowerCase()}</span><span class="letter-name">點字母聽名稱 🔊</span>`);
+
+        const list = document.createElement("div");
+        list.className = "sound-list";
+        sounds.forEach((sound) => {
+          const row = document.createElement("div");
+          row.className = "sound-row";
+          row.innerHTML = `<div class="spelling">${sound.spelling}</div><div class="ipa">${sound.ipa}</div>`;
+
+          const words = document.createElement("div");
+          words.className = "words";
+          sound.words.forEach(([word, focus]) => {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "word-button";
+            button.setAttribute("aria-label", `播放單字 ${word}`);
+            button.innerHTML = `${highlightedWord(word, focus)} 🔊`;
+            button.addEventListener("click", () => speak(word, button));
+            words.appendChild(button);
+          });
+          row.appendChild(words);
+          list.appendChild(row);
+        });
+
+        card.append(side, list);
+        grid.appendChild(card);
+      });
+    }
+
+    loadVoices();
+    if (window.speechSynthesis) {
+      window.speechSynthesis.addEventListener("voiceschanged", loadVoices);
+    }
+    renderTable();
+  </script>
+</body>
+</html>
