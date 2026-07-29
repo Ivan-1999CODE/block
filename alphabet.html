@@ -507,6 +507,16 @@
       ]}
     ];
 
+    // 避免語音引擎把單獨的大寫字母念成「Capital A」。
+    // 畫面仍顯示 A–Z，實際送進 TTS 的是各字母名稱的拼音。
+    const LETTER_NAMES = {
+      A: "ay", B: "bee", C: "see", D: "dee", E: "ee", F: "eff",
+      G: "gee", H: "aitch", I: "eye", J: "jay", K: "kay", L: "el",
+      M: "em", N: "en", O: "oh", P: "pee", Q: "cue", R: "are",
+      S: "ess", T: "tee", U: "you", V: "vee", W: "double you",
+      X: "ex", Y: "why", Z: "zee"
+    };
+
     const nav = document.getElementById("letter-nav");
     const grid = document.getElementById("alphabet-grid");
     const status = document.getElementById("speech-status");
@@ -538,7 +548,7 @@
       activeButton = null;
     }
 
-    function speak(text, button) {
+    function speak(text, button, displayText) {
       if (!window.speechSynthesis || !window.SpeechSynthesisUtterance) {
         showStatus("這個瀏覽器不支援語音播放");
         return;
@@ -554,7 +564,7 @@
       clearSpeakingState();
       activeButton = button;
       if (activeButton) activeButton.classList.add("speaking");
-      showStatus(`🔊 ${text}`);
+      showStatus(`🔊 ${displayText || text}`);
 
       utterance.onend = clearSpeakingState;
       utterance.onerror = clearSpeakingState;
@@ -584,7 +594,7 @@
         navButton.textContent = letter;
         navButton.setAttribute("aria-label", `播放字母 ${letter} 的名稱並跳到該區`);
         navButton.addEventListener("click", () => {
-          speak(letter, navButton);
+          speak(LETTER_NAMES[letter], navButton, letter);
           document.getElementById(`letter-${letter}`).scrollIntoView({ behavior: "smooth", block: "start" });
         });
         nav.appendChild(navButton);
@@ -600,7 +610,7 @@
         letterButton.className = "letter-button";
         letterButton.setAttribute("aria-label", `播放字母 ${letter} 的名稱`);
         letterButton.textContent = letter;
-        letterButton.addEventListener("click", () => speak(letter, letterButton));
+        letterButton.addEventListener("click", () => speak(LETTER_NAMES[letter], letterButton, letter));
         side.appendChild(letterButton);
         side.insertAdjacentHTML("beforeend", `<span class="letter-lower">${letter.toLowerCase()}</span><span class="letter-name">點字母聽名稱 🔊</span>`);
 
