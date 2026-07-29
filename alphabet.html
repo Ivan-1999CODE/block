@@ -119,21 +119,27 @@
       backdrop-filter: blur(10px);
     }
 
-    .letter-nav a {
+    .letter-nav button {
       display: grid;
       place-items: center;
       min-height: 34px;
+      padding: 0;
       color: #fff;
       font-weight: 700;
-      text-decoration: none;
       background: linear-gradient(135deg, #8e7cf3, var(--purple));
+      border: 0;
       border-radius: 10px;
       box-shadow: 0 3px 0 var(--purple-dark);
+      cursor: pointer;
     }
 
-    .letter-nav a:active {
+    .letter-nav button:active {
       transform: translateY(2px);
       box-shadow: 0 1px 0 var(--purple-dark);
+    }
+
+    .letter-nav button.speaking {
+      background: #2ecc71;
     }
 
     .alphabet-grid {
@@ -573,10 +579,15 @@
 
     function renderTable() {
       ALPHABET_DATA.forEach(({ letter, sounds }) => {
-        const navLink = document.createElement("a");
-        navLink.href = `#letter-${letter}`;
-        navLink.textContent = letter;
-        nav.appendChild(navLink);
+        const navButton = document.createElement("button");
+        navButton.type = "button";
+        navButton.textContent = letter;
+        navButton.setAttribute("aria-label", `播放字母 ${letter} 的名稱並跳到該區`);
+        navButton.addEventListener("click", () => {
+          speak(letter, navButton);
+          document.getElementById(`letter-${letter}`).scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+        nav.appendChild(navButton);
 
         const card = document.createElement("article");
         card.id = `letter-${letter}`;
