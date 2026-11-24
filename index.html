@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>拼磚塊英文拼字大冒險</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="accent-choice.css">
+  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="accent-choice.css?v=2">
 </head>
 <body>
 
@@ -47,7 +47,7 @@
       <p class="game-subtitle">聽聽發音，把正確的字母拼圖拉進雲朵裡吧！</p>
 
       <!-- A–Z 發音總表 -->
-      <a href="alphabet.html" data-carry-accent class="cross-game-link" style="display:inline-flex;align-items:center;gap:10px;margin:4px auto 12px;padding:12px 24px;background:linear-gradient(135deg,#8e44ad,#6c5ce7);color:#fff;font-weight:700;font-size:1.05rem;text-decoration:none;border-radius:24px;box-shadow:0 4px 0 #51348f;border:2px solid #fff;">
+      <a href="alphabet.html?v=2" data-carry-accent class="cross-game-link" style="display:inline-flex;align-items:center;gap:10px;margin:4px auto 12px;padding:12px 24px;background:linear-gradient(135deg,#8e44ad,#6c5ce7);color:#fff;font-weight:700;font-size:1.05rem;text-decoration:none;border-radius:24px;box-shadow:0 4px 0 #51348f;border:2px solid #fff;">
         🔤 A–Z 發音總表（點例字聽發音）
       </a>
 
@@ -155,15 +155,13 @@
       </header>
 
       <div class="study-content">
-        <template id="study-rule-template">
-          <aside id="phonics-info-card" class="phonics-info-card" aria-labelledby="phonics-info-title">
-            <header>
-              <h3 id="phonics-info-title">發音小知識</h3>
-              <button type="button" class="rule-close" aria-label="關閉發音小知識">×</button>
-            </header>
-            <div id="phonics-intro" aria-live="polite"></div>
-          </aside>
-        </template>
+        <aside id="phonics-info-card" class="phonics-info-card" aria-labelledby="phonics-info-title">
+          <header>
+            <h3 id="phonics-info-title">發音小知識</h3>
+            <button type="button" class="rule-close" aria-label="收起發音小知識" disabled>×</button>
+          </header>
+          <div id="phonics-intro" aria-live="polite"></div>
+        </aside>
 
         <!-- 拼音積木點擊學習區 -->
         <section id="study-tiles-section" class="study-panel">
@@ -250,8 +248,8 @@
     </div>
   </div>
 
-  <script src="pronunciation-audio.js"></script>
+  <script src="pronunciation-audio.js?v=2"></script>
   <script src="accent-phonics.js"></script>
-  <script src="game.js"></script>
+  <script src="game.js?v=2"></script>
 </body>
 </html>

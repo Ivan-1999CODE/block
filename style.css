@@ -1620,8 +1620,9 @@ button.vt-sound, button.vt-word, button.vt-combo { font-weight: inherit; }
 }
 
 .phonics-info-card {
-  flex: 1 0 100%;
-  grid-column: 1 / -1;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  height: 9rem;
   width: 100%;
   min-width: 0;
   padding: 8px 14px 12px;
@@ -1641,7 +1642,7 @@ button.vt-sound, button.vt-word, button.vt-combo { font-weight: inherit; }
 }
 
 .phonics-info-card h3 { margin: 0; color: #765211; font-size: .95rem; }
-#phonics-intro { line-height: 1.7; }
+#phonics-intro { line-height: 1.7; overflow-y: auto; }
 #phonics-intro b { color: #244f70; }
 
 .rule-close {
@@ -1658,6 +1659,7 @@ button.vt-sound, button.vt-word, button.vt-combo { font-weight: inherit; }
 }
 
 .rule-close:hover { background: #f6e9bc; }
+.rule-close:disabled { visibility: hidden; }
 .study-content button:focus-visible { outline: 3px solid #1768ac; outline-offset: 2px; }
 
 .rule-word {
@@ -1849,6 +1851,7 @@ button.vt-sound, button.vt-word, button.vt-combo { font-weight: inherit; }
 .study-word-card:hover .study-word-speaker { color: #fff; background: #1768ac; }
 
 @media (max-width: 720px) {
+  .phonics-info-card { height: 12rem; }
   .app-container.study-mode-active { padding: 10px; }
   .study-hud { grid-template-columns: 46px minmax(0, 1fr) auto; gap: 10px; padding: 11px; border-radius: 20px; }
   .study-icon-button { width: 44px; height: 44px; border-radius: 14px; }

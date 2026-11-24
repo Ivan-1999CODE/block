@@ -427,12 +427,29 @@ function playSound(type) {
 // ==========================================
 // 4. 單字與音素播放
 // ==========================================
-function speakWord(word) {
-  window.PronunciationAudio.play("word", word);
+function speakWord(word, onEnded, onError) {
+  window.PronunciationAudio.play("word", word, onEnded, onError);
 }
 
 function speakPhoneme(ipa) {
   window.PronunciationAudio.play("phoneme", ipa);
+}
+
+function playAnswerFeedback(word, effect, minimumDelay, advance) {
+  const start = performance.now();
+  function afterReading() {
+    clearTimeout(questionTransition);
+    playSound(effect);
+    const remaining = minimumDelay - (performance.now() - start);
+    questionTransition = setTimeout(advance, Math.max(450, remaining));
+  }
+  if (word) {
+    // 先聽清楚單字再響提示音。若音檔一直無法播放，挑戰仍會進入下一題。
+    questionTransition = setTimeout(advance, 4500);
+    speakWord(word, afterReading, afterReading);
+  } else {
+    afterReading();
+  }
 }
 
 // ==========================================
@@ -772,7 +789,7 @@ function setupGameControlEvents() {
   // 雲朵發音按鈕
   document.getElementById("btn-speak").addEventListener("click", () => {
     const currentQ = currentQuestions[currentQuestionIndex];
-    if (currentQ) {
+    if (currentQ && !isCurrentQuestionAnswered) {
       speakWord(currentQ.word);
     }
   });
@@ -859,6 +876,8 @@ function startGame(category) {
 
 // 載入題目
 function loadQuestion() {
+  clearTimeout(questionTransition);
+  window.PronunciationAudio.stop();
   isCurrentQuestionAnswered = false;
   clearInterval(timerInterval);
   
@@ -971,7 +990,6 @@ function handleDrop(letter) {
     score += pts;
 
     // 播放音效與粒子特效
-    playSound("correct");
     createCelebrationBurst();
 
     // 更新 UI 狀態
@@ -987,16 +1005,10 @@ function handleDrop(letter) {
       comboBadge.classList.add("show");
     }
 
-    // 播放發音 (僅限簡單模式，或過關後給予回饋)
-    if (isEasyMode) {
-      speakWord(currentQ.word);
-    }
-
-    // 延遲 1.8 秒進入下一題
-    questionTransition = setTimeout(() => {
+    playAnswerFeedback(isEasyMode ? currentQ.word : null, "correct", 1800, () => {
       comboBadge.classList.remove("show");
       nextQuestion();
-    }, 1800);
+    });
 
   } else {
     // 答錯了！
@@ -1076,6 +1088,7 @@ function updateHUD() {
 // ==========================================
 
 function showLevelClear() {
+  window.PronunciationAudio.stop();
   playSound("clear");
   const overlay = document.getElementById("modal-overlay");
   const modalClear = document.getElementById("modal-clear");
@@ -1122,6 +1135,7 @@ function showLevelClear() {
 }
 
 function showGameOver() {
+  window.PronunciationAudio.stop();
   playSound("gameover");
   const overlay = document.getElementById("modal-overlay");
   const modalGameOver = document.getElementById("modal-gameover");
@@ -1164,37 +1178,32 @@ let currentFilteredLetter = "";
 let studyRuleAnchor = null;
 
 function hideStudyRule(returnFocus = false) {
-  const panel = document.getElementById("phonics-info-card");
-  if (panel) (panel.closest("tr") || panel).remove();
   if (studyRuleAnchor) {
     studyRuleAnchor.removeAttribute("aria-details");
-    if (returnFocus && studyRuleAnchor.isConnected) studyRuleAnchor.focus();
+    if (returnFocus && studyRuleAnchor.isConnected) studyRuleAnchor.focus({ preventScroll: true });
     studyRuleAnchor = null;
   }
+  const intro = document.getElementById("phonics-intro");
+  intro.textContent = "點選字母、拼法或例字，就能在這裡看對應的規則。";
+  intro.scrollTop = 0;
+  document.querySelector(".rule-close").disabled = true;
 }
 
 function showStudyRule(html, anchor) {
-  hideStudyRule();
-  if (!html || !anchor?.isConnected) return;
-  const panel = document.getElementById("study-rule-template").content.firstElementChild.cloneNode(true);
-  const tableRow = anchor.closest("tr");
-  if (tableRow) {
-    const noteRow = document.createElement("tr");
-    const cell = noteRow.insertCell();
-    cell.colSpan = tableRow.cells.length;
-    cell.appendChild(panel);
-    tableRow.after(noteRow);
-  } else {
-    const row = anchor.closest(".patt-row, .vc-row");
-    (row || anchor).after(panel);
+  if (!html || !anchor?.isConnected) {
+    hideStudyRule();
+    return;
   }
-  panel.querySelector("#phonics-intro").innerHTML = html;
-  panel.querySelector(".rule-close").addEventListener("click", () => hideStudyRule(true));
-  anchor.setAttribute("aria-details", panel.id);
+  if (studyRuleAnchor) studyRuleAnchor.removeAttribute("aria-details");
+  const intro = document.getElementById("phonics-intro");
+  intro.innerHTML = html;
+  intro.scrollTop = 0;
+  document.querySelector(".rule-close").disabled = false;
+  anchor.setAttribute("aria-details", "phonics-info-card");
   studyRuleAnchor = anchor;
-  panel.scrollIntoView({ block: "nearest", inline: "nearest" });
 }
 
+document.querySelector(".rule-close").addEventListener("click", () => hideStudyRule(true));
 document.addEventListener("keydown", event => {
   if (event.key === "Escape" && studyRuleAnchor) hideStudyRule(true);
 });
@@ -1288,7 +1297,6 @@ function bindVowelButtons(container, words, describe) {
       if (button.dataset.word) {
         speakWord(name);
       } else {
-        playSound("click");
         speakPhoneme(button.dataset.ipa);
       }
       showStudyRule(describe(example), button);
@@ -1640,6 +1648,8 @@ function startSchwaQuiz() {
 }
 
 function loadSchwaQuestion() {
+  clearTimeout(questionTransition);
+  window.PronunciationAudio.stop();
   const quiz = document.getElementById("schwa-quiz");
   if (!quiz) return;
 
@@ -1672,7 +1682,9 @@ function loadSchwaQuestion() {
   feedback.id = "schwa-feedback";
   quiz.appendChild(feedback);
 
-  bar.querySelector(".btn-replay").addEventListener("click", () => speakWord(item.word));
+  bar.querySelector(".btn-replay").addEventListener("click", () => {
+    if (!schwaAnswered) speakWord(item.word);
+  });
   wordNode.querySelectorAll(".schwa-vbtn").forEach((btn) => {
     btn.addEventListener("click", () => onSchwaAnswer(parseInt(btn.dataset.i, 10), item, wordNode));
   });
@@ -1693,25 +1705,21 @@ function onSchwaAnswer(i, item, wordNode) {
 
   if (i === item.schwa) {
     schwaScore += 10;
-    playSound("correct");
     createCelebrationBurst();
     feedback.innerHTML = `🎉 答對了！「${item.word}」的這個母音偷懶唸成 /ə/。`;
     feedback.className = "schwa-feedback ok";
   } else {
-    playSound("wrong");
     const chosen = wordNode.querySelector(`.schwa-vbtn[data-i="${i}"]`);
     if (chosen) chosen.classList.add("schwa-wrong");
     feedback.innerHTML = `💡 再聽一次～綠色那個母音才是偷懶的 /ə/。`;
     feedback.className = "schwa-feedback no";
   }
 
-  speakWord(item.word);
-
-  setTimeout(() => {
+  playAnswerFeedback(item.word, i === item.schwa ? "correct" : "wrong", 1900, () => {
     if (!wordNode.isConnected || document.getElementById("study-screen").classList.contains("hidden")) return;
     schwaIdx++;
     loadSchwaQuestion();
-  }, 1900);
+  });
 }
 
 function renderSchwaResult() {
@@ -1784,6 +1792,7 @@ function renderConsonantTiles(category, studyData) {
     allTile.classList.add("active");
     allTile.setAttribute("aria-pressed", "true");
     currentFilteredLetter = "";
+    hideStudyRule();
     renderStudyWords();
   });
   tilesContainer.appendChild(allTile);
@@ -1804,7 +1813,6 @@ function renderConsonantTiles(category, studyData) {
     tile.innerHTML = `<span>${label}</span> ${showIpa ? '<span class="study-tile-ipa"></span>' : ""}${speakerIcon}`;
     updateConsonantTileLabel(tile);
     tile.addEventListener("click", () => {
-      playSound("click");
       document.querySelectorAll(".study-tile").forEach((t) => {
         t.classList.remove("active");
         t.setAttribute("aria-pressed", "false");
@@ -1833,7 +1841,6 @@ function updateConsonantFilterStatus() {
 }
 
 function renderStudyWords() {
-  hideStudyRule();
   const container = document.getElementById("study-words-container");
   container.replaceChildren();
   const words = WORD_DATABASE[currentStudyCategory];

@@ -68,3 +68,19 @@
   }
   .letter-nav button { flex: 0 0 44px; }
 }
+
+.audio-retry {
+  position: fixed;
+  z-index: 1000;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 18px;
+  border: 2px solid #155783;
+  border-radius: 12px;
+  background: #fff;
+  color: #155783;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
