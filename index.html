@@ -155,19 +155,15 @@
       </header>
 
       <div class="study-content">
-        <!-- 拼音小知識卡片 -->
-        <section id="phonics-info-card" class="phonics-info-card" aria-labelledby="phonics-info-title">
-          <div class="phonics-info-heading">
-            <span class="phonics-info-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4"/><path d="M8.5 14.5A7 7 0 1 1 15.5 14.5c-.9.7-1.5 1.5-1.5 2.5h-4c0-1-.6-1.8-1.5-2.5Z"/></svg>
-            </span>
-            <div>
-              <span class="section-kicker">先認識規則</span>
+        <template id="study-rule-template">
+          <aside id="phonics-info-card" class="phonics-info-card" aria-labelledby="phonics-info-title">
+            <header>
               <h3 id="phonics-info-title">發音小知識</h3>
-            </div>
-          </div>
-          <div id="phonics-intro">讀音小幫手說明載入中...</div>
-        </section>
+              <button type="button" class="rule-close" aria-label="關閉發音小知識">×</button>
+            </header>
+            <div id="phonics-intro" aria-live="polite"></div>
+          </aside>
+        </template>
 
         <!-- 拼音積木點擊學習區 -->
         <section id="study-tiles-section" class="study-panel">
@@ -193,7 +189,6 @@
             </div>
             <span id="study-filter-status" class="study-filter-status" aria-live="polite">顯示全部單字</span>
           </div>
-          <p id="consonant-rule-note" aria-live="polite" hidden></p>
           <div id="study-words-container" class="study-words-container">
             <!-- 動態載入單字發音卡 -->
           </div>

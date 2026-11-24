@@ -954,6 +954,13 @@ body {
 }
 
 /* 雙母音發音分類表格 */
+/* 拼法和例字同時支援觸控與鍵盤點讀。 */
+.study-content button { font-family: inherit; }
+button.vgroup-head { width: 100%; border: 0; }
+button.word-chip, button.vt-word, button.vt-sound { background: transparent; border: 0; }
+button.patt-tag { border: 0; }
+button.vt-sound, button.vt-word, button.vt-combo { font-weight: inherit; }
+
 .vowel-table {
   width: 100%;
   border-collapse: separate;
@@ -1341,7 +1348,6 @@ body {
 .sl-syll { padding: 2px 4px; border-radius: 8px; }
 .sl-weak { background: #ecf0f1; color: #95a5a6; }
 .sl-dot { color: #b2bec3; margin: 0 2px; font-weight: 400; }
-.sl-note { font-size: 0.95rem; color: #2c3e50; font-weight: 600; margin-bottom: 4px; }
 
 .schwa-quiz {
   width: 100%;
@@ -1527,7 +1533,6 @@ body {
 
 .study-icon-button svg,
 .study-challenge-button svg,
-.phonics-info-icon svg,
 .study-tile svg,
 .study-word-speaker svg {
   fill: none;
@@ -1598,7 +1603,6 @@ body {
   margin: 0 auto;
 }
 
-.phonics-info-card,
 .study-panel {
   width: 100%;
   background: rgba(255, 255, 255, .94);
@@ -1607,40 +1611,6 @@ body {
   box-shadow: 0 12px 30px rgba(37, 100, 140, .11), inset 0 -4px 0 rgba(31, 110, 158, .04);
 }
 
-.phonics-info-card {
-  display: grid;
-  grid-template-columns: 210px minmax(0, 1fr);
-  gap: 22px;
-  align-items: start;
-  padding: 22px 24px;
-  background: linear-gradient(145deg, rgba(255, 250, 220, .97), rgba(255, 255, 255, .96));
-}
-
-.phonics-info-heading {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  padding-right: 18px;
-  border-right: 2px dashed #ead997;
-}
-
-.phonics-info-icon {
-  display: grid;
-  width: 46px;
-  height: 46px;
-  flex: 0 0 auto;
-  color: #9b6811;
-  background: #ffe58f;
-  border: 2px solid #f1c956;
-  border-radius: 15px;
-  box-shadow: 0 4px 0 #d9aa34;
-  place-items: center;
-}
-
-.phonics-info-icon svg { width: 25px; height: 25px; }
-.phonics-info-card .section-kicker { color: #a16a0b; }
-
-.phonics-info-card h3,
 .study-section-heading h3 {
   margin: 3px 0 0;
   color: #17324d;
@@ -1649,43 +1619,46 @@ body {
   line-height: 1.15;
 }
 
-#phonics-intro {
-  margin: 0;
-  padding: 3px 0;
-  color: #53697c;
-  font-size: .98rem;
-  font-weight: 500;
-  line-height: 1.75;
-}
-
-#phonics-intro b { color: #244f70; }
-
-#consonant-rule-guide table {
+.phonics-info-card {
+  flex: 1 0 100%;
+  grid-column: 1 / -1;
   width: 100%;
-  margin: .6rem 0;
-  border-collapse: collapse;
-  color: #244f70;
-  text-align: left;
-  line-height: 1.45;
-}
-
-#consonant-rule-guide th,
-#consonant-rule-guide td {
-  padding: .35rem .4rem;
-  border-bottom: 1px solid #dfd5ae;
-}
-
-#consonant-rule-guide thead { background: #faf1cd; }
-
-#consonant-rule-note {
-  margin: 0 0 16px;
-  padding: 10px 14px;
-  border-left: 4px solid #e1ad35;
-  border-radius: 6px;
+  min-width: 0;
+  padding: 8px 14px 12px;
+  border: 1px solid #ead7a0;
+  border-left: 4px solid #d7a32a;
+  border-radius: 10px;
   background: #fffae8;
   color: #324e65;
-  line-height: 1.75;
+  text-align: left;
+  font-weight: 500;
 }
+
+.phonics-info-card header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.phonics-info-card h3 { margin: 0; color: #765211; font-size: .95rem; }
+#phonics-intro { line-height: 1.7; }
+#phonics-intro b { color: #244f70; }
+
+.rule-close {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #765211;
+  font: inherit;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.rule-close:hover { background: #f6e9bc; }
+.study-content button:focus-visible { outline: 3px solid #1768ac; outline-offset: 2px; }
 
 .rule-word {
   min-height: 32px;
@@ -1885,8 +1858,13 @@ body {
   .study-challenge-button svg { width: 22px; height: 22px; }
   .study-challenge-button { font-size: 0; gap: 0; }
   .study-content { gap: 13px; }
-  .phonics-info-card { grid-template-columns: 1fr; gap: 14px; padding: 18px; }
-  .phonics-info-heading { padding: 0 0 13px; border-right: 0; border-bottom: 2px dashed #ead997; }
+  .study-panel { min-width: 0; }
+  .vc-row { gap: 5px; padding: 6px; }
+  .vc-label { min-width: 0; font-size: .85rem; }
+  .vc-row .study-tile { min-width: 0; min-height: 44px; padding: 5px 0; }
+  .vowel-table thead th, .vt-row td { padding: 6px 4px; }
+  .vt-combos, .vt-words { gap: 5px; }
+  .vt-combo { padding: 4px 6px; }
   .study-panel { padding: 18px 15px 20px; }
   .study-section-heading { margin-bottom: 15px; }
   .study-filter-status { display: none; }
