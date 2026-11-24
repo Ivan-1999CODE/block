@@ -167,6 +167,54 @@ const WORD_DATABASE = {
     { word: "crab", missing: "cr", clue: ["", "ab"] },
     { word: "cry", missing: "cr", clue: ["", "y"] },
     { word: "crown", missing: "cr", clue: ["", "own"] }
+  ],
+  basic_consonants: [
+    { word: "book", missing: "b", clue: ["", "ook"] },
+    { word: "bird", missing: "b", clue: ["", "ird"] },
+    { word: "cat", missing: "c", soundGroup: "c [k]", clue: ["", "at"] },
+    { word: "cow", missing: "c", soundGroup: "c [k]", clue: ["", "ow"] },
+    { word: "city", missing: "c", soundGroup: "c [s]", clue: ["", "ity"] },
+    { word: "face", missing: "c", soundGroup: "c [s]", clue: ["fa", "e"] },
+    { word: "dog", missing: "d", clue: ["", "og"] },
+    { word: "duck", missing: "d", clue: ["", "uck"] },
+    { word: "fish", missing: "f", clue: ["", "ish"] },
+    { word: "foot", missing: "f", clue: ["", "oot"] },
+    { word: "goat", missing: "g", soundGroup: "g [g]", clue: ["", "oat"] },
+    { word: "garden", missing: "g", soundGroup: "g [g]", clue: ["", "arden"] },
+    { word: "giant", missing: "g", soundGroup: "g [dʒ]", clue: ["", "iant"] },
+    { word: "gym", missing: "g", soundGroup: "g [dʒ]", clue: ["", "ym"] },
+    { word: "home", missing: "h", clue: ["", "ome"] },
+    { word: "happy", missing: "h", clue: ["", "appy"] },
+    { word: "jam", missing: "j", clue: ["", "am"] },
+    { word: "jump", missing: "j", clue: ["", "ump"] },
+    { word: "key", missing: "k", clue: ["", "ey"] },
+    { word: "kite", missing: "k", clue: ["", "ite"] },
+    { word: "leg", missing: "l", clue: ["", "eg"] },
+    { word: "lemon", missing: "l", clue: ["", "emon"] },
+    { word: "map", missing: "m", clue: ["", "ap"] },
+    { word: "moon", missing: "m", clue: ["", "oon"] },
+    { word: "nose", missing: "n", clue: ["", "ose"] },
+    { word: "nurse", missing: "n", clue: ["", "urse"] },
+    { word: "pen", missing: "p", clue: ["", "en"] },
+    { word: "panda", missing: "p", clue: ["", "anda"] },
+    { word: "queen", missing: "qu", clue: ["", "een"] },
+    { word: "quick", missing: "qu", clue: ["", "ick"] },
+    { word: "rain", missing: "r", clue: ["", "ain"] },
+    { word: "red", missing: "r", clue: ["", "ed"] },
+    { word: "sun", missing: "s", clue: ["", "un"] },
+    { word: "sofa", missing: "s", clue: ["", "ofa"] },
+    { word: "top", missing: "t", clue: ["", "op"] },
+    { word: "town", missing: "t", clue: ["", "own"] },
+    { word: "van", missing: "v", clue: ["", "an"] },
+    { word: "five", missing: "v", clue: ["fi", "e"] },
+    { word: "wet", missing: "w", clue: ["", "et"] },
+    { word: "wagon", missing: "w", clue: ["", "agon"] },
+    { word: "box", missing: "x", clue: ["bo", ""] },
+    { word: "six", missing: "x", clue: ["si", ""] },
+    { word: "yes", missing: "y", clue: ["", "es"] },
+    { word: "yellow", missing: "y", clue: ["", "ellow"] },
+    { word: "zebra", missing: "z", clue: ["", "ebra"] },
+    { word: "zoo", missing: "z", clue: ["", "oo"] }
   ]
 };
 
@@ -216,6 +264,16 @@ const PHONICS_DATA = {
       br: "br",
       cr: "kr"
     }
+  },
+  basic_consonants: {
+    title: "普通子音 📖 學習樂園",
+    tips: "點 <b>b</b> 聽 /b/，再點 <b>book</b> 聽這個音怎麼接上後面的母音。<br>• <b>c</b> 在 cat 裡唸 /k/，和 kite 的 k 同音。在 city 裡，c 唸 /s/。<br>• <b>g</b> 在 goat 裡唸 /ɡ/，在 giant 裡唸 /dʒ/，和 jam 開頭的 j 同音。<br>• <b>qu</b> 在 queen 裡一起唸 /kw/，拼字時選 qu。<b>x</b> 在 box 的字尾唸 /ks/。<br>• <b>y</b> 在 yes、yellow 的字首都唸 /j/。唸 yes 時，把舌面靠近上顎，再滑向後面的母音。",
+    sounds: {
+      b: "b", "c [k]": "k", "c [s]": "s", d: "d", f: "f",
+      "g [g]": "g", "g [dʒ]": "dʒ", h: "h", j: "dʒ", k: "k",
+      l: "l", m: "m", n: "n", p: "p", qu: "kw", r: "r", s: "s",
+      t: "t", v: "v", w: "w", x: "ks", y: "j", z: "z"
+    }
   }
 };
 
@@ -236,12 +294,11 @@ let isCurrentQuestionAnswered = false;
 let isEasyMode = true;
 let gamePool = []; // 本局出題用的題庫（長母音只取基礎字）
 
-// 五大分類
-const CATEGORY_KEYS = ["short_vowels", "long_vowels", "special_vowels", "schwa", "consonants"];
+const CATEGORY_KEYS = Object.keys(WORD_DATABASE);
 
 // 儲存至本地的資料
-let highScores = { short_vowels: 0, long_vowels: 0, special_vowels: 0, schwa: 0, consonants: 0 };
-let starRatings = { short_vowels: 0, long_vowels: 0, special_vowels: 0, schwa: 0, consonants: 0 };
+let highScores = Object.fromEntries(CATEGORY_KEYS.map(key => [key, 0]));
+let starRatings = { ...highScores };
 
 // 音效控制
 let soundEnabled = true;
@@ -1088,6 +1145,8 @@ window.addEventListener("accentchange", () => {
   const studyData = PHONICS_DATA[currentStudyCategory];
   if (!studyData) return;
   updateStudyTips(studyData);
+  document.querySelectorAll(".study-tile[data-sound]").forEach(updateConsonantTileLabel);
+  if (currentStudyCategory === "basic_consonants") updateConsonantFilterStatus();
   const render = {
     short_vowels: renderShortVowels,
     long_vowels: renderLongVowels,
@@ -1135,7 +1194,9 @@ function startStudy(category) {
     return;
   }
 
-  // consonants：維持原本「積木 + 單字卡」模式
+  // 兩個子音章節共用可篩選的字母與例字卡。
+  document.getElementById("consonant-tiles-title").textContent =
+    category === "basic_consonants" ? "選擇子音字母" : "選擇子音組合";
   tilesPrompt.style.display = "";
   wordsSection.style.display = "";
   tilesContainer.style.display = "flex";
@@ -1611,6 +1672,16 @@ function renderSchwaResult() {
 }
 
 // ---- 子音頁：可篩選、可直接試聽的發音卡 ----
+function consonantGroup(word) {
+  return word.soundGroup || word.missing;
+}
+
+function updateConsonantTileLabel(tile) {
+  const badge = tile.querySelector(".study-tile-ipa");
+  if (badge) badge.textContent = window.AccentPhonics.label(tile.dataset.sound);
+  tile.setAttribute("aria-label", `篩選 ${tile.textContent.trim()} 的例字並播放發音`);
+}
+
 function renderConsonantTiles(category, studyData) {
   const tilesContainer = document.getElementById("study-tiles-container");
   tilesContainer.innerHTML = "";
@@ -1621,7 +1692,7 @@ function renderConsonantTiles(category, studyData) {
   allTile.type = "button";
   allTile.className = "study-tile study-tile-all active";
   allTile.setAttribute("aria-pressed", "true");
-  allTile.setAttribute("aria-label", "顯示全部子音組合的單字");
+  allTile.setAttribute("aria-label", "顯示本章全部單字");
   allTile.textContent = "全部";
   allTile.addEventListener("click", () => {
     playSound("click");
@@ -1638,17 +1709,19 @@ function renderConsonantTiles(category, studyData) {
 
   const defaultRow = document.createElement("div");
   defaultRow.className = "study-tile-row";
-  const uniqueLetters = [...new Set(WORD_DATABASE[category].map((w) => w.missing))];
+  if (category === "basic_consonants") defaultRow.classList.add("basic-consonant-tiles");
+  const uniqueLetters = [...new Set(WORD_DATABASE[category].map(consonantGroup))];
   uniqueLetters.forEach((letter) => {
     const tile = document.createElement("button");
     tile.type = "button";
     tile.className = "study-tile";
     tile.setAttribute("aria-pressed", "false");
-    tile.setAttribute("aria-label", `篩選 ${letter} 的例字並播放發音`);
     const match = letter.match(/^(.+?) \[(.+)\]$/);
     const label = match ? match[1] : letter;
-    const ipa = match ? `/${match[2]}/` : "";
-    tile.innerHTML = `<span>${label}</span>${ipa ? `<span class="study-tile-ipa">${ipa}</span>` : ""}${speakerIcon}`;
+    tile.dataset.sound = studyData.sounds[letter];
+    const showIpa = category === "basic_consonants" || match;
+    tile.innerHTML = `<span>${label}</span> ${showIpa ? '<span class="study-tile-ipa"></span>' : ""}${speakerIcon}`;
+    updateConsonantTileLabel(tile);
     tile.addEventListener("click", () => {
       playSound("click");
       document.querySelectorAll(".study-tile").forEach((t) => {
@@ -1666,21 +1739,25 @@ function renderConsonantTiles(category, studyData) {
   tilesContainer.appendChild(defaultRow);
 }
 
+function updateConsonantFilterStatus() {
+  const count = document.getElementById("study-words-container").childElementCount;
+  const status = document.getElementById("study-filter-status");
+  if (!currentFilteredLetter) {
+    status.textContent = `全部・${count} 個單字`;
+    return;
+  }
+  const activeTile = document.querySelector("#study-tiles-container [data-sound].active");
+  status.textContent = `${activeTile.textContent.trim()}・${count} 個單字`;
+}
+
 function renderStudyWords() {
   const container = document.getElementById("study-words-container");
-  const filterStatus = document.getElementById("study-filter-status");
-  container.innerHTML = "";
-
+  container.replaceChildren();
   const words = WORD_DATABASE[currentStudyCategory];
   // 篩選單字
   const displayWords = currentFilteredLetter 
-    ? words.filter(w => w.missing === currentFilteredLetter) 
+    ? words.filter(w => consonantGroup(w) === currentFilteredLetter)
     : words;
-
-  const cleanFilter = currentFilteredLetter.replace(/ \[.*?\]/, "");
-  filterStatus.textContent = currentFilteredLetter
-    ? `${cleanFilter}・${displayWords.length} 個單字`
-    : `全部・${displayWords.length} 個單字`;
 
   displayWords.forEach(word => {
     const card = document.createElement("button");
@@ -1705,6 +1782,7 @@ function renderStudyWords() {
 
     container.appendChild(card);
   });
+  updateConsonantFilterStatus();
 }
 
 function exitStudyToLobby() {

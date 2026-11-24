@@ -256,6 +256,10 @@ body {
 .card-long_vowels::before { background: linear-gradient(90deg, #00cec9, #81ecec); }
 .card-special_vowels::before { background: linear-gradient(90deg, #a29bfe, #d6a2ff); }
 .card-schwa::before { background: linear-gradient(90deg, #636e72, #b2bec3); }
+.card-basic_consonants { font: inherit; color: inherit; }
+.card-basic_consonants .category-name { display: block; }
+.card-basic_consonants::before { background: linear-gradient(90deg, #ed8053, #ffc090); }
+.card-basic_consonants:focus-visible { outline: 3px solid #7136b2; outline-offset: 3px; }
 
 .category-card:hover {
   transform: translateY(-8px) scale(1.03);
@@ -1845,6 +1849,10 @@ body {
   .study-filter-status { display: none; }
   .study-tiles-container, .study-tile-row { gap: 10px; }
   .study-tile { min-width: 72px; min-height: 54px; padding: 9px 13px; font-size: 1.06rem; }
+  .basic-consonant-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(62px, 1fr)); gap: 8px; }
+  .basic-consonant-tiles .study-tile { flex-direction: column; min-width: 0; gap: 2px; padding: 4px; }
+  .basic-consonant-tiles .study-tile svg { display: none; }
+  .basic-consonant-tiles .study-tile.active::after { position: absolute; top: -4px; right: -3px; }
   .study-words-container { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .study-word-card { grid-template-columns: minmax(0, 1fr) 34px; min-height: 72px; padding: 10px; }
   .study-word-text { font-size: 1.05rem; }
