@@ -5,221 +5,524 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>A–Z 英文字母發音總表</title>
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Noto+Sans+TC:wght@500;600;700&display=swap");
 
     :root {
-      --ink: #2c3e50;
-      --muted: #657485;
-      --purple: #6c5ce7;
-      --purple-dark: #51348f;
-      --sky: #dff4ff;
-      --card: rgba(255, 255, 255, 0.94);
-      --line: #e5e9f2;
+      --ink: #17324d;
+      --muted: #5d7185;
+      --surface: rgba(255, 255, 255, .94);
+      --surface-soft: #f7fbff;
+      --line: #dceaf4;
+      --vowel: #e83e73;
+      --vowel-deep: #b91f50;
+      --vowel-soft: #fff0f5;
+      --consonant: #1768ac;
+      --consonant-deep: #0b4f87;
+      --consonant-soft: #eaf6ff;
+      --sun: #ffbf3f;
+      --green: #16875e;
+      --green-deep: #0e6948;
+      --focus: #5b45d6;
+      --shadow: 0 14px 34px rgba(29, 81, 119, .13);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
       min-height: 100vh;
       color: var(--ink);
-      font-family: "Fredoka", "Noto Sans TC", sans-serif;
+      font-family: "Baloo 2", "Noto Sans TC", sans-serif;
       background:
-        radial-gradient(circle at 12% 12%, rgba(255,255,255,.9) 0 7%, transparent 7.5%),
-        radial-gradient(circle at 88% 22%, rgba(255,255,255,.7) 0 9%, transparent 9.5%),
-        linear-gradient(180deg, #87d4ff 0%, var(--sky) 42%, #f6fbff 100%);
+        radial-gradient(circle at 8% 9%, rgba(255, 255, 255, .9) 0 5.5%, transparent 5.8%),
+        radial-gradient(circle at 91% 16%, rgba(255, 255, 255, .72) 0 8%, transparent 8.3%),
+        linear-gradient(180deg, #8edcff 0%, #dff6ff 36%, #f7fcff 100%);
       background-attachment: fixed;
+      overscroll-behavior: contain;
+    }
+
+    body::before,
+    body::after {
+      position: fixed;
+      z-index: -1;
+      content: "";
+      border-radius: 50%;
+      opacity: .7;
+      filter: blur(1px);
+    }
+
+    body::before {
+      width: 170px;
+      height: 170px;
+      right: -42px;
+      top: 45%;
+      background: #ffe69a;
+    }
+
+    body::after {
+      width: 120px;
+      height: 120px;
+      left: -34px;
+      bottom: 8%;
+      background: #ffc0d4;
     }
 
     button, a {
       font: inherit;
       -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    button { cursor: pointer; }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 4px solid rgba(91, 69, 214, .35);
+      outline-offset: 3px;
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      flex: 0 0 auto;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 2.2;
     }
 
     .page {
-      width: min(1120px, calc(100% - 28px));
+      width: min(1180px, calc(100% - 30px));
       margin: 0 auto;
-      padding: 22px 0 60px;
+      padding: 24px 0 64px;
     }
 
     .hero {
       position: relative;
-      padding: 26px 24px 22px;
-      text-align: center;
-      background: var(--card);
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(310px, .65fr);
+      gap: 24px;
+      align-items: stretch;
+      padding: 30px;
+      overflow: hidden;
+      background: var(--surface);
       border: 4px solid #fff;
-      border-radius: 28px;
-      box-shadow: 0 14px 38px rgba(58, 90, 120, .14);
+      border-radius: 32px;
+      box-shadow: var(--shadow), inset 0 -5px 0 rgba(23, 104, 172, .05);
+    }
+
+    .hero::after {
+      position: absolute;
+      right: 36%;
+      bottom: -58px;
+      width: 150px;
+      height: 150px;
+      content: "";
+      background: #fff1a8;
+      border-radius: 50%;
+      opacity: .42;
+      pointer-events: none;
     }
 
     .home-link {
       position: absolute;
       top: 18px;
       left: 18px;
+      z-index: 2;
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      padding: 9px 13px;
-      color: #536273;
+      gap: 8px;
+      min-height: 44px;
+      padding: 8px 14px;
+      color: #425c72;
       font-weight: 700;
       text-decoration: none;
-      background: #f5f7fb;
-      border: 2px solid #e1e6ef;
+      background: #fff;
+      border: 2px solid #d9e6ef;
       border-radius: 15px;
-      box-shadow: 0 3px 0 #d4dae5;
+      box-shadow: 0 4px 0 #cbdce8;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .home-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 0 #cbdce8;
+    }
+
+    .hero-copy {
+      align-self: center;
+      padding: 54px 8px 10px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      color: var(--consonant-deep);
+      font-size: .86rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+    }
+
+    .eyebrow::before {
+      width: 32px;
+      height: 8px;
+      content: "";
+      background: linear-gradient(90deg, var(--vowel), var(--sun));
+      border-radius: 99px;
     }
 
     h1 {
-      margin: 6px 0 7px;
-      color: var(--purple);
-      font-size: clamp(2rem, 6vw, 3.2rem);
-      line-height: 1.05;
-      text-shadow: 2px 3px 0 #ebe8ff;
+      margin: 0 0 10px;
+      color: var(--consonant);
+      font-size: clamp(2.5rem, 6vw, 4.35rem);
+      line-height: .98;
+      letter-spacing: -.03em;
+      text-shadow: 3px 4px 0 #dcedff;
     }
+
+    h1 .title-vowel { color: var(--vowel); }
 
     .subtitle {
-      margin: 0 auto;
-      max-width: 720px;
+      max-width: 680px;
+      margin: 0;
       color: var(--muted);
-      font-size: 1.05rem;
-      line-height: 1.6;
+      font-family: "Noto Sans TC", sans-serif;
+      font-size: 1rem;
+      line-height: 1.75;
     }
 
-    .hint {
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .legend-item {
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      margin-top: 14px;
-      padding: 8px 14px;
-      color: #5a4ac8;
+      padding: 7px 12px;
+      font-family: "Noto Sans TC", sans-serif;
+      font-size: .88rem;
       font-weight: 700;
-      background: #f0edff;
+      background: #fff;
+      border: 2px solid;
       border-radius: 999px;
     }
 
-    .letter-nav {
+    .legend-item::before {
+      width: 11px;
+      height: 11px;
+      content: "";
+      border-radius: 50%;
+    }
+
+    .legend-vowel {
+      color: var(--vowel-deep);
+      background: var(--vowel-soft);
+      border-color: #ffc8d9;
+    }
+
+    .legend-vowel::before { background: var(--vowel); }
+
+    .legend-consonant {
+      color: var(--consonant-deep);
+      background: var(--consonant-soft);
+      border-color: #b7ddf8;
+    }
+
+    .legend-consonant::before { background: var(--consonant); }
+
+    .listen-guide {
+      position: relative;
+      z-index: 1;
+      align-self: center;
+      padding: 20px;
+      background: linear-gradient(145deg, #fff8d9, #fffdf4);
+      border: 3px solid #fff;
+      border-radius: 24px;
+      box-shadow: 0 8px 0 #f0d47b, 0 16px 30px rgba(150, 112, 24, .12);
+    }
+
+    .listen-guide h2 {
+      margin: 0 0 13px;
+      color: #765817;
+      font-size: 1.35rem;
+    }
+
+    .guide-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: guide;
+    }
+
+    .guide-list li {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 10px;
+      align-items: center;
+      color: #594b2b;
+      font-family: "Noto Sans TC", sans-serif;
+      counter-increment: guide;
+    }
+
+    .guide-list li::before {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      color: #fff;
+      font-family: "Baloo 2", sans-serif;
+      font-weight: 800;
+      content: counter(guide);
+      place-items: center;
+      background: #f09b26;
+      border-radius: 12px;
+      box-shadow: 0 3px 0 #c87614;
+    }
+
+    .guide-list strong,
+    .guide-list span { display: block; }
+
+    .guide-list strong { font-size: .94rem; }
+    .guide-list span { margin-top: 1px; color: #7b6b45; font-size: .78rem; }
+
+    .letter-nav-wrap {
       position: sticky;
       top: 8px;
       z-index: 10;
-      display: grid;
-      grid-template-columns: repeat(13, minmax(34px, 1fr));
-      gap: 7px;
-      margin: 18px 0;
+      margin: 20px 0;
       padding: 12px;
-      background: rgba(255,255,255,.9);
+      background: rgba(255, 255, 255, .91);
       border: 3px solid #fff;
-      border-radius: 20px;
-      box-shadow: 0 8px 25px rgba(58, 90, 120, .12);
-      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      box-shadow: 0 9px 28px rgba(29, 81, 119, .14);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-caption {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 0 2px 9px;
+      color: #526c82;
+      font-family: "Noto Sans TC", sans-serif;
+      font-size: .78rem;
+      font-weight: 700;
+    }
+
+    .nav-caption strong {
+      color: var(--ink);
+      font-size: .9rem;
+    }
+
+    .letter-nav {
+      display: grid;
+      grid-template-columns: repeat(13, minmax(40px, 1fr));
+      gap: 8px;
     }
 
     .letter-nav button {
       display: grid;
-      place-items: center;
-      min-height: 34px;
+      min-height: 44px;
       padding: 0;
       color: #fff;
-      font-weight: 700;
-      background: linear-gradient(135deg, #8e7cf3, var(--purple));
+      font-size: 1.08rem;
+      font-weight: 800;
       border: 0;
-      border-radius: 10px;
-      box-shadow: 0 3px 0 var(--purple-dark);
-      cursor: pointer;
+      border-radius: 13px;
+      place-items: center;
+      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+    }
+
+    .letter-nav button:hover { transform: translateY(-2px); filter: saturate(1.1); }
+
+    .letter-nav button.consonant {
+      background: linear-gradient(145deg, #2f8bd0, var(--consonant));
+      box-shadow: 0 4px 0 var(--consonant-deep);
+    }
+
+    .letter-nav button.vowel {
+      background: linear-gradient(145deg, #f36b93, var(--vowel));
+      box-shadow: 0 4px 0 var(--vowel-deep);
     }
 
     .letter-nav button:active {
-      transform: translateY(2px);
-      box-shadow: 0 1px 0 var(--purple-dark);
-    }
-
-    .letter-nav button.speaking {
-      background: #2ecc71;
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 var(--consonant-deep);
     }
 
     .alphabet-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
+      gap: 18px;
     }
 
     .letter-card {
-      scroll-margin-top: 126px;
+      scroll-margin-top: 150px;
       display: grid;
-      grid-template-columns: 90px 1fr;
+      grid-template-columns: 112px minmax(0, 1fr);
       overflow: hidden;
-      background: var(--card);
-      border: 3px solid #fff;
-      border-radius: 24px;
-      box-shadow: 0 8px 24px rgba(58, 90, 120, .1);
+      background: var(--surface);
+      border: 4px solid #fff;
+      border-radius: 28px;
+      box-shadow: 0 10px 25px rgba(29, 81, 119, .1), inset 0 -4px 0 rgba(29, 81, 119, .04);
     }
+
+    .letter-card.vowel-card { box-shadow: 0 10px 26px rgba(232, 62, 115, .14), inset 0 -4px 0 rgba(232, 62, 115, .04); }
 
     .letter-side {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 7px;
-      padding: 18px 10px;
+      align-items: stretch;
+      gap: 12px;
+      padding: 17px 12px;
       color: #fff;
-      background: linear-gradient(165deg, #8e7cf3, var(--purple));
+      background: linear-gradient(165deg, #3494d8, var(--consonant));
+    }
+
+    .vowel-card .letter-side { background: linear-gradient(165deg, #f47098, var(--vowel)); }
+
+    .type-badge {
+      align-self: center;
+      padding: 3px 9px;
+      color: inherit;
+      font-family: "Noto Sans TC", sans-serif;
+      font-size: .72rem;
+      font-weight: 700;
+      background: rgba(255, 255, 255, .2);
+      border: 1px solid rgba(255, 255, 255, .48);
+      border-radius: 999px;
     }
 
     .letter-button {
-      padding: 0;
+      display: grid;
+      min-height: 116px;
+      padding: 8px 5px;
       color: inherit;
-      font-size: 2.8rem;
-      font-weight: 700;
-      line-height: 1;
-      background: transparent;
-      border: 0;
-      cursor: pointer;
+      background: rgba(255, 255, 255, .14);
+      border: 2px solid rgba(255, 255, 255, .42);
+      border-radius: 20px;
+      place-items: center;
+      box-shadow: 0 5px 0 rgba(0, 0, 0, .14);
+      transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+    }
+
+    .letter-button:hover { background: rgba(255, 255, 255, .25); transform: translateY(-2px); }
+    .letter-button:active { transform: translateY(3px); box-shadow: 0 2px 0 rgba(0, 0, 0, .14); }
+
+    .letter-upper {
+      font-size: 3.3rem;
+      font-weight: 800;
+      line-height: .78;
     }
 
     .letter-lower {
-      font-size: 1.25rem;
-      opacity: .88;
+      font-size: 1.55rem;
+      font-weight: 700;
+      line-height: .8;
+      opacity: .94;
     }
 
     .letter-name {
-      font-size: .78rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      font-family: "Noto Sans TC", sans-serif;
+      font-size: .73rem;
       font-weight: 700;
-      opacity: .9;
     }
+
+    .letter-name .icon { width: 16px; height: 16px; }
 
     .sound-list {
       display: flex;
       flex-direction: column;
-      padding: 8px 14px;
+      padding: 7px 16px;
     }
 
     .sound-row {
       display: grid;
-      grid-template-columns: minmax(84px, .8fr) minmax(76px, .55fr) minmax(0, 1.8fr);
+      grid-template-columns: minmax(88px, .68fr) minmax(118px, .85fr) minmax(0, 1.5fr);
+      gap: 10px;
       align-items: center;
-      gap: 9px;
-      min-height: 48px;
-      padding: 8px 0;
+      min-height: 78px;
+      padding: 11px 0;
       border-bottom: 2px dashed var(--line);
     }
 
-    .sound-row:last-child {
-      border-bottom: 0;
+    .sound-row:last-child { border-bottom: 0; }
+
+    .micro-label {
+      display: block;
+      margin-bottom: 3px;
+      color: #7a8c9c;
+      font-family: "Noto Sans TC", sans-serif;
+      font-size: .66rem;
+      font-weight: 700;
+      letter-spacing: .04em;
     }
 
     .spelling {
-      color: #5445c2;
+      color: var(--consonant-deep);
       font-size: 1.05rem;
-      font-weight: 700;
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    .vowel-card .spelling { color: var(--vowel-deep); }
+
+    .sound-button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 7px 9px;
+      color: #77520a;
+      text-align: left;
+      background: #fff7d9;
+      border: 2px solid #f5d273;
+      border-radius: 14px;
+      box-shadow: 0 3px 0 #d9ae3f;
+      transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+    }
+
+    .sound-button:hover { background: #fff1bb; transform: translateY(-2px); }
+    .sound-button:active { transform: translateY(2px); box-shadow: 0 1px 0 #d9ae3f; }
+
+    .sound-button .icon {
+      width: 21px;
+      height: 21px;
+      padding: 3px;
+      color: #fff;
+      background: #e09519;
+      border-radius: 50%;
+      stroke-width: 2.5;
     }
 
     .ipa {
-      color: #e05b68;
+      display: block;
+      color: #6b4700;
+      font-size: .93rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .listen-label {
+      display: block;
+      color: #8a681f;
+      font-family: "Noto Sans TC", sans-serif;
+      font-size: .66rem;
       font-weight: 700;
       white-space: nowrap;
     }
@@ -227,149 +530,173 @@
     .words {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 8px;
     }
+
+    .words-group .micro-label { margin-left: 2px; }
 
     .word-button {
-      padding: 6px 9px;
-      color: #34495e;
-      font-weight: 600;
-      background: #f7f9fc;
-      border: 2px solid #e3e8f0;
-      border-radius: 11px;
-      cursor: pointer;
-      box-shadow: 0 2px 0 #d7dde7;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 44px;
+      padding: 7px 10px;
+      color: var(--ink);
+      font-size: .98rem;
+      font-weight: 700;
+      background: var(--surface-soft);
+      border: 2px solid #d8e6f0;
+      border-radius: 13px;
+      box-shadow: 0 3px 0 #c7d9e6;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
     }
+
+    .word-button .icon {
+      width: 17px;
+      height: 17px;
+      color: #637b90;
+    }
+
+    .word-button:hover {
+      background: #fff;
+      border-color: #9dcbea;
+      transform: translateY(-2px);
+    }
+
+    .word-button:active { transform: translateY(2px); box-shadow: 0 1px 0 #c7d9e6; }
+
+    .vowel-letter { color: var(--vowel-deep); }
+    .consonant-letter { color: var(--consonant-deep); }
 
     .word-button .focus {
-      color: #e44d61;
+      padding: 0 1px;
+      background: #fff0a9;
+      border-radius: 4px;
       text-decoration: underline;
       text-decoration-thickness: 2px;
-      text-underline-offset: 2px;
-    }
-
-    .word-button:hover, .word-button:focus-visible {
-      color: #3f32aa;
-      background: #f0edff;
-      border-color: #c7bfff;
-      outline: none;
-    }
-
-    .word-button:active {
-      transform: translateY(1px);
-      box-shadow: 0 1px 0 #d7dde7;
+      text-underline-offset: 3px;
     }
 
     .speaking {
-      color: #fff;
-      background: #2ecc71;
-      border-color: #27ae60;
+      color: #fff !important;
+      background: var(--green) !important;
+      border-color: var(--green-deep) !important;
+      box-shadow: 0 3px 0 var(--green-deep) !important;
     }
+
+    .speaking * { color: #fff !important; }
 
     .status {
       position: fixed;
-      right: 14px;
-      bottom: 14px;
+      right: 16px;
+      bottom: 16px;
       z-index: 20;
-      max-width: calc(100% - 28px);
-      padding: 9px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      max-width: calc(100% - 32px);
+      min-height: 48px;
+      padding: 10px 16px;
       color: #fff;
+      font-family: "Noto Sans TC", sans-serif;
       font-weight: 700;
-      background: rgba(44, 62, 80, .9);
-      border-radius: 12px;
+      background: rgba(23, 50, 77, .94);
+      border: 2px solid rgba(255, 255, 255, .28);
+      border-radius: 15px;
+      box-shadow: 0 8px 24px rgba(23, 50, 77, .2);
       opacity: 0;
-      transform: translateY(8px);
+      transform: translateY(10px);
       pointer-events: none;
-      transition: .2s ease;
+      transition: opacity .2s ease, transform .2s ease;
     }
 
-    .status.show {
-      opacity: 1;
-      transform: translateY(0);
+    .status.show { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-copy { padding-right: 0; }
+      .listen-guide { width: 100%; }
+      .guide-list { grid-template-columns: repeat(3, 1fr); }
+      .guide-list li { grid-template-columns: 32px 1fr; }
+      .letter-card { grid-template-columns: 100px minmax(0, 1fr); }
+      .sound-row { grid-template-columns: minmax(82px, .65fr) minmax(112px, .8fr); }
+      .words-group { grid-column: 1 / -1; }
     }
 
-    @media (max-width: 760px) {
-      .page {
-        width: min(100% - 18px, 620px);
-        padding-top: 10px;
-      }
-
-      .hero {
-        padding: 64px 16px 20px;
-      }
-
-      .home-link {
-        top: 13px;
-        left: 13px;
-      }
-
-      .letter-nav {
-        grid-template-columns: repeat(7, minmax(32px, 1fr));
-        gap: 6px;
-      }
-
-      .alphabet-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .letter-card {
-        scroll-margin-top: 214px;
-        grid-template-columns: 72px 1fr;
-      }
-
-      .letter-button {
-        font-size: 2.35rem;
-      }
-
-      .sound-row {
-        grid-template-columns: minmax(75px, .9fr) minmax(62px, .6fr);
-      }
-
-      .words {
-        grid-column: 1 / -1;
-      }
+    @media (max-width: 720px) {
+      .page { width: min(100% - 18px, 620px); padding-top: 10px; }
+      .hero { gap: 18px; padding: 20px 16px; border-radius: 26px; }
+      .hero-copy { padding: 58px 2px 0; }
+      .home-link { top: 13px; left: 13px; }
+      .guide-list { grid-template-columns: 1fr; }
+      .letter-nav-wrap { border-radius: 19px; }
+      .nav-caption span { display: none; }
+      .letter-nav { grid-template-columns: repeat(7, minmax(40px, 1fr)); gap: 7px; }
+      .alphabet-grid { grid-template-columns: 1fr; }
+      .letter-card { scroll-margin-top: 244px; grid-template-columns: 94px minmax(0, 1fr); }
     }
 
-    @media (max-width: 380px) {
-      .letter-nav {
-        grid-template-columns: repeat(6, minmax(30px, 1fr));
-      }
-
-      .letter-card {
-        grid-template-columns: 62px 1fr;
-      }
-
-      .sound-list {
-        padding-inline: 10px;
-      }
+    @media (max-width: 450px) {
+      h1 { font-size: 2.55rem; }
+      .subtitle { font-size: .91rem; }
+      .listen-guide { padding: 16px; }
+      .letter-nav { grid-template-columns: repeat(6, minmax(40px, 1fr)); }
+      .letter-card { grid-template-columns: 82px minmax(0, 1fr); border-radius: 23px; }
+      .letter-side { padding-inline: 8px; }
+      .letter-button { min-height: 106px; }
+      .letter-upper { font-size: 2.75rem; }
+      .sound-list { padding-inline: 11px; }
+      .sound-row { grid-template-columns: minmax(72px, .65fr) minmax(108px, 1fr); gap: 8px; }
+      .word-button { font-size: .92rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      * {
-        transition: none !important;
-      }
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
     }
   </style>
+  <link rel="stylesheet" href="accent-choice.css">
 </head>
 <body>
   <main class="page">
     <header class="hero">
-      <a class="home-link" href="index.html">🏠 回主選單</a>
-      <h1>A–Z 發音總表</h1>
-      <p class="subtitle">從 A 到 Z 整理常見的單字母、字母組合、母音與雙母音發音。點字母可聽字母名稱，點任何例字可直接聽美式英文發音。</p>
-      <div class="hint">👆 每個例字都可以點</div>
+      <a class="home-link" href="index.html" data-carry-accent>
+        <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9"/><path d="M9 20v-6h6v6"/></svg>
+        回主選單
+      </a>
+      <div class="hero-copy">
+        <div class="eyebrow">PHONICS PLAYGROUND</div>
+        <h1><span class="title-vowel">A–Z</span> 發音樂園</h1>
+        <p class="subtitle">先聽字母的名字，再聽它在單字裡的發音，最後挑一個例字跟著唸。每個按鈕都會告訴你正在聽哪一種聲音。</p>
+        <div class="legend" aria-label="字母顏色圖例">
+          <span class="legend-item legend-vowel">母音 A・E・I・O・U</span>
+          <span class="legend-item legend-consonant">子音 B・C・D⋯</span>
+        </div>
+      </div>
+      <aside class="listen-guide" aria-label="操作說明">
+        <h2>聽音三步驟</h2>
+        <ol class="guide-list">
+          <li><div><strong>點大字母</strong><span>聽所選口音的字母名稱</span></div></li>
+          <li><div><strong>點黃色發音鍵</strong><span>聽它在單字裡的聲音</span></div></li>
+          <li><div><strong>點彩色例字</strong><span>聽完整英文單字</span></div></li>
+        </ol>
+      </aside>
     </header>
 
-    <nav id="letter-nav" class="letter-nav" aria-label="快速跳到指定字母"></nav>
+    <div class="letter-nav-wrap">
+      <div class="nav-caption">
+        <div><strong>選一個字母開始</strong><span class="nav-key">粉紅色是母音，藍色是子音</span></div>
+        <div class="accent-choice" role="radiogroup" aria-label="發音口音"><span class="accent-heading">發音口音</span></div>
+      </div>
+      <nav id="letter-nav" class="letter-nav" aria-label="快速跳到指定字母"></nav>
+    </div>
     <section id="alphabet-grid" class="alphabet-grid" aria-label="A 到 Z 發音總表"></section>
   </main>
 
   <div id="speech-status" class="status" role="status" aria-live="polite"></div>
 
+  <script src="pronunciation-audio.js"></script>
+  <script src="accent-phonics.js"></script>
   <script>
     const ALPHABET_DATA = [
       { letter: "A", sounds: [
@@ -380,7 +707,8 @@
       ]},
       { letter: "B", sounds: [
         { spelling: "b", ipa: "/b/", words: [["book", "b"], ["rabbit", "b"]] },
-        { spelling: "bl, br", ipa: "/bl/, /br/", words: [["blue", "bl"], ["bread", "br"]] }
+        { spelling: "bl", ipa: "/bl/", words: [["blue", "bl"]] },
+        { spelling: "br", ipa: "/br/", words: [["bread", "br"]] }
       ]},
       { letter: "C", sounds: [
         { spelling: "c", ipa: "/k/", words: [["cat", "c"], ["music", "c"]] },
@@ -499,7 +827,7 @@
         { spelling: "y（字首）", ipa: "/j/", words: [["yes", "y"], ["yellow", "y"]] },
         { spelling: "y", ipa: "/ɪ/", words: [["gym", "y"], ["myth", "y"]] },
         { spelling: "y", ipa: "/aɪ/", words: [["my", "y"], ["cry", "y"]] },
-        { spelling: "y（字尾）", ipa: "/i/", words: [["happy", "y"], ["baby", "y"]] }
+        { spelling: "y（字尾）", ipa: "/i/", gbSound: "happy-i", words: [["happy", "y"], ["baby", "y"]] }
       ]},
       { letter: "Z", sounds: [
         { spelling: "z, zz", ipa: "/z/", words: [["zoo", "z"], ["buzz", "zz"]] },
@@ -507,34 +835,15 @@
       ]}
     ];
 
-    // 避免語音引擎把單獨的大寫字母念成「Capital A」。
-    // 畫面仍顯示 A–Z，實際送進 TTS 的是各字母名稱的拼音。
-    const LETTER_NAMES = {
-      A: "ay", B: "bee", C: "see", D: "dee", E: "ee", F: "eff",
-      G: "gee", H: "aitch", I: "eye", J: "jay", K: "kay", L: "el",
-      M: "em", N: "en", O: "oh", P: "pee", Q: "cue", R: "are",
-      S: "ess", T: "tee", U: "you", V: "vee", W: "double you",
-      X: "ex", Y: "why", Z: "zee"
-    };
+    const VOWELS = new Set(["A", "E", "I", "O", "U"]);
+    const VOWEL_CHARACTERS = new Set(["a", "e", "i", "o", "u"]);
+    const SPEAKER_ICON = '<svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18 6a8.5 8.5 0 0 1 0 12"/></svg>';
 
     const nav = document.getElementById("letter-nav");
     const grid = document.getElementById("alphabet-grid");
     const status = document.getElementById("speech-status");
-    let voices = [];
     let activeButton = null;
     let statusTimer = null;
-
-    function loadVoices() {
-      if (!window.speechSynthesis) return;
-      voices = window.speechSynthesis.getVoices();
-    }
-
-    function preferredVoice() {
-      return voices.find((voice) => voice.lang === "en-US" && /Samantha|Ava|Google US English/i.test(voice.name))
-        || voices.find((voice) => voice.lang === "en-US")
-        || voices.find((voice) => voice.lang.startsWith("en"))
-        || null;
-    }
 
     function showStatus(message) {
       clearTimeout(statusTimer);
@@ -548,79 +857,139 @@
       activeButton = null;
     }
 
-    function speak(text, button, displayText) {
-      if (!window.speechSynthesis || !window.SpeechSynthesisUtterance) {
-        showStatus("這個瀏覽器不支援語音播放");
-        return;
-      }
+    function soundKey(button) {
+      if (window.PronunciationAudio.accent === "gb" && button.dataset.gbSound) return button.dataset.gbSound;
+      return button.dataset.sound;
+    }
 
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = "en-US";
-      utterance.rate = 0.78;
-      utterance.pitch = 1.05;
-      const voice = preferredVoice();
-      if (voice) utterance.voice = voice;
+    function updateSoundLabel(button) {
+      const key = soundKey(button);
+      const ipa = window.AccentPhonics.label(key);
+      button.querySelector(".ipa").textContent = ipa;
+      button.setAttribute("aria-label", `播放 ${button.dataset.spelling} 的發音 ${ipa}`);
+    }
 
+    window.addEventListener("accentchange", () => {
+      clearSpeakingState();
+      clearTimeout(statusTimer);
+      status.classList.remove("show");
+      grid.querySelectorAll("button[data-sound]").forEach(updateSoundLabel);
+    });
+
+    window.addEventListener("pagehide", () => {
+      clearSpeakingState();
+      clearTimeout(statusTimer);
+      status.classList.remove("show");
+    });
+
+    function speak(kind, value, button, displayText) {
       clearSpeakingState();
       activeButton = button;
-      if (activeButton) activeButton.classList.add("speaking");
-      showStatus(`🔊 ${displayText || text}`);
+      button.classList.add("speaking");
+      showStatus(`🔊 ${displayText}`);
+      window.PronunciationAudio.play(kind, value, clearSpeakingState, () => {
+        clearSpeakingState();
+        showStatus(`無法播放${displayText}，請再試一次。`);
+      });
+    }
 
-      utterance.onend = clearSpeakingState;
-      utterance.onerror = clearSpeakingState;
-
-      const begin = () => window.speechSynthesis.speak(utterance);
-      if (window.speechSynthesis.speaking || window.speechSynthesis.pending) {
-        window.speechSynthesis.cancel();
-        setTimeout(begin, 60);
-      } else {
-        begin();
-      }
+    function coloredLetters(text) {
+      return [...text].map((character) => {
+        if (!/[a-z]/i.test(character)) return character;
+        const className = VOWEL_CHARACTERS.has(character.toLowerCase()) ? "vowel-letter" : "consonant-letter";
+        return `<span class="${className}">${character}</span>`;
+      }).join("");
     }
 
     function highlightedWord(word, focus) {
       const start = word.toLowerCase().indexOf(focus.toLowerCase());
-      if (start < 0) return word;
+      if (start < 0) return coloredLetters(word);
       const before = word.slice(0, start);
       const marked = word.slice(start, start + focus.length);
       const after = word.slice(start + focus.length);
-      return `${before}<span class="focus">${marked}</span>${after}`;
+      return `${coloredLetters(before)}<span class="focus">${coloredLetters(marked)}</span>${coloredLetters(after)}`;
     }
 
     function renderTable() {
       ALPHABET_DATA.forEach(({ letter, sounds }) => {
+        const isVowel = VOWELS.has(letter);
+        const typeLabel = isVowel ? "母音" : "子音";
         const navButton = document.createElement("button");
         navButton.type = "button";
+        navButton.className = isVowel ? "vowel" : "consonant";
         navButton.textContent = letter;
-        navButton.setAttribute("aria-label", `播放字母 ${letter} 的名稱並跳到該區`);
+        navButton.setAttribute("aria-label", `${typeLabel} ${letter}：播放字母名稱並跳到該區`);
         navButton.addEventListener("click", () => {
-          speak(LETTER_NAMES[letter], navButton, letter);
-          document.getElementById(`letter-${letter}`).scrollIntoView({ behavior: "smooth", block: "start" });
+          speak("letter", letter, navButton, `字母 ${letter} 的名稱`);
+          const card = document.getElementById(`letter-${letter}`);
+          card.style.scrollMarginTop = `${nav.parentElement.offsetHeight + 18}px`;
+          const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          card.scrollIntoView({ behavior: reducedMotion ? "instant" : "smooth", block: "start" });
         });
         nav.appendChild(navButton);
 
         const card = document.createElement("article");
         card.id = `letter-${letter}`;
-        card.className = "letter-card";
+        card.className = `letter-card ${isVowel ? "vowel-card" : "consonant-card"}`;
 
         const side = document.createElement("div");
         side.className = "letter-side";
+        const typeBadge = document.createElement("span");
+        typeBadge.className = "type-badge";
+        typeBadge.textContent = typeLabel;
         const letterButton = document.createElement("button");
         letterButton.type = "button";
         letterButton.className = "letter-button";
         letterButton.setAttribute("aria-label", `播放字母 ${letter} 的名稱`);
-        letterButton.textContent = letter;
-        letterButton.addEventListener("click", () => speak(LETTER_NAMES[letter], letterButton, letter));
-        side.appendChild(letterButton);
-        side.insertAdjacentHTML("beforeend", `<span class="letter-lower">${letter.toLowerCase()}</span><span class="letter-name">點字母聽名稱 🔊</span>`);
+        letterButton.innerHTML = `
+          <span class="letter-upper">${letter}</span>
+          <span class="letter-lower">${letter.toLowerCase()}</span>
+          <span class="letter-name">${SPEAKER_ICON} 聽字母名</span>
+        `;
+        letterButton.addEventListener("click", () => speak("letter", letter, letterButton, `字母 ${letter} 的名稱`));
+        side.append(typeBadge, letterButton);
 
         const list = document.createElement("div");
         list.className = "sound-list";
         sounds.forEach((sound) => {
           const row = document.createElement("div");
           row.className = "sound-row";
-          row.innerHTML = `<div class="spelling">${sound.spelling}</div><div class="ipa">${sound.ipa}</div>`;
+          row.innerHTML = `
+            <div class="spelling-group">
+              <span class="micro-label">字母組合</span>
+              <div class="spelling">${sound.spelling}</div>
+            </div>
+          `;
 
+          const soundButton = document.createElement("button");
+          soundButton.type = "button";
+          soundButton.className = "sound-button";
+          const silent = sound.ipa === "silent";
+          const spelling = sound.spelling.replace("（不發音）", "");
+          soundButton.innerHTML = `${silent ? "" : SPEAKER_ICON}<span><span class="ipa">${sound.ipa}</span><span class="listen-label">${silent ? "不發音" : "聽這個音"}</span></span>`;
+          if (silent) {
+            soundButton.setAttribute("aria-label", `說明 ${spelling} 在這些例字中不發音`);
+          } else {
+            soundButton.dataset.sound = sound.ipa.slice(1, -1);
+            if (sound.gbSound) soundButton.dataset.gbSound = sound.gbSound;
+            soundButton.dataset.spelling = spelling;
+            updateSoundLabel(soundButton);
+          }
+          soundButton.addEventListener("click", () => {
+            if (silent) {
+              window.PronunciationAudio.stop();
+              clearSpeakingState();
+              showStatus(`${spelling} 在這些例字中不發音，可以點例字聽整個字。`);
+              return;
+            }
+            const key = soundKey(soundButton);
+            speak("phoneme", key, soundButton, `${spelling} 的發音 ${window.AccentPhonics.label(key)}`);
+          });
+          row.appendChild(soundButton);
+
+          const wordsGroup = document.createElement("div");
+          wordsGroup.className = "words-group";
+          wordsGroup.innerHTML = '<span class="micro-label">聽完整單字</span>';
           const words = document.createElement("div");
           words.className = "words";
           sound.words.forEach(([word, focus]) => {
@@ -628,11 +997,12 @@
             button.type = "button";
             button.className = "word-button";
             button.setAttribute("aria-label", `播放單字 ${word}`);
-            button.innerHTML = `${highlightedWord(word, focus)} 🔊`;
-            button.addEventListener("click", () => speak(word, button));
+            button.innerHTML = `<span>${highlightedWord(word, focus)}</span>${SPEAKER_ICON}`;
+            button.addEventListener("click", () => speak("word", word, button, `單字 ${word}`));
             words.appendChild(button);
           });
-          row.appendChild(words);
+          wordsGroup.appendChild(words);
+          row.appendChild(wordsGroup);
           list.appendChild(row);
         });
 
@@ -641,10 +1011,6 @@
       });
     }
 
-    loadVoices();
-    if (window.speechSynthesis) {
-      window.speechSynthesis.addEventListener("voiceschanged", loadVoices);
-    }
     renderTable();
   </script>
 </body>

@@ -79,14 +79,14 @@ const WORD_DATABASE = {
     { word: "no",    missing: "o",    vowel: "o", spelling: "open", adv: false, clue: ["n", ""] },
     { word: "toe",   missing: "oe",   vowel: "o", spelling: "oe",   adv: true,  clue: ["t", ""] },
     // 長 U /(j)u/
-    { word: "new",   missing: "ew",   vowel: "u", spelling: "ew",   adv: false, clue: ["n", ""] },
+    { word: "new",   missing: "ew",   vowel: "u", spelling: "ew",   ipa: "u", adv: false, clue: ["n", ""] },
     { word: "few",   missing: "ew",   vowel: "u", spelling: "ew",   adv: false, clue: ["f", ""] },
-    { word: "blue",  missing: "ue",   vowel: "u", spelling: "ue",   adv: false, clue: ["bl", ""] },
-    { word: "due",   missing: "ue",   vowel: "u", spelling: "ue",   adv: false, clue: ["d", ""] },
+    { word: "blue",  missing: "ue",   vowel: "u", spelling: "ue",   ipa: "u", adv: false, clue: ["bl", ""] },
+    { word: "due",   missing: "ue",   vowel: "u", spelling: "ue",   ipa: "u", adv: false, clue: ["d", ""] },
     { word: "cute",  missing: "u",    vowel: "u", spelling: "u_e",  adv: false, clue: ["c", "te"] },
     { word: "cube",  missing: "u",    vowel: "u", spelling: "u_e",  adv: false, clue: ["c", "be"] },
-    { word: "euro",  missing: "eu",   vowel: "u", spelling: "eu",   adv: true,  clue: ["", "ro"] },
-    { word: "neutral", missing: "eu", vowel: "u", spelling: "eu",   adv: true,  clue: ["n", "tral"] }
+    { word: "euro",  missing: "eu",   vowel: "u", spelling: "eu",   ipa: "jʊ", adv: true,  clue: ["", "ro"] },
+    { word: "neutral", missing: "eu", vowel: "u", spelling: "eu",   ipa: "u", adv: true,  clue: ["n", "tral"] }
   ],
   // ③ 特殊母音：雙母音/滑音 + oo 雙拼；g = 依發音分組（給表格用）
   special_vowels: [
@@ -179,27 +179,22 @@ const PHONICS_DATA = {
   short_vowels: {
     title: "短母音組 📖 學習樂園",
     tips: "短母音 a, e, i, o, u 是<b>又短又輕</b>的聲音，最常出現在兩種結構裡：<br>• <b>子母子</b>：c<u>a</u>t、p<u>e</u>n、p<u>i</u>g<br>• <b>母子</b>：<u>a</u>t、<u>i</u>n、<u>u</u>p<br>💡 小提醒：英文還有一個「偷懶的母音」schwa /ə/，沒重音的母音常弱化成它（像 sofa 的 a），那是另一區「弱化母音」要練的喔！",
-    // 短音近似音（給長/短對照表與點字母發音用）
-    // 採用 GitHub 已驗證的單母音值：a="a"(/æ/誒)、i="yi"(一)
-    sounds: { a: "a", e: "eh", i: "yi", o: "ah", u: "uh" }
+    sounds: { a: "æ", e: "ɛ", i: "ɪ", o: "ɑ", u: "ʌ" }
   },
   long_vowels: {
     title: "長母音組 📖 學習樂園",
-    tips: "長母音就是「<b>母音在唸自己的名字</b>」（a→/eɪ/、e→/i/、i→/aɪ/、o→/oʊ/、u→/juː/）。常見三種形式：<br>• <b>子音＋長母音＋子音</b>：r<u>ai</u>n、b<u>oa</u>t<br>• <b>子音＋長母音</b>：s<u>ay</u>、h<u>e</u>、g<u>o</u><br>• <b>Magic-e（無聲 e）</b>：c<u>a</u>ke、b<u>i</u>ke、h<u>o</u>me（字尾的 e 不發音，卻讓前面的母音唸出名字！）<br>先看基礎拼法，想看更多奇特拼法再點「進階」💪",
-    // 長母音 = 字母念自己的名字；用會念出字母名又不會多唸 "capital" 的拼法
-    // 長A：直接沿用短母音 A 的 "a"（在 TTS 上唸出的音正是要的長 A），取代會發成「哎」的 "ay"
-    sounds: { a: "a", e: "ee", i: "eye", o: "oh", u: "you" }
+    tips: "長母音就是「<b>母音在唸自己的名字</b>」（a→/eɪ/、e→/i/、i→/aɪ/、o→/oʊ/、u→/juː/）。長 U 在 blue 裡唸 /uː/。常見三種形式：<br>• <b>子音＋長母音＋子音</b>：r<u>ai</u>n、b<u>oa</u>t<br>• <b>子音＋長母音</b>：s<u>ay</u>、h<u>e</u>、g<u>o</u><br>• <b>Magic-e（無聲 e）</b>：c<u>a</u>ke、b<u>i</u>ke、h<u>o</u>me（字尾的 e 不發音，卻讓前面的母音唸出名字！）<br>先看基礎拼法，想看更多奇特拼法再點「進階」💪",
+    sounds: { a: "eɪ", e: "i", i: "aɪ", o: "oʊ", u: "ju" }
   },
   special_vowels: {
     title: "特殊母音組 📖 學習樂園",
     tips: "這些是<b>滑來滑去的特殊母音</b>，兩個字母合出一個新的音。下面的表格把<b>發音相同的拼法排在同一列</b>，點「發音」欄或字母聽聽看，點單字聽整個字。<br>⚠️ 注意 <b>oo</b> 有兩個音：zoo 的長『嗚』/u/ vs book 的短『嗚』/ʊ/，所以分成兩列喔！",
-    // 依「發音」分組，給學習樂園表格用；say 是給 TTS 念的近似音
     groups: [
-      { id: "loud", ipa: "/aʊ/", note: "凹（澳）", say: "ow",  combos: ["ou", "ow"] },
-      { id: "saw",  ipa: "/ɔ/",  note: "喔",       say: "aw",  combos: ["au", "aw"] },
-      { id: "book", ipa: "/ʊ/",  note: "嗚（短）", say: "oo",  combos: ["oo"] },
-      { id: "moon", ipa: "/u/",  note: "嗚（長）", say: "ooh", combos: ["oo"] },
-      { id: "coin", ipa: "/ɔɪ/", note: "歐一",     say: "oy",  combos: ["oi", "oy"] }
+      { id: "loud", ipa: "aʊ", note: "凹（澳）", combos: ["ou", "ow"] },
+      { id: "saw",  ipa: "ɔ",  note: "喔",       combos: ["au", "aw"] },
+      { id: "book", ipa: "ʊ",  note: "嗚（短）", combos: ["oo"] },
+      { id: "moon", ipa: "u",  note: "嗚（長）", combos: ["oo"] },
+      { id: "coin", ipa: "ɔɪ", note: "歐一",     combos: ["oi", "oy"] }
     ]
   },
   schwa: {
@@ -210,16 +205,16 @@ const PHONICS_DATA = {
     title: "子音與輔音群 📖 學習樂園",
     tips: "子音組合有時會<b>發出一個全新的音</b>（如 sh, ch, th, ph, wh），有時則是兩個字母的<b>發音快速滑過去</b>（如 tr, dr, br, cr）。例如：<br>• <b>sh</b> 發 /ʃ/（像叫人安靜的『噓』，如 ship）<br>• <b>ch</b> 發 /tʃ/（像火車『七』，如 chip）<br>• <b>th [θ]</b> 發無聲的 /θ/（要把舌頭夾在牙齒中間發音喔，如 three）<br>• <b>th [ð]</b> 發有聲的 /ð/（喉嚨會震動，如 this）<br>• <b>ph</b> 發 /f/（發『夫』的音，如 phone）<br>• <b>wh</b> 發 /w/ (發『烏』，如 whale)<br>• <b>tr</b> /tr/, <b>dr</b> /dr/, <b>br</b> /br/, <b>cr</b> /cr/ 則是把兩個聲母連著快速唸出來！",
     sounds: {
-      sh: "shh",
-      ch: "chuh",
-      "th [θ]": "thuh",
-      "th [ð]": "the",
-      ph: "fuh",
-      wh: "wuh",
-      tr: "truh",
-      dr: "druh",
-      br: "bruh",
-      cr: "cruh"
+      sh: "ʃ",
+      ch: "tʃ",
+      "th [θ]": "θ",
+      "th [ð]": "ð",
+      ph: "f",
+      wh: "w",
+      tr: "tr",
+      dr: "dr",
+      br: "br",
+      cr: "kr"
     }
   }
 };
@@ -235,6 +230,7 @@ let score = 0;
 let lives = 3;
 let timer = 30;
 let timerInterval = null;
+let questionTransition = null;
 let combo = 0;
 let isCurrentQuestionAnswered = false;
 let isEasyMode = true;
@@ -350,21 +346,14 @@ function playSound(type) {
 }
 
 // ==========================================
-// 4. Web Speech API (TTS 發音)
+// 4. 單字與音素播放
 // ==========================================
-function speakWord(word, callback) {
-  if (!window.speechSynthesis) return;
-  window.speechSynthesis.cancel(); // 停止目前所有發音
+function speakWord(word) {
+  window.PronunciationAudio.play("word", word);
+}
 
-  const utterance = new SpeechSynthesisUtterance(word);
-  utterance.lang = "en-US";
-  utterance.rate = 0.8; // 稍微放慢速度，讓小朋友聽得清楚
-  utterance.pitch = 1.1; // 稍微拉高音調，聽起來更活潑
-
-  if (callback) {
-    utterance.onend = callback;
-  }
-  window.speechSynthesis.speak(utterance);
+function speakPhoneme(ipa) {
+  window.PronunciationAudio.play("phoneme", ipa);
 }
 
 // ==========================================
@@ -813,9 +802,7 @@ function loadQuestion() {
   const btnSpeakCloud = document.getElementById("btn-speak");
   if (isEasyMode) {
     btnSpeakCloud.style.display = "flex"; // 顯示按鈕
-    setTimeout(() => {
-      speakWord(currentQ.word);
-    }, 300);
+    speakWord(currentQ.word);
   } else {
     btnSpeakCloud.style.display = "none"; // 隱藏按鈕
   }
@@ -871,7 +858,14 @@ function generateOptions(question) {
     
     // 綁定拖曳事件
     setupDragEvents(block);
-    
+
+    // 點擊直接作答（不須拖到框格）
+    block.addEventListener("click", () => {
+      if (isCurrentQuestionAnswered) return;
+      initAudioContext();
+      handleDrop(letter);
+    });
+
     container.appendChild(block);
   });
 }
@@ -915,7 +909,7 @@ function handleDrop(letter) {
     }
 
     // 延遲 1.8 秒進入下一題
-    setTimeout(() => {
+    questionTransition = setTimeout(() => {
       comboBadge.classList.remove("show");
       nextQuestion();
     }, 1800);
@@ -939,7 +933,7 @@ function handleDrop(letter) {
     // 檢查生命值
     if (lives <= 0) {
       clearInterval(timerInterval);
-      setTimeout(showGameOver, 800);
+      questionTransition = setTimeout(showGameOver, 800);
     }
   }
 }
@@ -958,7 +952,7 @@ function handleTimeout() {
     dropZone.textContent = "⏰";
   }
 
-  setTimeout(() => {
+  questionTransition = setTimeout(() => {
     if (lives <= 0) {
       showGameOver();
     } else {
@@ -1063,6 +1057,9 @@ function hideModal() {
 
 function exitToLobby() {
   clearInterval(timerInterval);
+  clearTimeout(questionTransition);
+  window.PronunciationAudio.stop();
+  document.getElementById("combo-badge").classList.remove("show");
   hideModal();
   
   // 切換畫面
@@ -1080,17 +1077,41 @@ function exitToLobby() {
 let currentStudyCategory = "";
 let currentFilteredLetter = "";
 
+function updateStudyTips(studyData) {
+  document.getElementById("phonics-intro").innerHTML = studyData.tips.replace(
+    /\/([\p{L}ː]+)\//gu, (_, sound) => window.AccentPhonics.label(sound.replace("ː", ""))
+  );
+}
+
+window.addEventListener("accentchange", () => {
+  if (document.getElementById("study-screen").classList.contains("hidden")) return;
+  const studyData = PHONICS_DATA[currentStudyCategory];
+  if (!studyData) return;
+  updateStudyTips(studyData);
+  const render = {
+    short_vowels: renderShortVowels,
+    long_vowels: renderLongVowels,
+    special_vowels: renderSpecialVowelTable
+  }[currentStudyCategory];
+  if (render) {
+    document.getElementById("study-tiles-container").replaceChildren();
+    render(studyData);
+  }
+});
+
 function startStudy(category) {
   currentStudyCategory = category;
   currentFilteredLetter = ""; // 預設顯示全部
 
   // 切換頁面
+  document.querySelector(".app-container").classList.add("study-mode-active");
   document.getElementById("lobby-screen").classList.add("hidden");
   document.getElementById("study-screen").classList.remove("hidden");
+  window.scrollTo({ top: 0, left: 0, behavior: "auto" });
 
   const studyData = PHONICS_DATA[category];
-  document.getElementById("study-title").textContent = studyData.title;
-  document.getElementById("phonics-intro").innerHTML = studyData.tips;
+  document.getElementById("study-title").textContent = studyData.title.replace(/\s*📖\s*/g, " ");
+  updateStudyTips(studyData);
 
   const tilesContainer = document.getElementById("study-tiles-container");
   const tilesPrompt = document.getElementById("study-tiles-prompt");
@@ -1146,17 +1167,13 @@ function bindWordChips(container) {
 }
 
 // ---- 長/短母音對照表（兩頁共用，active 那一排會加框） ----
-// 短母音用「近似音素」拼法讓 TTS 直接念短音（不是念整個單字）。
-// 注意：e/o/u 念得較準；a(/æ/) 與 i(/ɪ/) 是 TTS 弱點，只能盡量近似。
-const SHORT_VOWEL_DEMO = { a: "a", e: "eh", i: "yi", o: "ah", u: "uh" };
-
 function renderVowelCompare(activeType) {
   const wrap = document.createElement("div");
   wrap.className = "vowel-compare";
 
   const rows = [
     { type: "long",  label: "長母音", cls: "long-vowel",  sounds: PHONICS_DATA.long_vowels.sounds },
-    { type: "short", label: "短母音", cls: "short-vowel", sounds: SHORT_VOWEL_DEMO }
+    { type: "short", label: "短母音", cls: "short-vowel", sounds: PHONICS_DATA.short_vowels.sounds }
   ];
 
   rows.forEach((r) => {
@@ -1176,7 +1193,7 @@ function renderVowelCompare(activeType) {
       tile.textContent = v;
       tile.addEventListener("click", () => {
         playSound("click");
-        speakWord(r.sounds[v] || v);
+        speakPhoneme(r.sounds[v]);
       });
       row.appendChild(tile);
     });
@@ -1193,15 +1210,8 @@ function renderShortVowels(studyData) {
 
   c.appendChild(renderVowelCompare("short"));
 
-  const vowels = [
-    { v: "a", name: "短 A /æ/" },
-    { v: "e", name: "短 E /ɛ/" },
-    { v: "i", name: "短 I /ɪ/" },
-    { v: "o", name: "短 O /ɑ/" },
-    { v: "u", name: "短 U /ʌ/" }
-  ];
-
-  vowels.forEach(({ v, name }) => {
+  Object.entries(studyData.sounds).forEach(([v, key]) => {
+    const name = `短 ${v.toUpperCase()} ${window.AccentPhonics.label(key)}`;
     const words = WORD_DATABASE.short_vowels.filter((w) => w.vowel === v);
     const cvc = words.filter((w) => w.pattern === "CVC");
     const vc = words.filter((w) => w.pattern === "VC");
@@ -1209,7 +1219,7 @@ function renderShortVowels(studyData) {
     const group = document.createElement("div");
     group.className = "vgroup";
     group.innerHTML = `
-      <div class="vgroup-head short-head" data-say="${SHORT_VOWEL_DEMO[v] || v}">${name} 🔊</div>
+      <div class="vgroup-head short-head" data-ipa="${studyData.sounds[v]}">${name} 🔊</div>
       <div class="vgroup-body">
         <div class="patt-row">
           <span class="patt-tag tag-cvc">子母子</span>
@@ -1228,7 +1238,7 @@ function renderShortVowels(studyData) {
   c.querySelectorAll(".vgroup-head").forEach((el) => {
     el.addEventListener("click", () => {
       playSound("click");
-      speakWord(el.getAttribute("data-say"));
+      speakPhoneme(el.dataset.ipa);
     });
   });
   bindWordChips(c);
@@ -1244,7 +1254,8 @@ function renderLongVowels(studyData) {
   const advBtn = document.createElement("button");
   advBtn.id = "btn-advanced";
   advBtn.className = "btn-advanced";
-  advBtn.textContent = "🔒 進階拼法（點我展開）";
+  advBtn.textContent = c.classList.contains("show-adv")
+    ? "🔓 進階拼法（點我收合）" : "🔒 進階拼法（點我展開）";
   advBtn.addEventListener("click", () => {
     playSound("click");
     const on = c.classList.toggle("show-adv");
@@ -1252,31 +1263,24 @@ function renderLongVowels(studyData) {
   });
   c.appendChild(advBtn);
 
-  const vowels = [
-    { v: "a", name: "長 A /eɪ/" },
-    { v: "e", name: "長 E /iː/" },
-    { v: "i", name: "長 I /aɪ/" },
-    { v: "o", name: "長 O /oʊ/" },
-    { v: "u", name: "長 U /juː/" }
-  ];
-
-  vowels.forEach(({ v, name }) => {
+  Object.entries(studyData.sounds).forEach(([v, key]) => {
+    const name = `長 ${v.toUpperCase()} ${window.AccentPhonics.label(key)}`;
     const words = WORD_DATABASE.long_vowels.filter((w) => w.vowel === v);
 
-    // 依 spelling 分組，保留原始順序
-    const order = [];
-    const bySpell = {};
+    // 相同拼法在不同單字裡可能有不同的音，例如 new 和 few 的 ew。
+    const rows = new Map();
     words.forEach((w) => {
-      if (!bySpell[w.spelling]) { bySpell[w.spelling] = []; order.push(w.spelling); }
-      bySpell[w.spelling].push(w);
+      const ipa = window.AccentPhonics.longVowelKey(w, key);
+      const rowKey = `${w.spelling}-${ipa}`;
+      if (!rows.has(rowKey)) rows.set(rowKey, { spelling: w.spelling, ipa, isAdv: w.adv, words: [] });
+      rows.get(rowKey).words.push(w);
     });
 
-    const rowsHtml = order.map((sp) => {
-      const list = bySpell[sp];
-      const isAdv = list[0].adv;
+    const rowsHtml = [...rows.values()].map(({ spelling, ipa, isAdv, words: list }) => {
+      const label = v === "u" ? `${spellLabel(spelling)} ${window.AccentPhonics.label(ipa)}` : spellLabel(spelling);
       return `
         <div class="patt-row${isAdv ? " adv-row" : ""}">
-          <span class="patt-tag tappable ${isAdv ? "tag-adv" : "tag-basic"}" data-say="${studyData.sounds[v] || v}">${spellLabel(sp)} 🔊</span>
+          <span class="patt-tag tappable ${isAdv ? "tag-adv" : "tag-basic"}" data-ipa="${ipa}">${label} 🔊</span>
           <div class="chips">${list.map(wordChipHtml).join("")}</div>
         </div>`;
     }).join("");
@@ -1284,23 +1288,16 @@ function renderLongVowels(studyData) {
     const group = document.createElement("div");
     group.className = "vgroup";
     group.innerHTML = `
-      <div class="vgroup-head long-head" data-say="${studyData.sounds[v] || v}">${name} 🔊</div>
+      <div class="vgroup-head long-head" data-ipa="${studyData.sounds[v]}">${name} 🔊</div>
       <div class="vgroup-body">${rowsHtml}</div>
     `;
     c.appendChild(group);
   });
 
-  c.querySelectorAll(".vgroup-head").forEach((el) => {
+  c.querySelectorAll("[data-ipa]").forEach((el) => {
     el.addEventListener("click", () => {
       playSound("click");
-      speakWord(el.getAttribute("data-say"));
-    });
-  });
-  // 點前面的拼法標籤 → 念該母音的長音（ai/ay/a_e… 都念同一個長音）
-  c.querySelectorAll(".patt-tag[data-say]").forEach((el) => {
-    el.addEventListener("click", () => {
-      playSound("click");
-      speakWord(el.getAttribute("data-say"));
+      speakPhoneme(el.dataset.ipa);
     });
   });
   bindWordChips(c);
@@ -1324,7 +1321,7 @@ function renderSpecialVowelTable(studyData) {
     const words = WORD_DATABASE.special_vowels.filter((w) => w.g === g.id);
 
     const combosHtml = g.combos
-      .map((cmb) => `<span class="vt-combo" data-say="${g.say}">${cmb}</span>`)
+      .map((cmb) => `<span class="vt-combo" data-ipa="${g.ipa}">${cmb}</span>`)
       .join("");
 
     const wordsHtml = words
@@ -1334,8 +1331,8 @@ function renderSpecialVowelTable(studyData) {
     const tr = document.createElement("tr");
     tr.className = `vt-row vt-row-${g.id}`;
     tr.innerHTML = `
-      <td class="vt-sound" data-say="${g.say}">
-        <span class="vt-ipa">${g.ipa}</span>
+      <td class="vt-sound" data-ipa="${g.ipa}">
+        <span class="vt-ipa">${window.AccentPhonics.label(g.ipa)}</span>
         <span class="vt-note">${g.note}</span>
       </td>
       <td class="vt-combos">${combosHtml}</td>
@@ -1349,7 +1346,7 @@ function renderSpecialVowelTable(studyData) {
   container.querySelectorAll(".vt-sound, .vt-combo").forEach((el) => {
     el.addEventListener("click", () => {
       playSound("click");
-      speakWord(el.getAttribute("data-say"));
+      speakPhoneme(el.dataset.ipa);
     });
   });
   container.querySelectorAll(".vt-word").forEach((el) => {
@@ -1415,8 +1412,12 @@ function renderSchwa(studyData) {
     tabs.querySelectorAll(".schwa-tab").forEach((b) =>
       b.classList.toggle("active", b.dataset.mode === mode)
     );
-    if (mode === "learn") renderSchwaLearn();
-    else renderSchwaPractice();
+    if (mode === "learn") {
+      window.PronunciationAudio.stop();
+      renderSchwaLearn();
+    } else {
+      renderSchwaPractice();
+    }
   };
 
   tabs.querySelectorAll(".schwa-tab").forEach((b) => {
@@ -1544,7 +1545,7 @@ function loadSchwaQuestion() {
     btn.addEventListener("click", () => onSchwaAnswer(parseInt(btn.dataset.i, 10), item, wordNode));
   });
 
-  setTimeout(() => speakWord(item.word), 350);
+  speakWord(item.word);
 }
 
 function onSchwaAnswer(i, item, wordNode) {
@@ -1575,6 +1576,7 @@ function onSchwaAnswer(i, item, wordNode) {
   speakWord(item.word);
 
   setTimeout(() => {
+    if (!wordNode.isConnected || document.getElementById("study-screen").classList.contains("hidden")) return;
     schwaIdx++;
     loadSchwaQuestion();
   }, 1900);
@@ -1608,39 +1610,54 @@ function renderSchwaResult() {
   });
 }
 
-// ---- 子音頁：維持原本「積木 + 單字卡」 ----
+// ---- 子音頁：可篩選、可直接試聽的發音卡 ----
 function renderConsonantTiles(category, studyData) {
   const tilesContainer = document.getElementById("study-tiles-container");
   tilesContainer.innerHTML = "";
+  const speakerIcon = '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18 6a8.5 8.5 0 0 1 0 12"/></svg>';
 
   // 「全部」按鈕
-  const allTileWrapper = document.createElement("div");
-  allTileWrapper.style.cssText = "width:100%;display:flex;justify-content:center;margin-bottom:15px;";
-  const allTile = document.createElement("div");
-  allTile.className = "study-tile active";
-  allTile.textContent = "🌟 全部";
+  const allTile = document.createElement("button");
+  allTile.type = "button";
+  allTile.className = "study-tile study-tile-all active";
+  allTile.setAttribute("aria-pressed", "true");
+  allTile.setAttribute("aria-label", "顯示全部子音組合的單字");
+  allTile.textContent = "全部";
   allTile.addEventListener("click", () => {
     playSound("click");
-    document.querySelectorAll(".study-tile").forEach((t) => t.classList.remove("active"));
+    document.querySelectorAll(".study-tile").forEach((t) => {
+      t.classList.remove("active");
+      t.setAttribute("aria-pressed", "false");
+    });
     allTile.classList.add("active");
+    allTile.setAttribute("aria-pressed", "true");
     currentFilteredLetter = "";
     renderStudyWords();
   });
-  allTileWrapper.appendChild(allTile);
-  tilesContainer.appendChild(allTileWrapper);
+  tilesContainer.appendChild(allTile);
 
   const defaultRow = document.createElement("div");
-  defaultRow.style.cssText = "width:100%;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;";
+  defaultRow.className = "study-tile-row";
   const uniqueLetters = [...new Set(WORD_DATABASE[category].map((w) => w.missing))];
   uniqueLetters.forEach((letter) => {
-    const tile = document.createElement("div");
+    const tile = document.createElement("button");
+    tile.type = "button";
     tile.className = "study-tile";
-    tile.textContent = letter;
+    tile.setAttribute("aria-pressed", "false");
+    tile.setAttribute("aria-label", `篩選 ${letter} 的例字並播放發音`);
+    const match = letter.match(/^(.+?) \[(.+)\]$/);
+    const label = match ? match[1] : letter;
+    const ipa = match ? `/${match[2]}/` : "";
+    tile.innerHTML = `<span>${label}</span>${ipa ? `<span class="study-tile-ipa">${ipa}</span>` : ""}${speakerIcon}`;
     tile.addEventListener("click", () => {
       playSound("click");
-      document.querySelectorAll(".study-tile").forEach((t) => t.classList.remove("active"));
+      document.querySelectorAll(".study-tile").forEach((t) => {
+        t.classList.remove("active");
+        t.setAttribute("aria-pressed", "false");
+      });
       tile.classList.add("active");
-      speakWord(studyData.sounds[letter] || `${letter} says Phonics sound`);
+      tile.setAttribute("aria-pressed", "true");
+      speakPhoneme(studyData.sounds[letter]);
       currentFilteredLetter = letter;
       renderStudyWords();
     });
@@ -1651,6 +1668,7 @@ function renderConsonantTiles(category, studyData) {
 
 function renderStudyWords() {
   const container = document.getElementById("study-words-container");
+  const filterStatus = document.getElementById("study-filter-status");
   container.innerHTML = "";
 
   const words = WORD_DATABASE[currentStudyCategory];
@@ -1659,9 +1677,16 @@ function renderStudyWords() {
     ? words.filter(w => w.missing === currentFilteredLetter) 
     : words;
 
+  const cleanFilter = currentFilteredLetter.replace(/ \[.*?\]/, "");
+  filterStatus.textContent = currentFilteredLetter
+    ? `${cleanFilter}・${displayWords.length} 個單字`
+    : `全部・${displayWords.length} 個單字`;
+
   displayWords.forEach(word => {
-    const card = document.createElement("div");
+    const card = document.createElement("button");
+    card.type = "button";
     card.className = "study-word-card";
+    card.setAttribute("aria-label", `播放單字 ${word.word}`);
 
     // 格式化單字，高亮目標拼音部分（如 cl<u>ou</u>d）
     const displayMissing = word.missing.replace(/ \[.*?\]/, "");
@@ -1669,7 +1694,9 @@ function renderStudyWords() {
 
     card.innerHTML = `
       <div class="study-word-text">${highlightedHtml}</div>
-      <div class="study-word-speaker">🔊</div>
+      <span class="study-word-speaker" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18 6a8.5 8.5 0 0 1 0 12"/></svg>
+      </span>
     `;
 
     card.addEventListener("click", () => {
@@ -1681,11 +1708,15 @@ function renderStudyWords() {
 }
 
 function exitStudyToLobby() {
+  window.PronunciationAudio.stop();
+  document.querySelector(".app-container").classList.remove("study-mode-active");
   document.getElementById("study-screen").classList.add("hidden");
   document.getElementById("lobby-screen").classList.remove("hidden");
 }
 
 function exitStudyToGame() {
+  window.PronunciationAudio.stop();
+  document.querySelector(".app-container").classList.remove("study-mode-active");
   document.getElementById("study-screen").classList.add("hidden");
   startGame(currentStudyCategory);
 }
