@@ -223,6 +223,12 @@ const QUESTIONS_PER_GAME = 10;
 // ==========================================
 // 自然拼讀發音與教學資料
 // ==========================================
+// 規則例字用底線標出要觀察的拼法，整個字都可以點讀。
+function ruleWord(word, spelling) {
+  const highlighted = word.replace(spelling, "<u>$&</u>");
+  return `<button type="button" class="rule-word" data-word="${word}" aria-label="播放單字 ${word}"><span lang="en">${highlighted}</span></button>`;
+}
+
 const PHONICS_DATA = {
   short_vowels: {
     title: "短母音組 📖 學習樂園",
@@ -267,7 +273,28 @@ const PHONICS_DATA = {
   },
   basic_consonants: {
     title: "普通子音 📖 學習樂園",
-    tips: "點 <b>b</b> 聽 /b/，再點 <b>book</b> 聽這個音怎麼接上後面的母音。<br>• <b>c</b> 在 cat 裡唸 /k/，和 kite 的 k 同音。在 city 裡，c 唸 /s/。<br>• <b>g</b> 在 goat 裡唸 /ɡ/，在 giant 裡唸 /dʒ/，和 jam 開頭的 j 同音。<br>• <b>qu</b> 在 queen 裡一起唸 /kw/，拼字時選 qu。<b>x</b> 在 box 的字尾唸 /ks/。<br>• <b>y</b> 在 yes、yellow 的字首都唸 /j/。唸 yes 時，把舌面靠近上顎，再滑向後面的母音。",
+    tips: `<div id="consonant-rule-guide">
+      先看 <b>c</b> 或 <b>g</b> 右邊緊接的字母，猜猜它怎麼唸，再點例字聽聽。
+      <table aria-label="c 和 g 的常見讀音">
+        <thead><tr><th scope="col">後面的字母</th><th scope="col">c 常唸</th><th scope="col">g 常唸</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">e、i、y</th><td>/s/ ${ruleWord("city", "ci")}</td><td>/dʒ/ ${ruleWord("gem", "ge")}</td></tr>
+          <tr><th scope="row">a、o、u</th><td>/k/ ${ruleWord("cat", "ca")}</td><td>/ɡ/ ${ruleWord("goat", "go")}</td></tr>
+        </tbody>
+      </table>
+      <b>常見例外</b>　${ruleWord("get", "ge")} 和 ${ruleWord("give", "gi")} 的 g 都唸 /ɡ/。
+    </div>`,
+    notes: {
+      "c [s]": `<b>c 的軟音</b>　c 後面接 e、i、y 時，通常唸 /s/。依序聽 ${ruleWord("face", "ce")}、${ruleWord("city", "ci")}、${ruleWord("fancy", "cy")}。`,
+      "c [k]": `<b>c 的硬音</b>　c 後面接 a、o、u 時，通常唸 /k/，和 ${ruleWord("kite", "k")} 開頭的 k 同音。依序聽 ${ruleWord("cat", "ca")}、${ruleWord("cow", "co")}、${ruleWord("cup", "cu")}。`,
+      "g [dʒ]": `<b>g 的軟音</b>　g 後面接 e、i、y 時，常唸 /dʒ/，和 ${ruleWord("jam", "j")} 開頭的 j 同音。依序聽 ${ruleWord("gem", "ge")}、${ruleWord("giant", "gi")}、${ruleWord("gym", "gy")}。`,
+      "g [g]": `<b>g 的硬音</b>　g 後面接 a、o、u 時，通常唸 /ɡ/。留意 ${ruleWord("get", "ge")} 和 ${ruleWord("give", "gi")}，這兩個字接了 e 或 i，g 仍唸 /ɡ/。`,
+      k: `<b>字首的 kn</b>　比較 ${ruleWord("kite", "k")} 和 ${ruleWord("knee", "kn")}。kite 的 k 唸 /k/，knee 開頭的 kn 只唸 /n/。`,
+      qu: `<b>q 和 u 一起讀</b>　${ruleWord("queen", "qu")} 和 ${ruleWord("quick", "qu")} 開頭的 qu 都唸 /kw/。先發 /k/，接著把嘴唇收圓發 /w/。拼字時選 qu。`,
+      w: `<b>字首的 wr</b>　比較 ${ruleWord("wet", "w")} 和 ${ruleWord("write", "wr")}。wet 的 w 唸 /w/，write 開頭的 w 不發音。`,
+      x: `<b>看 x 的位置</b>　字尾的 x 通常唸 /ks/，像 ${ruleWord("box", "x")}。把 /k/ 和 /s/ 連起來唸。聽聽 ${ruleWord("xylophone", "x")}，這個字開頭的 x 唸 /z/。`,
+      y: `<b>y 也可以當母音</b>　${ruleWord("yes", "y")} 開頭的 y 是子音 /j/。舌面靠近上顎，再滑向後面的母音。聽聽 ${ruleWord("gym", "y")}，這裡的 y 是母音 /ɪ/。`
+    },
     sounds: {
       b: "b", "c [k]": "k", "c [s]": "s", d: "d", f: "f",
       "g [g]": "g", "g [dʒ]": "dʒ", h: "h", j: "dʒ", k: "k",
@@ -728,6 +755,11 @@ function showModeSelect() {
 
 // 設定遊戲按鈕與視窗事件
 function setupGameControlEvents() {
+  document.getElementById("study-screen").addEventListener("click", event => {
+    const wordButton = event.target.closest(".rule-word");
+    if (wordButton) speakWord(wordButton.dataset.word);
+  });
+
   // 返回首頁
   document.getElementById("btn-home").addEventListener("click", () => {
     playSound("click");
@@ -1753,6 +1785,10 @@ function updateConsonantFilterStatus() {
 function renderStudyWords() {
   const container = document.getElementById("study-words-container");
   container.replaceChildren();
+  const note = document.getElementById("consonant-rule-note");
+  const rule = PHONICS_DATA[currentStudyCategory].notes?.[currentFilteredLetter];
+  note.innerHTML = rule || "";
+  note.hidden = !rule;
   const words = WORD_DATABASE[currentStudyCategory];
   // 篩選單字
   const displayWords = currentFilteredLetter 

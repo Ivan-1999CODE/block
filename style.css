@@ -1660,6 +1660,49 @@ body {
 
 #phonics-intro b { color: #244f70; }
 
+#consonant-rule-guide table {
+  width: 100%;
+  margin: .6rem 0;
+  border-collapse: collapse;
+  color: #244f70;
+  text-align: left;
+  line-height: 1.45;
+}
+
+#consonant-rule-guide th,
+#consonant-rule-guide td {
+  padding: .35rem .4rem;
+  border-bottom: 1px solid #dfd5ae;
+}
+
+#consonant-rule-guide thead { background: #faf1cd; }
+
+#consonant-rule-note {
+  margin: 0 0 16px;
+  padding: 10px 14px;
+  border-left: 4px solid #e1ad35;
+  border-radius: 6px;
+  background: #fffae8;
+  color: #324e65;
+  line-height: 1.75;
+}
+
+.rule-word {
+  min-height: 32px;
+  padding: 2px 7px;
+  border: 1px solid #a5c8de;
+  border-radius: 7px;
+  background: #f1f8fd;
+  color: #155783;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.rule-word u { text-underline-offset: 3px; }
+.rule-word:hover { background: #dceef9; }
+.rule-word:focus-visible { outline: 3px solid #1768ac; outline-offset: 2px; }
+
 .study-panel { padding: 22px 24px 25px; }
 
 .study-section-heading {
