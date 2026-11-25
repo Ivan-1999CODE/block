@@ -22,8 +22,8 @@
   }
 
   function longVowelKey(word, defaultKey) {
-    if (window.PronunciationAudio.accent !== "us" && ["new", "due", "neutral"].includes(word.word)) {
-      return "ju";
+    if (window.PronunciationAudio.accent !== "us" && word.gbAuIpa) {
+      return word.gbAuIpa;
     }
     return word.ipa || defaultKey;
   }

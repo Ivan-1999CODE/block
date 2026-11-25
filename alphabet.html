@@ -660,7 +660,7 @@
 <body>
   <main class="page">
     <header class="hero">
-      <a class="home-link" href="index.html?v=2" data-carry-accent>
+      <a class="home-link" href="index.html?v=6" data-carry-accent>
         <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9"/><path d="M9 20v-6h6v6"/></svg>
         回主選單
       </a>
@@ -695,143 +695,143 @@
 
   <div id="speech-status" class="status" role="status" aria-live="polite"></div>
 
-  <script src="pronunciation-audio.js?v=2"></script>
-  <script src="accent-phonics.js"></script>
+  <script src="pronunciation-audio.js?v=5"></script>
+  <script src="accent-phonics.js?v=2"></script>
   <script>
     const ALPHABET_DATA = [
       { letter: "A", sounds: [
-        { spelling: "a", ipa: "/æ/", words: [["apple", "a"], ["cat", "a"]] },
-        { spelling: "a-e, ai, ay", ipa: "/eɪ/", words: [["cake", "a"], ["rain", "ai"], ["day", "ay"]] },
-        { spelling: "ar", ipa: "/ɑr/", words: [["car", "ar"], ["star", "ar"]] },
-        { spelling: "au, aw", ipa: "/ɔ/", words: [["sauce", "au"], ["draw", "aw"]] }
+        { spelling: "a", ipa: "/æ/", words: [["apple", "a"], ["cat", "a"], ["hat", "a"], ["map", "a"], ["bag", "a"]] },
+        { spelling: "a-e, ai, ay", ipa: "/eɪ/", words: [["cake", "a_e"], ["rain", "ai"], ["day", "ay"], ["train", "ai"], ["play", "ay"]] },
+        { spelling: "ar", ipa: "/ɑr/", words: [["car", "ar"], ["star", "ar"], ["garden", "ar"], ["farm", "ar"], ["park", "ar"]] },
+        { spelling: "au, aw", ipa: "/ɔ/", words: [["sauce", "au"], ["draw", "aw"], ["straw", "aw"], ["paw", "aw"], ["autumn", "au"]] }
       ]},
       { letter: "B", sounds: [
-        { spelling: "b", ipa: "/b/", words: [["book", "b"], ["rabbit", "b"]] },
-        { spelling: "bl", ipa: "/bl/", words: [["blue", "bl"]] },
-        { spelling: "br", ipa: "/br/", words: [["bread", "br"]] }
+        { spelling: "b, bb", ipa: "/b/", words: [["book", "b"], ["rabbit", "bb"], ["bird", "b"], ["bag", "b"], ["bus", "b"]] },
+        { spelling: "bl", ipa: "/bl/", words: [["blue", "bl"], ["black", "bl"], ["blow", "bl"], ["blink", "bl"], ["block", "bl"]] },
+        { spelling: "br", ipa: "/br/", words: [["bread", "br"], ["brown", "br"], ["brush", "br"], ["brick", "br"], ["bright", "br"]] }
       ]},
       { letter: "C", sounds: [
-        { spelling: "c", ipa: "/k/", words: [["cat", "c"], ["music", "c"]] },
-        { spelling: "c", ipa: "/s/", words: [["city", "c"], ["face", "c"]] },
-        { spelling: "ch", ipa: "/tʃ/", words: [["chair", "ch"], ["peach", "ch"]] },
-        { spelling: "ch", ipa: "/k/", words: [["chorus", "ch"], ["school", "ch"]] }
+        { spelling: "c", ipa: "/k/", words: [["cat", "c"], ["music", "c"], ["cup", "c"], ["cow", "c"], ["cut", "c"]] },
+        { spelling: "c", ipa: "/s/", words: [["city", "c"], ["face", "c"], ["ice", "c"], ["rice", "c"], ["ceiling", "c"]] },
+        { spelling: "ch", ipa: "/tʃ/", words: [["chair", "ch"], ["peach", "ch"], ["chip", "ch"], ["lunch", "ch"], ["cheese", "ch"]] },
+        { spelling: "ch", ipa: "/k/", words: [["chorus", "ch"], ["school", "ch"], ["echo", "ch"], ["chemistry", "ch"], ["anchor", "ch"]] }
       ]},
       { letter: "D", sounds: [
-        { spelling: "d", ipa: "/d/", words: [["dog", "d"], ["red", "d"]] },
-        { spelling: "dr", ipa: "/dr/", words: [["drum", "dr"], ["drink", "dr"]] }
+        { spelling: "d", ipa: "/d/", words: [["dog", "d"], ["red", "d"], ["duck", "d"], ["day", "d"], ["dish", "d"]] },
+        { spelling: "dr", ipa: "/dr/", words: [["drum", "dr"], ["drink", "dr"], ["dress", "dr"], ["draw", "dr"], ["drop", "dr"]] }
       ]},
       { letter: "E", sounds: [
-        { spelling: "e", ipa: "/ɛ/", words: [["egg", "e"], ["bed", "e"]] },
-        { spelling: "e, ee, ea", ipa: "/i/", words: [["he", "e"], ["tree", "ee"], ["eat", "ea"]] },
-        { spelling: "er", ipa: "/ɝ/", words: [["her", "er"], ["term", "er"]] },
-        { spelling: "e（不發音）", ipa: "silent", words: [["cake", "e"], ["bike", "e"]] }
+        { spelling: "e", ipa: "/ɛ/", words: [["egg", "e"], ["bed", "e"], ["leg", "e"], ["ten", "e"], ["red", "e"]] },
+        { spelling: "e, ee, ea", ipa: "/i/", words: [["he", "e"], ["tree", "ee"], ["eat", "ea"], ["leaf", "ea"], ["knee", "ee"]] },
+        { spelling: "er", ipa: "/ɝ/", words: [["her", "er"], ["term", "er"], ["verb", "er"], ["fern", "er"], ["germ", "er"]] },
+        { spelling: "e（不發音）", ipa: "silent", words: [["cake", "e"], ["bike", "e"], ["cute", "e"], ["home", "e"], ["white", "e"]] }
       ]},
       { letter: "F", sounds: [
-        { spelling: "f", ipa: "/f/", words: [["fish", "f"], ["leaf", "f"]] },
-        { spelling: "ph", ipa: "/f/", words: [["phone", "ph"], ["dolphin", "ph"]] }
+        { spelling: "f", ipa: "/f/", words: [["fish", "f"], ["leaf", "f"], ["foot", "f"], ["fin", "f"], ["fox", "f"]] },
+        { spelling: "ph", ipa: "/f/", words: [["phone", "ph"], ["dolphin", "ph"], ["photo", "ph"], ["alphabet", "ph"], ["elephant", "ph"]] }
       ]},
       { letter: "G", sounds: [
-        { spelling: "g", ipa: "/g/", words: [["goat", "g"], ["bag", "g"]] },
-        { spelling: "g", ipa: "/dʒ/", words: [["giant", "g"], ["gym", "g"]] },
-        { spelling: "gh", ipa: "/f/", words: [["laugh", "gh"], ["cough", "gh"]] },
-        { spelling: "gh（不發音）", ipa: "silent", words: [["night", "gh"], ["light", "gh"]] }
+        { spelling: "g", ipa: "/g/", words: [["goat", "g"], ["bag", "g"], ["get", "g"], ["garden", "g"], ["give", "g"]] },
+        { spelling: "g", ipa: "/dʒ/", words: [["giant", "g"], ["gym", "g"], ["gem", "g"], ["gentle", "g"], ["magic", "g"]] },
+        { spelling: "gh", ipa: "/f/", words: [["laugh", "gh"], ["cough", "gh"], ["rough", "gh"], ["tough", "gh"], ["enough", "gh"]] },
+        { spelling: "gh（不發音）", ipa: "silent", words: [["night", "gh"], ["light", "gh"], ["high", "gh"], ["bright", "gh"], ["right", "gh"]] }
       ]},
       { letter: "H", sounds: [
-        { spelling: "h", ipa: "/h/", words: [["hat", "h"], ["home", "h"]] },
-        { spelling: "sh", ipa: "/ʃ/", words: [["ship", "sh"], ["dish", "sh"]] },
-        { spelling: "h（不發音）", ipa: "silent", words: [["hour", "h"], ["honest", "h"]] }
+        { spelling: "h", ipa: "/h/", words: [["hat", "h"], ["home", "h"], ["happy", "h"], ["he", "h"], ["house", "h"]] },
+        { spelling: "sh", ipa: "/ʃ/", words: [["ship", "sh"], ["dish", "sh"], ["shop", "sh"], ["fish", "sh"], ["brush", "sh"]] },
+        { spelling: "h（不發音）", ipa: "silent", words: [["hour", "h"], ["honest", "h"], ["honor", "h"], ["heir", "h"], ["rhyme", "h"]] }
       ]},
       { letter: "I", sounds: [
-        { spelling: "i", ipa: "/ɪ/", words: [["ink", "i"], ["pig", "i"]] },
-        { spelling: "i-e, igh", ipa: "/aɪ/", words: [["bike", "i"], ["night", "igh"]] },
-        { spelling: "ie", ipa: "/i/", words: [["field", "ie"], ["thief", "ie"]] }
+        { spelling: "i", ipa: "/ɪ/", words: [["ink", "i"], ["pig", "i"], ["fin", "i"], ["six", "i"], ["sit", "i"]] },
+        { spelling: "i-e, igh", ipa: "/aɪ/", words: [["bike", "i_e"], ["night", "igh"], ["white", "i_e"], ["light", "igh"], ["time", "i_e"]] },
+        { spelling: "ie", ipa: "/i/", words: [["field", "ie"], ["thief", "ie"], ["chief", "ie"], ["shield", "ie"], ["brief", "ie"]] }
       ]},
       { letter: "J", sounds: [
-        { spelling: "j", ipa: "/dʒ/", words: [["jam", "j"], ["jump", "j"]] }
+        { spelling: "j", ipa: "/dʒ/", words: [["jam", "j"], ["jump", "j"], ["jet", "j"], ["job", "j"], ["joy", "j"]] }
       ]},
       { letter: "K", sounds: [
-        { spelling: "k, ck", ipa: "/k/", words: [["kite", "k"], ["duck", "ck"]] },
-        { spelling: "kn", ipa: "/n/", words: [["knee", "kn"], ["knife", "kn"]] }
+        { spelling: "k, ck", ipa: "/k/", words: [["kite", "k"], ["duck", "ck"], ["key", "k"], ["kid", "k"], ["truck", "ck"]] },
+        { spelling: "kn", ipa: "/n/", words: [["knee", "kn"], ["knife", "kn"], ["knock", "kn"], ["knot", "kn"], ["kneel", "kn"]] }
       ]},
       { letter: "L", sounds: [
-        { spelling: "l", ipa: "/l/", words: [["leg", "l"], ["light", "l"]] },
-        { spelling: "l（母音後，在字尾或子音前）", ipa: "/ɫ/", words: [["ball", "ll"], ["milk", "l"]] },
-        { spelling: "l（不發音）", ipa: "silent", words: [["walk", "l"], ["calm", "l"]] }
+        { spelling: "l", ipa: "/l/", words: [["leg", "l"], ["light", "l"], ["lake", "l"], ["leaf", "l"], ["lemon", "l"]] },
+        { spelling: "l（母音後，在字尾或子音前）", ipa: "/ɫ/", words: [["ball", "ll"], ["milk", "l"], ["full", "ll"], ["elk", "l"], ["help", "l"]] },
+        { spelling: "l（不發音）", ipa: "silent", words: [["walk", "l"], ["calm", "l"], ["talk", "l"], ["chalk", "l"], ["half", "l"]] }
       ]},
       { letter: "M", sounds: [
-        { spelling: "m", ipa: "/m/", words: [["map", "m"], ["moon", "m"]] }
+        { spelling: "m", ipa: "/m/", words: [["map", "m"], ["moon", "m"], ["mouth", "m"], ["mud", "m"], ["me", "m"]] }
       ]},
       { letter: "N", sounds: [
-        { spelling: "n", ipa: "/n/", words: [["nose", "n"], ["sun", "n"]] },
-        { spelling: "ng", ipa: "/ŋ/", words: [["sing", "ng"], ["ring", "ng"]] },
-        { spelling: "n + k", ipa: "/ŋ/", words: [["ink", "n"], ["thank", "n"]] },
-        { spelling: "n（不發音）", ipa: "silent", words: [["autumn", "n"], ["column", "n"]] }
+        { spelling: "n", ipa: "/n/", words: [["nose", "n"], ["sun", "n"], ["name", "n"], ["nurse", "n"], ["no", "n"]] },
+        { spelling: "ng", ipa: "/ŋ/", words: [["sing", "ng"], ["ring", "ng"], ["king", "ng"], ["long", "ng"], ["wing", "ng"]] },
+        { spelling: "n + k", ipa: "/ŋ/", words: [["ink", "n"], ["thank", "n"], ["drink", "n"], ["pink", "n"], ["blink", "n"]] },
+        { spelling: "n（不發音）", ipa: "silent", words: [["autumn", "n"], ["column", "n"], ["hymn", "n"], ["solemn", "n"], ["condemn", "n", 6]] }
       ]},
       { letter: "O", sounds: [
-        { spelling: "o", ipa: "/ɑ/", words: [["hot", "o"], ["ox", "o"]] },
-        { spelling: "o-e, oa", ipa: "/oʊ/", words: [["home", "o"], ["boat", "oa"]] },
-        { spelling: "oi, oy", ipa: "/ɔɪ/", words: [["coin", "oi"], ["toy", "oy"]] },
-        { spelling: "ou, ow", ipa: "/aʊ/", words: [["house", "ou"], ["cow", "ow"]] },
-        { spelling: "oo", ipa: "/ʊ/", words: [["book", "oo"], ["foot", "oo"]] },
-        { spelling: "oo", ipa: "/u/", words: [["moon", "oo"], ["zoo", "oo"]] }
+        { spelling: "o", ipa: "/ɑ/", words: [["hot", "o"], ["ox", "o"], ["top", "o"], ["pot", "o"], ["odd", "o"]] },
+        { spelling: "o-e, oa", ipa: "/oʊ/", words: [["home", "o_e"], ["boat", "oa"], ["coat", "oa"], ["road", "oa"], ["note", "o_e"]] },
+        { spelling: "oi, oy", ipa: "/ɔɪ/", words: [["coin", "oi"], ["toy", "oy"], ["soil", "oi"], ["point", "oi"], ["joy", "oy"]] },
+        { spelling: "ou, ow", ipa: "/aʊ/", words: [["house", "ou"], ["cow", "ow"], ["cloud", "ou"], ["town", "ow"], ["shout", "ou"]] },
+        { spelling: "oo", ipa: "/ʊ/", words: [["book", "oo"], ["foot", "oo"], ["good", "oo"], ["wood", "oo"], ["wool", "oo"]] },
+        { spelling: "oo", ipa: "/u/", words: [["moon", "oo"], ["zoo", "oo"], ["boot", "oo"], ["food", "oo"], ["cool", "oo"]] }
       ]},
       { letter: "P", sounds: [
-        { spelling: "p", ipa: "/p/", words: [["pen", "p"], ["map", "p"]] },
-        { spelling: "ph", ipa: "/f/", words: [["photo", "ph"], ["phone", "ph"]] },
-        { spelling: "p（不發音）", ipa: "silent", words: [["psychology", "p"], ["receipt", "p"]] }
+        { spelling: "p", ipa: "/p/", words: [["pen", "p"], ["map", "p"], ["pig", "p"], ["pencil", "p"], ["panda", "p"]] },
+        { spelling: "ph", ipa: "/f/", words: [["photo", "ph"], ["phone", "ph"], ["dolphin", "ph"], ["elephant", "ph"], ["alphabet", "ph"]] },
+        { spelling: "p（不發音）", ipa: "silent", words: [["psychology", "p"], ["receipt", "p"], ["psalm", "p"], ["psychic", "p"], ["pneumonia", "p"]] }
       ]},
       { letter: "Q", sounds: [
-        { spelling: "qu", ipa: "/kw/", words: [["queen", "qu"], ["quick", "qu"]] },
-        { spelling: "que", ipa: "/k/", words: [["antique", "que"], ["unique", "que"]] }
+        { spelling: "qu", ipa: "/kw/", words: [["queen", "qu"], ["quick", "qu"], ["quiz", "qu"], ["quit", "qu"], ["quilt", "qu"]] },
+        { spelling: "que", ipa: "/k/", words: [["antique", "que"], ["unique", "que"], ["technique", "que"], ["boutique", "que"], ["mosque", "que"]] }
       ]},
       { letter: "R", sounds: [
-        { spelling: "r", ipa: "/r/", words: [["red", "r"], ["rain", "r"]] },
-        { spelling: "ar", ipa: "/ɑr/", words: [["car", "ar"], ["garden", "ar"]] },
-        { spelling: "er, ir, ur", ipa: "/ɝ/", words: [["her", "er"], ["bird", "ir"], ["turn", "ur"]] }
+        { spelling: "r", ipa: "/r/", words: [["red", "r"], ["rain", "r"], ["rose", "r"], ["ring", "r"], ["rabbit", "r"]] },
+        { spelling: "ar", ipa: "/ɑr/", words: [["car", "ar"], ["garden", "ar"], ["star", "ar"], ["park", "ar"], ["farm", "ar"]] },
+        { spelling: "er, ir, ur", ipa: "/ɝ/", words: [["her", "er"], ["bird", "ir"], ["turn", "ur"], ["term", "er"], ["nurse", "ur"]] }
       ]},
       { letter: "S", sounds: [
-        { spelling: "s", ipa: "/s/", words: [["sun", "s"], ["bus", "s"]] },
-        { spelling: "s", ipa: "/z/", words: [["rose", "s"], ["music", "s"]] },
-        { spelling: "sh", ipa: "/ʃ/", words: [["ship", "sh"], ["shop", "sh"]] },
-        { spelling: "s", ipa: "/ʒ/", words: [["vision", "s"], ["usual", "s"]] }
+        { spelling: "s", ipa: "/s/", words: [["sun", "s"], ["bus", "s"], ["sit", "s"], ["six", "s"], ["sea", "s"]] },
+        { spelling: "s", ipa: "/z/", words: [["rose", "s"], ["music", "s"], ["nose", "s"], ["these", "s"], ["easy", "s"]] },
+        { spelling: "sh", ipa: "/ʃ/", words: [["ship", "sh"], ["shop", "sh"], ["dish", "sh"], ["brush", "sh"], ["fish", "sh"]] },
+        { spelling: "s", ipa: "/ʒ/", words: [["vision", "s"], ["usual", "s"], ["measure", "s"], ["treasure", "s"], ["pleasure", "s"]] }
       ]},
       { letter: "T", sounds: [
-        { spelling: "t", ipa: "/t/", words: [["top", "t"], ["cat", "t"]] },
-        { spelling: "th", ipa: "/θ/", words: [["thin", "th"], ["bath", "th"]] },
-        { spelling: "th", ipa: "/ð/", words: [["this", "th"], ["brother", "th"]] },
-        { spelling: "tion", ipa: "/ʃən/", words: [["nation", "tion"], ["station", "tion"]] },
-        { spelling: "tch", ipa: "/tʃ/", words: [["watch", "tch"], ["kitchen", "tch"]] }
+        { spelling: "t", ipa: "/t/", words: [["top", "t"], ["cat", "t"], ["ten", "t"], ["wet", "t"], ["toy", "t"]] },
+        { spelling: "th", ipa: "/θ/", words: [["thin", "th"], ["bath", "th"], ["three", "th"], ["thank", "th"], ["thick", "th"]] },
+        { spelling: "th", ipa: "/ð/", words: [["this", "th"], ["brother", "th"], ["that", "th"], ["these", "th"], ["they", "th"]] },
+        { spelling: "tion", ipa: "/ʃən/", words: [["nation", "tion"], ["station", "tion"], ["action", "tion"], ["motion", "tion"], ["fiction", "tion"]] },
+        { spelling: "tch", ipa: "/tʃ/", words: [["watch", "tch"], ["kitchen", "tch"], ["catch", "tch"], ["match", "tch"], ["patch", "tch"]] }
       ]},
       { letter: "U", sounds: [
-        { spelling: "u", ipa: "/ʌ/", words: [["up", "u"], ["cup", "u"]] },
-        { spelling: "u-e", ipa: "/ju/", words: [["cute", "u"], ["cube", "u"]] },
-        { spelling: "u-e, ue", ipa: "/u/", words: [["rule", "u"], ["blue", "ue"]] },
-        { spelling: "u", ipa: "/ʊ/", words: [["put", "u"], ["full", "u"]] },
-        { spelling: "ur", ipa: "/ɝ/", words: [["turn", "ur"], ["nurse", "ur"]] }
+        { spelling: "u", ipa: "/ʌ/", words: [["up", "u"], ["cup", "u"], ["sun", "u"], ["cut", "u"], ["bus", "u"]] },
+        { spelling: "u-e", ipa: "/ju/", words: [["cute", "u_e"], ["cube", "u_e"], ["huge", "u_e"], ["mule", "u_e"], ["mute", "u_e"]] },
+        { spelling: "u-e, ue", ipa: "/u/", words: [["rule", "u_e"], ["blue", "ue"], ["clue", "ue"], ["glue", "ue"], ["true", "ue"]] },
+        { spelling: "u", ipa: "/ʊ/", words: [["put", "u"], ["full", "u"], ["pull", "u"], ["push", "u"], ["bush", "u"]] },
+        { spelling: "ur", ipa: "/ɝ/", words: [["turn", "ur"], ["nurse", "ur"], ["hurt", "ur"], ["burn", "ur"], ["fur", "ur"]] }
       ]},
       { letter: "V", sounds: [
-        { spelling: "v", ipa: "/v/", words: [["van", "v"], ["five", "v"]] }
+        { spelling: "v", ipa: "/v/", words: [["van", "v"], ["five", "v"], ["very", "v"], ["vest", "v"], ["voice", "v"]] }
       ]},
       { letter: "W", sounds: [
-        { spelling: "w, wh", ipa: "/w/", words: [["wet", "w"], ["whale", "wh"]] },
-        { spelling: "w（不發音）", ipa: "silent", words: [["write", "w"], ["wrong", "w"]] },
-        { spelling: "ow", ipa: "/aʊ/", words: [["cow", "ow"], ["town", "ow"]] },
-        { spelling: "ow", ipa: "/oʊ/", words: [["snow", "ow"], ["yellow", "ow"]] }
+        { spelling: "w, wh", ipa: "/w/", words: [["wet", "w"], ["whale", "wh"], ["wheel", "wh"], ["white", "wh"], ["week", "w"]] },
+        { spelling: "w（不發音）", ipa: "silent", words: [["write", "w"], ["wrong", "w"], ["wrist", "w"], ["wrap", "w"], ["wreck", "w"]] },
+        { spelling: "ow", ipa: "/aʊ/", words: [["cow", "ow"], ["town", "ow"], ["how", "ow"], ["crown", "ow"], ["brown", "ow"]] },
+        { spelling: "ow", ipa: "/oʊ/", words: [["snow", "ow"], ["yellow", "ow"], ["grow", "ow"], ["slow", "ow"], ["bowl", "ow"]] }
       ]},
       { letter: "X", sounds: [
-        { spelling: "x", ipa: "/ks/", words: [["box", "x"], ["six", "x"]] },
-        { spelling: "x", ipa: "/gz/", words: [["exam", "x"], ["exact", "x"]] },
-        { spelling: "x（字首）", ipa: "/z/", words: [["xylophone", "x"], ["xenon", "x"]] }
+        { spelling: "x", ipa: "/ks/", words: [["box", "x"], ["six", "x"], ["fox", "x"], ["mix", "x"], ["next", "x"]] },
+        { spelling: "x", ipa: "/gz/", words: [["exam", "x"], ["exact", "x"], ["example", "x"], ["exist", "x"], ["exhaust", "x"]] },
+        { spelling: "x（字首）", ipa: "/z/", words: [["xylophone", "x"], ["xenon", "x"], ["xylem", "x"], ["xylitol", "x"], ["xenophobia", "x"]] }
       ]},
       { letter: "Y", sounds: [
-        { spelling: "y（字首）", ipa: "/j/", words: [["yes", "y"], ["yellow", "y"]] },
-        { spelling: "y", ipa: "/ɪ/", words: [["gym", "y"], ["myth", "y"]] },
-        { spelling: "y", ipa: "/aɪ/", words: [["my", "y"], ["cry", "y"]] },
-        { spelling: "y（字尾）", ipa: "/i/", gbSound: "happy-i", words: [["happy", "y"], ["baby", "y"]] }
+        { spelling: "y（字首）", ipa: "/j/", words: [["yes", "y"], ["yellow", "y"], ["yet", "y"], ["yell", "y"], ["yogurt", "y"]] },
+        { spelling: "y", ipa: "/ɪ/", words: [["gym", "y"], ["myth", "y"], ["symbol", "y"], ["system", "y"], ["rhythm", "y"]] },
+        { spelling: "y", ipa: "/aɪ/", words: [["my", "y"], ["cry", "y"], ["fly", "y"], ["sky", "y"], ["dry", "y"]] },
+        { spelling: "y（字尾）", ipa: "/i/", gbSound: "happy-i", words: [["happy", "y"], ["baby", "y"], ["city", "y"], ["fancy", "y"], ["very", "y"]] }
       ]},
       { letter: "Z", sounds: [
-        { spelling: "z, zz", ipa: "/z/", words: [["zoo", "z"], ["buzz", "zz"]] },
-        { spelling: "z", ipa: "/ʒ/", words: [["azure", "z"], ["seizure", "z"]] }
+        { spelling: "z, zz", ipa: "/z/", words: [["zoo", "z"], ["buzz", "zz"], ["zebra", "z"], ["zip", "z"], ["zero", "z"]] },
+        { spelling: "z, zs", ipa: "/ʒ/", words: [["azure", "z"], ["seizure", "z"], ["azurite", "z"], ["vizsla", "zs"], ["seizures", "z"]] }
       ]}
     ];
 
@@ -902,13 +902,18 @@
       }).join("");
     }
 
-    function highlightedWord(word, focus) {
-      const start = word.toLowerCase().indexOf(focus.toLowerCase());
+    function highlightedWord(word, focus, offset) {
+      const splitVowel = focus.endsWith("_e");
+      const target = splitVowel ? focus[0] : focus;
+      const start = offset ?? word.indexOf(target);
       if (start < 0) return coloredLetters(word);
       const before = word.slice(0, start);
-      const marked = word.slice(start, start + focus.length);
-      const after = word.slice(start + focus.length);
-      return `${coloredLetters(before)}<span class="focus">${coloredLetters(marked)}</span>${coloredLetters(after)}`;
+      const marked = `<span class="focus">${coloredLetters(target)}</span>`;
+      const after = word.slice(start + target.length);
+      if (splitVowel) {
+        return `${coloredLetters(before)}${marked}${coloredLetters(after.slice(0, -1))}<span class="focus">${coloredLetters("e")}</span>`;
+      }
+      return `${coloredLetters(before)}${marked}${coloredLetters(after)}`;
     }
 
     function renderTable() {
@@ -993,12 +998,12 @@
           wordsGroup.innerHTML = '<span class="micro-label">聽完整單字</span>';
           const words = document.createElement("div");
           words.className = "words";
-          sound.words.forEach(([word, focus]) => {
+          sound.words.forEach(([word, focus, offset]) => {
             const button = document.createElement("button");
             button.type = "button";
             button.className = "word-button";
             button.setAttribute("aria-label", `播放單字 ${word}`);
-            button.innerHTML = `<span>${highlightedWord(word, focus)}</span>${SPEAKER_ICON}`;
+            button.innerHTML = `<span>${highlightedWord(word, focus, offset)}</span>${SPEAKER_ICON}`;
             button.addEventListener("click", () => speak("word", word, button, `單字 ${word}`));
             words.appendChild(button);
           });

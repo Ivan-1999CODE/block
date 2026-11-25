@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>拼磚塊英文拼字大冒險</title>
-  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="style.css?v=5">
   <link rel="stylesheet" href="accent-choice.css?v=2">
 </head>
 <body>
@@ -47,7 +47,7 @@
       <p class="game-subtitle">聽聽發音，把正確的字母拼圖拉進雲朵裡吧！</p>
 
       <!-- A–Z 發音總表 -->
-      <a href="alphabet.html?v=2" data-carry-accent class="cross-game-link" style="display:inline-flex;align-items:center;gap:10px;margin:4px auto 12px;padding:12px 24px;background:linear-gradient(135deg,#8e44ad,#6c5ce7);color:#fff;font-weight:700;font-size:1.05rem;text-decoration:none;border-radius:24px;box-shadow:0 4px 0 #51348f;border:2px solid #fff;">
+      <a href="alphabet.html?v=6" data-carry-accent class="cross-game-link" style="display:inline-flex;align-items:center;gap:10px;margin:4px auto 12px;padding:12px 24px;background:linear-gradient(135deg,#8e44ad,#6c5ce7);color:#fff;font-weight:700;font-size:1.05rem;text-decoration:none;border-radius:24px;box-shadow:0 4px 0 #51348f;border:2px solid #fff;">
         🔤 A–Z 發音總表（點例字聽發音）
       </a>
 
@@ -65,11 +65,11 @@
         </div>
 
         <!-- ② 長母音 -->
-        <div class="category-card card-long_vowels" data-category="long_vowels">
-          <span class="category-icon">🍰</span>
-          <h2 class="category-name">長母音組</h2>
-          <p class="category-desc">母音唸名字！ai/ay、magic-e、開音節，含進階拼法</p>
-        </div>
+        <button type="button" class="category-card card-long_vowels" data-category="long_vowels" aria-haspopup="dialog">
+          <span class="category-icon" aria-hidden="true">🍰</span>
+          <span class="category-name">長母音組</span>
+          <span class="category-desc">從字尾 e 開始，再挑戰同一個長母音的不同拼法</span>
+        </button>
 
         <!-- ③ 特殊母音 -->
         <div class="category-card card-special_vowels" data-category="special_vowels">
@@ -103,6 +103,7 @@
     <!-- 遊戲主畫面 -->
     <div id="game-screen" class="screen hidden">
       <!-- 關卡進度條 -->
+      <p id="long-quiz-status" hidden></p>
       <div class="progress-container">
         <div id="game-progress" class="progress-bar"></div>
       </div>
@@ -199,17 +200,31 @@
   <!-- 遊戲結束/結算彈窗模組 -->
   <div id="modal-overlay" class="modal-overlay hidden">
     <!-- 模式選擇 (學習/遊戲) -->
-    <div id="modal-mode-select" class="modal-card hidden">
-      <h2 class="modal-title" style="color: #0984e3;">🌟 模式選擇</h2>
+    <div id="modal-mode-select" class="modal-card hidden" role="dialog" aria-modal="true" aria-labelledby="mode-select-heading">
+      <h2 id="mode-select-heading" class="modal-title"><span aria-hidden="true">🌟</span> 模式選擇</h2>
+      <button type="button" id="btn-mode-close" aria-label="關閉模式選擇">×</button>
+      <fieldset id="long-practice-scope" hidden>
+        <legend>今天的練習範圍</legend>
+        <div class="scope-options">
+          <label>
+            <input type="radio" name="long-scope" value="magic-e" checked>
+            <span>只練 Magic E <small>cake、bike、cute</small></span>
+          </label>
+          <label>
+            <input type="radio" name="long-scope" value="mixed">
+            <span>全部拼法一起複習 <small>cake、rain、eight</small></span>
+          </label>
+        </div>
+      </fieldset>
       <div class="modal-body">
         <p>你要先讀讀發音規則，還是直接挑戰拼字遊戲呢？</p>
       </div>
-      <div class="modal-buttons" style="flex-direction: column; gap: 15px; width: 100%;">
-        <button id="btn-mode-learn" class="btn-secondary" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; font-size:1.3rem; padding: 16px;">
-          <span>📖</span> 學習樂園 (先看教學)
+      <div class="modal-buttons">
+        <button type="button" id="btn-mode-learn" class="btn-secondary">
+          <span aria-hidden="true">📖</span> 學習樂園 (先看教學)
         </button>
-        <button id="btn-mode-play-easy" class="btn-primary" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; font-size:1.3rem; padding: 16px; background: linear-gradient(135deg, #2ecc71, #27ae60); box-shadow: 0 6px 0 #1e8449;">
-          <span>🎮</span> 開始挑戰 (有發音)
+        <button type="button" id="btn-mode-play-easy" class="btn-primary">
+          <span aria-hidden="true">🎮</span> 開始挑戰 (有發音)
         </button>
       </div>
     </div>
@@ -248,8 +263,8 @@
     </div>
   </div>
 
-  <script src="pronunciation-audio.js?v=2"></script>
-  <script src="accent-phonics.js"></script>
-  <script src="game.js?v=2"></script>
+  <script src="pronunciation-audio.js?v=5"></script>
+  <script src="accent-phonics.js?v=2"></script>
+  <script src="game.js?v=6"></script>
 </body>
 </html>

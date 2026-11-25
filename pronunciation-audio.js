@@ -10,7 +10,7 @@
   retry.hidden = true;
   document.body.appendChild(retry);
   let current = null;
-  let pending = null;
+  const pending = [];
   let stallTimer;
   let accent = "us";
 
@@ -38,7 +38,7 @@
 
   function stop() {
     current = null;
-    pending = null;
+    pending.length = 0;
     clearTimeout(stallTimer);
     retry.hidden = true;
     retry.onclick = null;
@@ -58,7 +58,7 @@
       clearTimeout(stallTimer);
       current = null;
       if (error) player.pause();
-      if (error?.name === "NotAllowedError" && !pending) {
+      if (error?.name === "NotAllowedError" && !pending.length) {
         // Safari 若限制非手勢銜接播放，這個按鈕提供一次真正的點擊。
         const target = document.querySelector("#game-screen:not(.hidden)") ? "題目單字" : request.value;
         retry.textContent = `點一下播放 ${target}`;
@@ -68,11 +68,7 @@
       }
       const callback = error ? request.onError : request.onEnded;
       callback?.();
-      if (pending && !current) {
-        const next = pending;
-        pending = null;
-        start(next);
-      }
+      if (pending.length && !current) start(pending.shift());
     }
 
     player.onended = () => {
@@ -86,21 +82,30 @@
     };
     // 沿用同一個已獲播放授權的元素，讓待播音檔也能在 Safari 接續播放。
     const folder = accent === "us" ? "audio" : `audio/${accent}`;
-    player.src = `${folder}/${request.kind}/${encodeURIComponent(request.value)}.mp3?v=2`;
-    player.defaultPlaybackRate = request.kind === "phoneme" ? 1 : 0.86;
+    player.src = `${folder}/${request.kind}/${encodeURIComponent(request.value)}.mp3?v=3`;
+    player.defaultPlaybackRate = request.rate ?? (request.kind === "phoneme" ? 1 : 0.86);
     player.playbackRate = player.defaultPlaybackRate;
     player.preservesPitch = true;
     stallTimer = setTimeout(() => finish(new Error("音檔載入逾時")), 12000);
     player.play().catch(finish);
   }
 
-  function play(kind, value, onEnded, onError, onStart) {
-    const request = { kind, value, onEnded, onError, onStart };
-    if (current) pending = request;
-    else start(request);
+  function schedule(request, keepPending) {
+    if (!current) return start(request);
+    if (!keepPending) pending.length = 0;
+    pending.push(request);
   }
 
-  window.PronunciationAudio = { play, stop, get accent() { return accent; } };
+  function play(kind, value, onEnded, onError, onStart) {
+    schedule({ kind, value, onEnded, onError, onStart }, false);
+  }
+
+  // 母音對照表以原速播放，讓學生可以依點選順序逐聲比較。
+  function playVowel(kind, value) {
+    schedule({ kind, value, rate: 1 }, true);
+  }
+
+  window.PronunciationAudio = { play, playVowel, stop, get accent() { return accent; } };
 
   for (const [value, name] of Object.entries(accents)) {
     const input = document.createElement("input");
