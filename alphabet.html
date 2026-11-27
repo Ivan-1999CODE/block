@@ -540,6 +540,7 @@
       align-items: center;
       gap: 7px;
       min-height: 44px;
+      max-width: 100%;
       padding: 7px 10px;
       color: var(--ink);
       font-size: .98rem;
@@ -555,6 +556,12 @@
       width: 17px;
       height: 17px;
       color: #637b90;
+      flex: 0 0 17px;
+    }
+
+    .word-button [lang="en"] {
+      font-size: calc(1em * var(--word-scale, 1));
+      overflow-wrap: anywhere;
     }
 
     .word-translation {
@@ -663,13 +670,13 @@
       *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
     }
   </style>
-  <link rel="stylesheet" href="accent-choice.css?v=3">
-  <link rel="stylesheet" href="word-focus.css?v=1">
+  <link rel="stylesheet" href="accent-choice.css?v=4">
+  <link rel="stylesheet" href="word-focus.css?v=2">
 </head>
 <body>
   <main class="page">
     <header class="hero">
-      <a class="home-link" href="index.html?v=10" data-carry-accent>
+      <a class="home-link" href="index.html?v=11" data-carry-accent>
         <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9"/><path d="M9 20v-6h6v6"/></svg>
         回主選單
       </a>
@@ -699,6 +706,14 @@
       </div>
       <nav id="letter-nav" class="letter-nav" aria-label="快速跳到指定字母"></nav>
       <div class="word-focus-tools">
+        <label class="word-size-control">
+          單字大小
+          <select data-word-size>
+            <option value="1">100%</option>
+            <option value="1.5">150%</option>
+            <option value="2">200%</option>
+          </select>
+        </label>
         <button type="button" class="word-focus-button" data-word-focus-toggle aria-pressed="false">放大單字</button>
         <span class="word-focus-hint" hidden>點例字就會放大並播放</span>
       </div>
@@ -709,7 +724,7 @@
 
   <div id="speech-status" class="status" role="status" aria-live="polite"></div>
 
-  <script src="pronunciation-audio.js?v=13"></script>
+  <script src="pronunciation-audio.js?v=14"></script>
   <script src="accent-phonics.js?v=2"></script>
   <script src="word-meanings.js?v=1"></script>
   <script>
@@ -769,7 +784,7 @@
         { spelling: "kn", ipa: "/n/", words: [["knee", "kn"], ["knife", "kn"], ["knock", "kn"], ["knot", "kn"], ["kneel", "kn"]] }
       ]},
       { letter: "L", sounds: [
-        { spelling: "l", ipa: "/l/", words: [["leg", "l"], ["light", "l"], ["lake", "l"], ["leaf", "l"], ["lemon", "l"]] },
+        { spelling: "l（字首）", ipa: "/l/", words: [["leg", "l"], ["light", "l"], ["lake", "l"], ["leaf", "l"], ["lemon", "l"]] },
         { spelling: "l（母音後，在字尾或子音前）", ipa: "/ɫ/", words: [["ball", "ll"], ["milk", "l"], ["full", "ll"], ["elk", "l"], ["help", "l"]] },
         { spelling: "l（不發音）", ipa: "silent", words: [["walk", "l"], ["calm", "l"], ["talk", "l"], ["chalk", "l"], ["half", "l"]] }
       ]},
@@ -1035,6 +1050,6 @@
 
     renderTable();
   </script>
-  <script src="word-focus.js?v=1"></script>
+  <script src="word-focus.js?v=2"></script>
 </body>
 </html>

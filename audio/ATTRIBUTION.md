@@ -2,7 +2,7 @@
 
 ## Curious Learning 自然發音錄音
 
-三種口音模式的 `l.mp3`、`m.mp3`、`n.mp3` 共用 Curious Learning 公開的澳洲英語自然發音錄音。完整 WAV 檔轉存為 MP3，保留原本速度、音高、音量和時長。[原始錄音目錄](https://github.com/curiouslearning/ftm-languagepacks/tree/master/AUSTRAILIANENGLISH/sounds/letters) · [Curious Learning 的 CC BY 授權說明](https://github.com/curiouslearning/FeedTheMonsterJS#contributing)
+三種口音模式的 `l.mp3` 共用 Curious Learning 的美式英語 `l.WAV`，用於字首 l 的示範。`ɫ.mp3` 沿用原先由澳洲英語 `l.WAV` 取得的錄音，用於 A–Z 總表的母音後 l。`m.mp3`、`n.mp3` 也取自澳洲英語錄音。完整 WAV 檔轉存為 MP3，保留原本速度、音高、音量和時長。[美式英語原始錄音](https://github.com/curiouslearning/ftm-languagepacks/tree/master/USENGLISH/sounds/letters) · [澳洲英語原始錄音](https://github.com/curiouslearning/ftm-languagepacks/tree/master/AUSTRAILIANENGLISH/sounds/letters) · [Curious Learning 的 CC BY 授權說明](https://github.com/curiouslearning/FeedTheMonsterJS#contributing)
 
 ## FreeReading 短子音錄音
 

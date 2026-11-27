@@ -11,6 +11,31 @@
   margin-top: 12px;
 }
 
+.word-size-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #23445a;
+  font-size: .9rem;
+  font-weight: 700;
+}
+
+.word-size-control select {
+  min-height: 44px;
+  padding: 6px 8px;
+  border: 2px solid #b8ddf2;
+  border-radius: 12px;
+  background: #f7fcff;
+  color: #174e78;
+  cursor: pointer;
+  font: inherit;
+}
+
+.word-size-control select:focus-visible {
+  outline: 3px solid #206fb6;
+  outline-offset: 2px;
+}
+
 .word-focus-button {
   min-height: 44px;
   padding: 7px 14px;

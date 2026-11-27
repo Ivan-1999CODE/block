@@ -1,6 +1,6 @@
 (() => {
   const accents = { us: "美式", gb: "英式", au: "澳式" };
-  const audioVersions = { phoneme: 11, letter: 4 };
+  const audioVersions = { phoneme: 12, letter: 4 };
   const preferenceKey = "block_puzzle_accent";
   const choices = document.querySelector(".accent-choice");
   const pageLinks = document.querySelectorAll("a[data-carry-accent]");

@@ -1,4 +1,12 @@
 (() => {
+  const size = document.querySelector("[data-word-size]");
+  const setWordSize = () => {
+    document.documentElement.style.setProperty("--word-scale", size.value);
+    document.documentElement.classList.toggle("large-words", size.value !== "1");
+  };
+  size.addEventListener("change", setWordSize);
+  setWordSize();
+
   const toggle = document.querySelector("[data-word-focus-toggle]");
   const hint = document.querySelector(".word-focus-hint");
   const dialog = document.createElement("dialog");

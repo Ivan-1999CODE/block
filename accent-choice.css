@@ -44,12 +44,19 @@
 .accent-choice input:checked + label { color: #fff; background: #1768ac; }
 .accent-choice input:focus-visible + label { outline: 3px solid #7136b2; outline-offset: 1px; }
 
-.app-container > .accent-choice {
+.game-toolbar {
   position: sticky;
   top: 6px;
   z-index: 12;
-  align-self: flex-end;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
   margin: 0 0 8px;
+}
+
+.game-toolbar .accent-choice {
   box-shadow: 0 3px 0 rgba(57, 114, 149, .17);
 }
 

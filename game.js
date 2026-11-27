@@ -1172,6 +1172,7 @@ function loadQuestion() {
 
   // 生成雲朵單字結構
   const wordContainer = document.getElementById("word-container");
+  wordContainer.style.setProperty("--question-letters", currentQ.word.length);
   document.getElementById("game-word-meaning").textContent = WORD_MEANINGS[currentQ.word];
   wordContainer.innerHTML = `
     <span class="word-letter">${currentQ.clue[0]}</span>

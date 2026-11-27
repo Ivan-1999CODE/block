@@ -462,13 +462,27 @@ body:has(#game-screen:not(.hidden)) {
 }
 
 .word-display {
-  font-size: clamp(1.5rem, 10cqw, 3.2rem);
+  --base-word-size: clamp(1.5rem, 10cqw, 3.2rem);
+  font-size: var(--base-word-size);
   font-weight: 700;
   letter-spacing: 0.025em;
   color: var(--color-text-dark);
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.large-words .word-display {
+  font-size: clamp(var(--base-word-size),
+    calc((145cqw - 6rem) / var(--question-letters)),
+    calc(var(--base-word-size) * var(--word-scale)));
+}
+
+.large-words .word-chip [lang="en"],
+.large-words .vt-word [lang="en"],
+.large-words .rule-word [lang="en"] {
+  font-size: calc(1em * var(--word-scale));
+  overflow-wrap: anywhere;
 }
 
 .word-letter {
@@ -1521,7 +1535,8 @@ button.vt-sound, button.vt-word, button.vt-combo { font-weight: inherit; }
 
 .schwa-learn-card:hover { transform: translateY(-3px); border-color: #ffeaa7; }
 
-.sl-break { font-size: 1.6rem; margin-bottom: 8px; }
+.sl-break { font-size: calc(1.6rem * var(--word-scale, 1)); margin-bottom: 8px; }
+.large-words .sl-break { flex-wrap: wrap; }
 .sl-syll { padding: 2px 4px; border-radius: 8px; }
 .sl-weak { background: #ecf0f1; color: #95a5a6; }
 .sl-dot { color: #b2bec3; margin: 0 2px; font-weight: 400; }
@@ -2030,10 +2045,11 @@ button.vt-sound, button.vt-word, button.vt-combo { font-weight: inherit; }
 .study-word-text {
   min-width: 0;
   color: #17324d;
-  font-size: 1.25rem;
+  font-size: calc(1.25rem * var(--word-scale, 1));
   font-weight: 800;
   line-height: 1.15;
   text-align: left;
+  overflow-wrap: anywhere;
 }
 
 .study-word-text u {
@@ -2089,7 +2105,7 @@ button.vt-sound, button.vt-word, button.vt-combo { font-weight: inherit; }
   .basic-consonant-tiles .study-tile.active::after { position: absolute; top: -4px; right: -3px; }
   .study-words-container { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .study-word-card { grid-template-columns: minmax(0, 1fr) 34px; min-height: 72px; padding: 10px; }
-  .study-word-text { font-size: 1.05rem; }
+  .study-word-text { font-size: calc(1.05rem * var(--word-scale, 1)); }
   .study-word-speaker { width: 34px; height: 34px; }
 }
 
