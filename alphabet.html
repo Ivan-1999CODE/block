@@ -557,6 +557,14 @@
       color: #637b90;
     }
 
+    .word-translation {
+      display: block;
+      margin-top: 3px;
+      color: #465d6b;
+      font-size: .85rem;
+      font-weight: 500;
+    }
+
     .word-button:hover {
       background: #fff;
       border-color: #9dcbea;
@@ -655,12 +663,13 @@
       *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
     }
   </style>
-  <link rel="stylesheet" href="accent-choice.css?v=2">
+  <link rel="stylesheet" href="accent-choice.css?v=3">
+  <link rel="stylesheet" href="word-focus.css?v=1">
 </head>
 <body>
   <main class="page">
     <header class="hero">
-      <a class="home-link" href="index.html?v=6" data-carry-accent>
+      <a class="home-link" href="index.html?v=10" data-carry-accent>
         <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9"/><path d="M9 20v-6h6v6"/></svg>
         回主選單
       </a>
@@ -689,14 +698,20 @@
         <div class="accent-choice" role="radiogroup" aria-label="發音口音"><span class="accent-heading">發音口音</span></div>
       </div>
       <nav id="letter-nav" class="letter-nav" aria-label="快速跳到指定字母"></nav>
+      <div class="word-focus-tools">
+        <button type="button" class="word-focus-button" data-word-focus-toggle aria-pressed="false">放大單字</button>
+        <span class="word-focus-hint" hidden>點例字就會放大並播放</span>
+      </div>
     </div>
     <section id="alphabet-grid" class="alphabet-grid" aria-label="A 到 Z 發音總表"></section>
+    <footer class="audio-credit">自然發音示範來自 <a href="https://phonicademy.com/">Phonicademy</a>、<a href="https://www.literacyhub.edu.au/search/phonemes-and-graphemes-daily-review/">Literacy Hub</a> 等。<a href="audio/ATTRIBUTION.md">錄音來源與授權</a></footer>
   </main>
 
   <div id="speech-status" class="status" role="status" aria-live="polite"></div>
 
-  <script src="pronunciation-audio.js?v=5"></script>
+  <script src="pronunciation-audio.js?v=13"></script>
   <script src="accent-phonics.js?v=2"></script>
+  <script src="word-meanings.js?v=1"></script>
   <script>
     const ALPHABET_DATA = [
       { letter: "A", sounds: [
@@ -781,7 +796,7 @@
         { spelling: "p（不發音）", ipa: "silent", words: [["psychology", "p"], ["receipt", "p"], ["psalm", "p"], ["psychic", "p"], ["pneumonia", "p"]] }
       ]},
       { letter: "Q", sounds: [
-        { spelling: "qu", ipa: "/kw/", words: [["queen", "qu"], ["quick", "qu"], ["quiz", "qu"], ["quit", "qu"], ["quilt", "qu"]] },
+        { spelling: "q", ipa: "/kw/", words: [["queen", "qu"], ["quick", "qu"], ["quiz", "qu"], ["quit", "qu"], ["quilt", "qu"]] },
         { spelling: "que", ipa: "/k/", words: [["antique", "que"], ["unique", "que"], ["technique", "que"], ["boutique", "que"], ["mosque", "que"]] }
       ]},
       { letter: "R", sounds: [
@@ -1002,8 +1017,9 @@
             const button = document.createElement("button");
             button.type = "button";
             button.className = "word-button";
-            button.setAttribute("aria-label", `播放單字 ${word}`);
-            button.innerHTML = `<span>${highlightedWord(word, focus, offset)}</span>${SPEAKER_ICON}`;
+            button.dataset.word = word;
+            button.setAttribute("aria-label", `播放 ${word}，${WORD_MEANINGS[word]}`);
+            button.innerHTML = `<span><span lang="en">${highlightedWord(word, focus, offset)}</span><span class="word-translation">${WORD_MEANINGS[word]}</span></span>${SPEAKER_ICON}`;
             button.addEventListener("click", () => speak("word", word, button, `單字 ${word}`));
             words.appendChild(button);
           });
@@ -1019,5 +1035,6 @@
 
     renderTable();
   </script>
+  <script src="word-focus.js?v=1"></script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 (() => {
   const accents = { us: "美式", gb: "英式", au: "澳式" };
+  const audioVersions = { phoneme: 11, letter: 4 };
   const preferenceKey = "block_puzzle_accent";
   const choices = document.querySelector(".accent-choice");
   const pageLinks = document.querySelectorAll("a[data-carry-accent]");
@@ -82,7 +83,8 @@
     };
     // 沿用同一個已獲播放授權的元素，讓待播音檔也能在 Safari 接續播放。
     const folder = accent === "us" ? "audio" : `audio/${accent}`;
-    player.src = `${folder}/${request.kind}/${encodeURIComponent(request.value)}.mp3?v=3`;
+    const version = audioVersions[request.kind] ?? 3;
+    player.src = `${folder}/${request.kind}/${encodeURIComponent(request.value)}.mp3?v=${version}`;
     player.defaultPlaybackRate = request.rate ?? (request.kind === "phoneme" ? 1 : 0.86);
     player.playbackRate = player.defaultPlaybackRate;
     player.preservesPitch = true;
@@ -93,6 +95,13 @@
   function schedule(request, keepPending) {
     if (!current) return start(request);
     if (!keepPending) pending.length = 0;
+    const last = pending[pending.length - 1] || current;
+    if (last.kind === request.kind && last.value === request.value) {
+      // 同一聲尚未播完時沿用它；答題回饋仍需在結束後推進題目。
+      if (request.onEnded) last.onEnded = request.onEnded;
+      if (request.onError) last.onError = request.onError;
+      return;
+    }
     pending.push(request);
   }
 

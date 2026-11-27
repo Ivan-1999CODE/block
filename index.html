@@ -2,10 +2,11 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>拼磚塊英文拼字大冒險</title>
-  <link rel="stylesheet" href="style.css?v=5">
-  <link rel="stylesheet" href="accent-choice.css?v=2">
+  <link rel="stylesheet" href="style.css?v=7">
+  <link rel="stylesheet" href="accent-choice.css?v=3">
+  <link rel="stylesheet" href="word-focus.css?v=1">
 </head>
 <body>
 
@@ -47,7 +48,7 @@
       <p class="game-subtitle">聽聽發音，把正確的字母拼圖拉進雲朵裡吧！</p>
 
       <!-- A–Z 發音總表 -->
-      <a href="alphabet.html?v=6" data-carry-accent class="cross-game-link" style="display:inline-flex;align-items:center;gap:10px;margin:4px auto 12px;padding:12px 24px;background:linear-gradient(135deg,#8e44ad,#6c5ce7);color:#fff;font-weight:700;font-size:1.05rem;text-decoration:none;border-radius:24px;box-shadow:0 4px 0 #51348f;border:2px solid #fff;">
+      <a href="alphabet.html?v=10" data-carry-accent class="cross-game-link" style="display:inline-flex;align-items:center;gap:10px;margin:4px auto 12px;padding:12px 24px;background:linear-gradient(135deg,#8e44ad,#6c5ce7);color:#fff;font-weight:700;font-size:1.05rem;text-decoration:none;border-radius:24px;box-shadow:0 4px 0 #51348f;border:2px solid #fff;">
         🔤 A–Z 發音總表（點例字聽發音）
       </a>
 
@@ -98,6 +99,7 @@
           <span class="category-desc">聽 21 個子音字母在單字裡怎麼唸，再拼出少掉的字母</span>
         </button>
       </div>
+      <footer class="audio-credit">自然發音示範來自 <a href="https://phonicademy.com/">Phonicademy</a>、<a href="https://www.literacyhub.edu.au/search/phonemes-and-graphemes-daily-review/">Literacy Hub</a> 等。<a href="audio/ATTRIBUTION.md">錄音來源與授權</a></footer>
     </div>
 
     <!-- 遊戲主畫面 -->
@@ -117,10 +119,11 @@
           <div class="main-cloud"></div>
           <div class="cloud-patch"></div>
           <div class="cloud-content">
-            <div id="word-container" class="word-display">
-              <!-- JS 動態生成單字，例如 cl[放置區]d -->
+            <div class="cloud-word-row">
+              <div id="word-container" class="word-display" lang="en"></div>
+              <button id="btn-speak" class="btn-speak-cloud" aria-label="聽單字發音">🔊</button>
             </div>
-            <button id="btn-speak" class="btn-speak-cloud" title="聽單字發音">🔊</button>
+            <span id="game-word-meaning" class="word-meaning"></span>
           </div>
         </div>
       </div>
@@ -156,6 +159,10 @@
       </header>
 
       <div class="study-content">
+        <div class="word-focus-tools">
+          <button type="button" class="word-focus-button" data-word-focus-toggle aria-pressed="false">放大單字</button>
+          <span class="word-focus-hint" hidden>點例字就會放大並播放</span>
+        </div>
         <aside id="phonics-info-card" class="phonics-info-card" aria-labelledby="phonics-info-title">
           <header>
             <h3 id="phonics-info-title">發音小知識</h3>
@@ -208,11 +215,15 @@
         <div class="scope-options">
           <label>
             <input type="radio" name="long-scope" value="magic-e" checked>
-            <span>只練 Magic E <small>cake、bike、cute</small></span>
+            <span>Magic E <small lang="en">cake、bike、cute</small></span>
           </label>
           <label>
-            <input type="radio" name="long-scope" value="mixed">
-            <span>全部拼法一起複習 <small>cake、rain、eight</small></span>
+            <input type="radio" name="long-scope" value="regular">
+            <span>普通 <small lang="en">rain、tree、boat</small></span>
+          </label>
+          <label>
+            <input type="radio" name="long-scope" value="advanced">
+            <span>進階 <small lang="en">eight、thief、pie</small></span>
           </label>
         </div>
       </fieldset>
@@ -249,11 +260,14 @@
     </div>
 
     <!-- 挑戰失敗 (生命值歸零) -->
-    <div id="modal-gameover" class="modal-card fail hidden">
-      <h2 class="modal-title">😢 再接再厲！</h2>
-      <div style="font-size: 4rem; margin: 15px 0;">💔</div>
+    <div id="modal-gameover" class="modal-card fail hidden" role="dialog" aria-modal="true" aria-labelledby="fail-title" aria-describedby="fail-answer">
+      <h2 id="fail-title" class="modal-title" tabindex="-1">再接再厲！</h2>
       <div class="modal-body">
-        <p>好可惜，生命值用完了。別灰心，多練習幾次一定可以成功的！</p>
+        <div id="fail-answer">
+          <p>這一題要選 <strong id="fail-tile" lang="en"></strong></p>
+          <p id="fail-word" lang="en"></p>
+          <p id="fail-meaning"></p>
+        </div>
         <div class="modal-score">本次得分：<span id="fail-score">0</span></div>
       </div>
       <div class="modal-buttons">
@@ -263,8 +277,10 @@
     </div>
   </div>
 
-  <script src="pronunciation-audio.js?v=5"></script>
+  <script src="pronunciation-audio.js?v=13"></script>
   <script src="accent-phonics.js?v=2"></script>
-  <script src="game.js?v=6"></script>
+  <script src="word-meanings.js?v=1"></script>
+  <script src="game.js?v=9"></script>
+  <script src="word-focus.js?v=1"></script>
 </body>
 </html>

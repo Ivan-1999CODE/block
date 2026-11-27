@@ -329,9 +329,24 @@ button.category-card:focus-visible { outline: 3px solid #7136b2; outline-offset:
 }
 
 /* 遊戲主畫面 */
+body:has(#game-screen:not(.hidden)) {
+  min-height: 100dvh;
+}
+
+.app-container:has(#game-screen:not(.hidden)) {
+  height: auto;
+  min-height: min(100dvh, 920px);
+  max-height: none;
+  --game-inset: clamp(10px, 2vw, 20px);
+  padding: max(var(--game-inset), env(safe-area-inset-top))
+           max(var(--game-inset), env(safe-area-inset-right))
+           max(var(--game-inset), env(safe-area-inset-bottom))
+           max(var(--game-inset), env(safe-area-inset-left));
+}
+
 #game-screen {
-  justify-content: space-between;
-  padding: 10px 0;
+  justify-content: flex-start;
+  padding: 8px 0 0;
   animation: fadeIn 0.4s ease-out;
 }
 
@@ -341,9 +356,10 @@ button.category-card:focus-visible { outline: 3px solid #7136b2; outline-offset:
   background: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
   height: 12px;
+  flex-shrink: 0;
   overflow: hidden;
   border: 2px solid #ffffff;
-  margin-top: 10px;
+  margin-top: 6px;
 }
 
 .progress-bar {
@@ -363,23 +379,22 @@ button.category-card:focus-visible { outline: 3px solid #7136b2; outline-offset:
   justify-content: center;
   position: relative;
   width: 100%;
-  min-height: 280px;
+  padding: 20px 0 28px;
 }
 
 .cloud-wrapper {
+  /* 上緣的兩個圓也是雲的一部分，保留它們和浮動動畫的空間。 */
+  --cloud-rise: clamp(36px, 10vh, 100px);
   position: relative;
-  width: 420px;
-  height: 220px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: min(100%, 420px);
+  padding-top: var(--cloud-rise);
+  container-type: inline-size;
   animation: floatCloud 6s ease-in-out infinite alternate;
 }
 
 .main-cloud {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  inset: var(--cloud-rise) 0 0;
   background: var(--color-cloud);
   border-radius: 100px;
   box-shadow: var(--shadow-cloud);
@@ -396,27 +411,24 @@ button.category-card:focus-visible { outline: 3px solid #7136b2; outline-offset:
 }
 
 .main-cloud::before {
-  width: 200px;
-  height: 200px;
-  top: -90px;
-  left: 50px;
+  width: 47%;
+  height: calc(1.8 * var(--cloud-rise));
+  top: calc(-0.8 * var(--cloud-rise));
+  left: 12%;
 }
 
 .main-cloud::after {
-  width: 220px;
-  height: 220px;
-  top: -110px;
-  right: 50px;
+  width: 52%;
+  height: calc(2 * var(--cloud-rise));
+  top: calc(-1 * var(--cloud-rise));
+  right: 12%;
 }
 
 /* 覆蓋掉雲朵內側的白底圓圈邊界 */
 .cloud-patch {
   position: absolute;
-  width: 320px;
-  height: 140px;
+  inset: var(--cloud-rise) 12% 12%;
   background: #ffffff;
-  top: 40px;
-  left: 50px;
   border-radius: 40px;
   z-index: 2;
 }
@@ -425,16 +437,34 @@ button.category-card:focus-visible { outline: 3px solid #7136b2; outline-offset:
   position: relative;
   z-index: 3;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 15px;
-  margin-top: 20px;
+  gap: 8px;
+  min-height: clamp(100px, 23vh, 210px);
+  padding: 12px 8px;
+}
+
+.cloud-word-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+  max-width: 100%;
+}
+
+.word-meaning {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #3b5366;
+  text-align: center;
 }
 
 .word-display {
-  font-size: 3.2rem;
+  font-size: clamp(1.5rem, 10cqw, 3.2rem);
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: 0.025em;
   color: var(--color-text-dark);
   display: flex;
   align-items: center;
@@ -450,12 +480,13 @@ button.category-card:focus-visible { outline: 3px solid #7136b2; outline-offset:
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 85px;
+  min-width: clamp(54px, 19cqw, 85px);
+  padding-inline: 4px;
   height: 65px;
   border: 4px dashed #bdc3c7;
   border-radius: 16px;
   background: #f8f9fa;
-  margin: 0 8px;
+  margin: 0 4px;
   transition: all 0.2s ease;
   vertical-align: middle;
   position: relative;
@@ -497,7 +528,6 @@ button.category-card:focus-visible { outline: 3px solid #7136b2; outline-offset:
   box-shadow: 0 6px 12px rgba(9, 132, 227, 0.3), inset 0 -3px 0 rgba(0, 0, 0, 0.15);
   transition: all 0.15s ease;
   border: 3px solid #ffffff;
-  margin-left: 10px;
 }
 
 .btn-speak-cloud:hover {
@@ -512,7 +542,7 @@ button.category-card:focus-visible { outline: 3px solid #7136b2; outline-offset:
 /* Combo 動畫提示 */
 .combo-banner {
   position: absolute;
-  top: -30px;
+  top: 16px;
   background: linear-gradient(135deg, #ff7675, #fdcb6e);
   color: #ffffff;
   padding: 8px 20px;
@@ -536,7 +566,8 @@ button.category-card:focus-visible { outline: 3px solid #7136b2; outline-offset:
 .bottom-area {
   position: relative;
   width: 100%;
-  height: 240px;
+  min-height: clamp(100px, 22vh, 210px);
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -575,6 +606,7 @@ button.category-card:focus-visible { outline: 3px solid #7136b2; outline-offset:
 /* 字母積木樣式 */
 .block {
   display: flex;
+  font-family: inherit;
   align-items: center;
   justify-content: center;
   width: 80px;
@@ -589,7 +621,7 @@ button.category-card:focus-visible { outline: 3px solid #7136b2; outline-offset:
   border: 3px solid #ffffff;
   transition: transform 0.1s ease, box-shadow 0.1s ease;
   position: relative;
-  touch-action: none; /* 禁用預設觸控動作，便於自訂觸控拖曳 */
+  touch-action: pinch-zoom; /* 單指仍可拖積木，雙指可縮放頁面 */
 }
 
 .block:hover {
@@ -757,7 +789,6 @@ button.category-card:focus-visible { outline: 3px solid #7136b2; outline-offset:
 
 .scope-options {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
 }
 
@@ -787,9 +818,14 @@ button.category-card:focus-visible { outline: 3px solid #7136b2; outline-offset:
   background: #edf7ff;
 }
 
+.scope-options label span {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+}
+
 .scope-options small {
-  display: block;
-  margin-top: 2px;
   color: #465d6b;
   font-size: .85rem;
   font-weight: 500;
@@ -803,7 +839,6 @@ button.category-card:focus-visible { outline: 3px solid #7136b2; outline-offset:
 
 @media (max-width: 460px) {
   #modal-mode-select { padding: 26px 16px; }
-  .scope-options { grid-template-columns: 1fr; }
   .scope-options label { padding-block: 6px; }
   #modal-mode-select .modal-body { font-size: 1.05rem; margin-bottom: 18px; }
   #modal-mode-select .modal-buttons button { font-size: 1.1rem; padding: 12px; }
@@ -822,6 +857,46 @@ button.category-card:focus-visible { outline: 3px solid #7136b2; outline-offset:
 
 .modal-card.fail .modal-title {
   color: var(--color-danger);
+}
+
+#modal-gameover {
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+#fail-answer {
+  padding: 14px;
+  border-radius: 18px;
+  background: #edf7ff;
+  color: #23475e;
+}
+
+#fail-tile, #fail-word u {
+  color: #135b88;
+  font-weight: 800;
+}
+
+#fail-word {
+  font-size: clamp(1.65rem, 6vw, 2.5rem);
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+#fail-word u { text-underline-offset: .1em; }
+
+@media (max-height: 500px) {
+  #modal-gameover { padding: 10px 16px 14px; }
+  #fail-title { margin-bottom: 4px; font-size: 1.5rem; }
+  #fail-answer { padding: 6px 12px; }
+  #fail-word { font-size: 1.65rem; }
+  #modal-gameover .modal-body { margin-bottom: 8px; font-size: 1rem; }
+  #modal-gameover .modal-score { margin: 6px 0; padding: 4px; font-size: 1rem; }
+  #modal-gameover .modal-buttons button { min-height: 44px; padding: 6px 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #modal-gameover { animation: none; transform: none; }
+  .drop-zone.wrong { animation: none; }
 }
 
 .modal-stars {
@@ -1321,6 +1396,15 @@ button.vt-sound, button.vt-word, button.vt-combo { font-weight: inherit; }
   text-underline-offset: 3px;
 }
 
+.study-meaning {
+  display: block;
+  margin-top: 3px;
+  font-size: .85rem;
+  line-height: 1.35;
+  font-weight: 500;
+  color: #465d6b;
+}
+
 .word-chip:hover {
   background: #fff5f5;
   transform: scale(1.06);
@@ -1366,9 +1450,11 @@ button.vt-sound, button.vt-word, button.vt-combo { font-weight: inherit; }
 .schwa-zh {
   margin-top: 6px;
   font-size: 0.95rem;
-  color: #95a5a6;
+  color: #465d6b;
   font-weight: 700;
 }
+
+.schwa-quiz .schwa-zh { margin: 0 0 12px; text-align: center; }
 
 /* schwa 模式分頁 */
 .schwa-mode-tabs {
@@ -1540,18 +1626,51 @@ button.vt-sound, button.vt-word, button.vt-combo { font-weight: inherit; }
 /* 響應式調整 */
 @media (max-width: 600px) {
   .game-title { font-size: 2.5rem; }
-  .cloud-wrapper { width: 320px; height: 180px; }
-  .main-cloud::before { width: 140px; height: 140px; top: -60px; left: 40px; }
-  .main-cloud::after { width: 160px; height: 160px; top: -80px; right: 40px; }
-  .cloud-patch { width: 240px; height: 110px; top: 30px; left: 40px; }
-  .word-display { font-size: 2.2rem; }
-  .drop-zone { width: 65px; height: 50px; border-radius: 12px; }
-  .btn-speak-cloud { width: 42px; height: 42px; font-size: 1.2rem; }
-  .block { width: 65px; height: 55px; font-size: 1.4rem; border-radius: 12px; }
-  .hud { padding: 8px 12px; gap: 8px; }
+  .cloud-wrapper { width: min(100%, 340px); --cloud-rise: clamp(36px, 9vh, 72px); }
+  .drop-zone { height: 50px; border-radius: 12px; }
+  .btn-speak-cloud { width: 44px; height: 44px; font-size: 1.2rem; }
+  .bottom-area { padding: 14px 8px; }
+  .blocks-container { gap: 10px; }
+  .block { width: clamp(46px, 13vw, 65px); height: 54px; font-size: 1.25rem; border-radius: 12px; }
+  .hud { padding: 6px; gap: 4px; }
+  .hud > div { gap: 4px; }
+  .hud .hud-item { gap: 2px; }
   .hud-item { font-size: 1rem; }
-  .heart { font-size: 1.2rem; }
-  .btn-icon { width: 36px; height: 36px; font-size: 1rem; }
+  .heart { font-size: 1.1rem; }
+  .btn-icon { width: 44px; height: 44px; font-size: 1rem; }
+}
+
+@media (orientation: portrait) and (max-height: 600px) {
+  .word-cloud-container { padding-block: 16px 20px; }
+  .bottom-area { min-height: 0; }
+}
+
+/* 橫向手機左邊看題、右邊拿積木，保留兩邊的觸控空間。 */
+@media (orientation: landscape) and (max-height: 560px) {
+  #game-screen {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    grid-template-rows: auto auto 1fr;
+    gap: 0 12px;
+    align-items: center;
+    padding-top: 4px;
+  }
+  #long-quiz-status, .progress-container { grid-column: 1 / -1; }
+  .progress-container { grid-row: 2; height: 8px; margin-top: 4px; }
+  .word-cloud-container { padding-block: 12px; }
+  .cloud-wrapper { --cloud-rise: 30px; animation: none; }
+  .cloud-content { min-height: 80px; gap: 2px; padding-block: 6px; }
+  .cloud-word-row { column-gap: 4px; }
+  .drop-zone { height: 44px; }
+  .btn-speak-cloud { width: 44px; height: 44px; }
+  .bottom-area { min-height: 0; padding: 10px 8px 16px; }
+  .blocks-container { gap: 8px; }
+  .block { width: clamp(46px, 8vw, 65px); height: 44px; font-size: 1.25rem; }
+  .combo-banner { top: 12px; font-size: 1rem; padding: 2px 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cloud-wrapper, .combo-banner.show { animation: none; }
 }
 
 /* =========================================================

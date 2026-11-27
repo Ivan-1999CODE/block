@@ -263,24 +263,24 @@ const WORD_DATABASE = {
   // ④ 弱化母音 schwa /ə/：schwa = 唸輕聲那個母音的字元索引(0-based)；
   //    syll = 音節拆解（接起來等於 word）；weak = 輕音節（含 schwa）的索引
   schwa: [
-    { word: "sofa",    schwa: 3, syll: ["so", "fa"],    weak: 1, zh: "沙發" },
-    { word: "lemon",   schwa: 3, syll: ["lem", "on"],   weak: 1, zh: "檸檬" },
-    { word: "panda",   schwa: 4, syll: ["pan", "da"],   weak: 1, zh: "熊貓" },
-    { word: "zebra",   schwa: 4, syll: ["ze", "bra"],   weak: 1, zh: "斑馬" },
-    { word: "pencil",  schwa: 4, syll: ["pen", "cil"],  weak: 1, zh: "鉛筆" },
-    { word: "salad",   schwa: 3, syll: ["sal", "ad"],   weak: 1, zh: "沙拉" },
-    { word: "seven",   schwa: 3, syll: ["sev", "en"],   weak: 1, zh: "七" },
-    { word: "open",    schwa: 2, syll: ["o", "pen"],    weak: 1, zh: "打開" },
-    { word: "garden",  schwa: 4, syll: ["gar", "den"],  weak: 1, zh: "花園" },
-    { word: "problem", schwa: 5, syll: ["prob", "lem"], weak: 1, zh: "問題" },
-    { word: "about",   schwa: 0, syll: ["a", "bout"],   weak: 0, zh: "關於" },
-    { word: "wagon",   schwa: 3, syll: ["wag", "on"],   weak: 1, zh: "貨車" },
-    { word: "away", schwa: 0, syll: ["a", "way"], weak: 0, zh: "離開" },
-    { word: "ago", schwa: 0, syll: ["a", "go"], weak: 0, zh: "以前" },
-    { word: "balloon", schwa: 1, syll: ["bal", "loon"], weak: 0, zh: "氣球" },
-    { word: "today", schwa: 1, syll: ["to", "day"], weak: 0, zh: "今天" },
-    { word: "support", schwa: 1, syll: ["sup", "port"], weak: 0, zh: "支持" },
-    { word: "supply", schwa: 1, syll: ["sup", "ply"], weak: 0, zh: "供應" }
+    { word: "sofa",    schwa: 3, syll: ["so", "fa"],    weak: 1 },
+    { word: "lemon",   schwa: 3, syll: ["lem", "on"],   weak: 1 },
+    { word: "panda",   schwa: 4, syll: ["pan", "da"],   weak: 1 },
+    { word: "zebra",   schwa: 4, syll: ["ze", "bra"],   weak: 1 },
+    { word: "pencil",  schwa: 4, syll: ["pen", "cil"],  weak: 1 },
+    { word: "salad",   schwa: 3, syll: ["sal", "ad"],   weak: 1 },
+    { word: "seven",   schwa: 3, syll: ["sev", "en"],   weak: 1 },
+    { word: "open",    schwa: 2, syll: ["o", "pen"],    weak: 1 },
+    { word: "garden",  schwa: 4, syll: ["gar", "den"],  weak: 1 },
+    { word: "problem", schwa: 5, syll: ["prob", "lem"], weak: 1 },
+    { word: "about",   schwa: 0, syll: ["a", "bout"],   weak: 0 },
+    { word: "wagon",   schwa: 3, syll: ["wag", "on"],   weak: 1 },
+    { word: "away", schwa: 0, syll: ["a", "way"], weak: 0 },
+    { word: "ago", schwa: 0, syll: ["a", "go"], weak: 0 },
+    { word: "balloon", schwa: 1, syll: ["bal", "loon"], weak: 0 },
+    { word: "today", schwa: 1, syll: ["to", "day"], weak: 0 },
+    { word: "support", schwa: 1, syll: ["sup", "port"], weak: 0 },
+    { word: "supply", schwa: 1, syll: ["sup", "ply"], weak: 0 }
   ],
   consonants: [
     { word: "ship", missing: "sh", clue: ["", "ip"] },
@@ -405,11 +405,11 @@ const WORD_DATABASE = {
     { word: "pig", missing: "p", clue: ["", "ig"] },
     { word: "peach", missing: "p", clue: ["", "each"] },
     { word: "pie", missing: "p", clue: ["", "ie"] },
-    { word: "queen", missing: "qu", clue: ["", "een"] },
-    { word: "quick", missing: "qu", clue: ["", "ick"] },
-    { word: "quiz", missing: "qu", clue: ["", "iz"] },
-    { word: "quit", missing: "qu", clue: ["", "it"] },
-    { word: "quilt", missing: "qu", clue: ["", "ilt"] },
+    { word: "queen", missing: "q", clue: ["", "ueen"] },
+    { word: "quick", missing: "q", clue: ["", "uick"] },
+    { word: "quiz", missing: "q", clue: ["", "uiz"] },
+    { word: "quit", missing: "q", clue: ["", "uit"] },
+    { word: "quilt", missing: "q", clue: ["", "uilt"] },
     { word: "rain", missing: "r", clue: ["", "ain"] },
     { word: "red", missing: "r", clue: ["", "ed"] },
     { word: "road", missing: "r", clue: ["", "oad"] },
@@ -461,7 +461,7 @@ const QUESTIONS_PER_GAME = 10;
 // 規則例字用底線標出要觀察的拼法，整個字都可以點讀。
 function ruleWord(word, spelling) {
   const highlighted = word.replace(spelling, "<u>$&</u>");
-  return `<button type="button" class="rule-word" data-word="${word}" aria-label="播放單字 ${word}"><span lang="en">${highlighted}</span></button>`;
+  return `<button type="button" class="rule-word" data-word="${word}" aria-label="播放 ${word}，${WORD_MEANINGS[word]}"><span lang="en">${highlighted}</span>（${WORD_MEANINGS[word]}）</button>`;
 }
 
 const PHONICS_DATA = {
@@ -520,7 +520,7 @@ const PHONICS_DATA = {
       l: `<b>母音前後的 L</b>　${ruleWord("leg", "l")} 的 l 在母音前，通常較清亮。聽 ${ruleWord("milk", "l")} 和 ${ruleWord("ball", "ll")}，l 在同一個音節的母音後，舌後部也會抬起來，聲音常較厚，叫做「暗 L」[ɫ]。不同口音的明暗程度會有差別。<br>也留意前面的母音。字尾拼成 <b>-all</b> 時，a 常像 ball 裡的母音。聽 ${ruleWord("cat", "a")}，比較兩個字的 a。`,
       n: `<b>n 遇到 k</b>　先聽 ${ruleWord("nose", "n")} 開頭的 /n/，再聽 ${ruleWord("ink", "nk")} 和 ${ruleWord("thank", "nk")}。在這兩個字裡，舌後部先抬起發 /ŋ/，再接 /k/。`,
       r: `<b>母音前後的 r</b>　${ruleWord("red", "r")} 的 r 在母音前。換個口音再聽單獨的 ${ruleWord("car", "ar")}，多數美式讀法的字尾帶有 r 音，常見的英式和澳式讀法則以母音收尾。`,
-      qu: `<b>q 和 u 一起讀</b>　${ruleWord("queen", "qu")} 和 ${ruleWord("quick", "qu")} 開頭的 qu 都唸 /kw/。先發 /k/，接著把嘴唇收圓發 /w/。拼字時選 qu。`,
+      q: `<b>q 和 u 一起讀</b>　${ruleWord("queen", "qu")} 和 ${ruleWord("quick", "qu")} 開頭的 qu 都唸 /kw/。先發 /k/，接著把嘴唇收圓發 /w/。拼字時把 q 放在 u 前面。`,
       w: `<b>字首的 wr</b>　比較 ${ruleWord("wet", "w")} 和 ${ruleWord("write", "wr")}。wet 的 w 唸 /w/，write 開頭的 w 不發音。`,
       x: `<b>看 x 的位置</b>　字尾的 x 通常唸 /ks/，像 ${ruleWord("box", "x")}。把 /k/ 和 /s/ 連起來唸。聽聽 ${ruleWord("xylophone", "x")}，這個字開頭的 x 唸 /z/。`,
       y: `<b>y 也可以當母音</b>　${ruleWord("yes", "y")} 開頭的 y 是子音 /j/。舌面靠近上顎，再滑向後面的母音。聽聽 ${ruleWord("gym", "y")}，這裡的 y 是母音 /ɪ/。`
@@ -528,7 +528,7 @@ const PHONICS_DATA = {
     sounds: {
       b: "b", "c [k]": "k", "c [s]": "s", d: "d", f: "f",
       "g [g]": "g", "g [dʒ]": "dʒ", h: "h", j: "dʒ", k: "k",
-      l: "l", m: "m", n: "n", p: "p", qu: "kw", r: "r", s: "s",
+      l: "l", m: "m", n: "n", p: "p", q: "kw", r: "r", s: "s",
       t: "t", v: "v", w: "w", x: "ks", y: "j", z: "z"
     }
   }
@@ -540,7 +540,7 @@ const PHONICS_DATA = {
 let currentCategory = "";
 let selectedCategory = ""; // 大廳選取的類別，用於模式選擇分流
 let longVowelScope = "magic-e";
-const LONG_VOWEL_SCOPE_LABELS = { "magic-e": "Magic E", mixed: "全部拼法" };
+const LONG_VOWEL_SCOPE_LABELS = { "magic-e": "Magic E", regular: "普通", advanced: "進階" };
 let currentQuestions = [];
 let currentQuestionIndex = 0;
 let score = 0;
@@ -796,136 +796,116 @@ function updateParticles() {
 requestAnimationFrame(updateParticles);
 
 // ==========================================
-// 6. 拖拉與觸控機制 (Drag & Drop + Touch Support)
+// 6. 積木配對（滑鼠、觸控及觸控筆共用）
 // ==========================================
-let draggedLetter = "";
-let draggedElement = null;
-let activeTouchProxy = null;
+let activeDrag = null;
+const DRAG_THRESHOLD = 6;
+const HOVER_MATCH_DELAY = 350;
 
-function setupDragEvents(block) {
-  // 桌機滑鼠拖拉
-  block.addEventListener("dragstart", (e) => {
-    if (isCurrentQuestionAnswered) return;
-    draggedLetter = block.getAttribute("data-letter");
-    draggedElement = block;
-    block.classList.add("dragging");
-    e.dataTransfer.setData("text/plain", draggedLetter);
-  });
-
-  block.addEventListener("dragend", () => {
-    block.classList.remove("dragging");
-    draggedElement = null;
-  });
-
-  // 手機平板觸控支援
-  block.addEventListener("touchstart", (e) => {
-    if (isCurrentQuestionAnswered) return;
-    initAudioContext();
-    const touch = e.touches[0];
-    draggedLetter = block.getAttribute("data-letter");
-    draggedElement = block;
-    block.classList.add("dragging");
-
-    // 建立拖拉視覺分身 (Proxy)
-    createTouchProxy(block, touch.clientX, touch.clientY);
-    e.preventDefault(); // 避免滑動視窗
-  }, { passive: false });
-
-  block.addEventListener("touchmove", (e) => {
-    if (!activeTouchProxy) return;
-    const touch = e.touches[0];
-    
-    // 更新分身位置
-    activeTouchProxy.style.left = `${touch.clientX}px`;
-    activeTouchProxy.style.top = `${touch.clientY}px`;
-
-    // 檢測是否與放置區碰撞
-    const dropZone = document.getElementById("drop-zone");
-    if (dropZone) {
-      const rect = dropZone.getBoundingClientRect();
-      if (
-        touch.clientX >= rect.left &&
-        touch.clientX <= rect.right &&
-        touch.clientY >= rect.top &&
-        touch.clientY <= rect.bottom
-      ) {
-        dropZone.classList.add("drag-over");
-      } else {
-        dropZone.classList.remove("drag-over");
-      }
-    }
-  });
-
-  block.addEventListener("touchend", (e) => {
-    if (!draggedElement) return;
-    block.classList.remove("dragging");
-    
-    // 移除視覺分身
-    if (activeTouchProxy) {
-      document.body.removeChild(activeTouchProxy);
-      activeTouchProxy = null;
-    }
-
-    const dropZone = document.getElementById("drop-zone");
-    if (dropZone) {
-      const rect = dropZone.getBoundingClientRect();
-      const touch = e.changedTouches[0];
-
-      // 檢查是否放置在 drop-zone 內
-      if (
-        touch.clientX >= rect.left &&
-        touch.clientX <= rect.right &&
-        touch.clientY >= rect.top &&
-        touch.clientY <= rect.bottom
-      ) {
-        handleDrop(draggedLetter);
-      }
-      dropZone.classList.remove("drag-over");
-    }
-    draggedElement = null;
-  });
+function clearBlockDrag() {
+  if (!activeDrag) return;
+  const { block, pointerId, proxy, zone, hoverTimer } = activeDrag;
+  activeDrag = null;
+  clearTimeout(hoverTimer);
+  proxy?.remove();
+  zone.classList.remove("drag-over");
+  block.classList.remove("dragging");
+  if (block.hasPointerCapture(pointerId)) block.releasePointerCapture(pointerId);
 }
 
-function createTouchProxy(sourceElement, x, y) {
-  if (activeTouchProxy) return;
+function submitBlockDrag() {
+  const letter = activeDrag.block.dataset.letter;
+  clearBlockDrag();
+  handleDrop(letter);
+}
+
+function isOverZone(zone, event) {
+  const { left, right, top, bottom } = zone.getBoundingClientRect();
+  return event.clientX >= left && event.clientX <= right &&
+    event.clientY >= top && event.clientY <= bottom;
+}
+
+function movedFromStart(drag, event) {
+  return Math.hypot(event.clientX - drag.startX, event.clientY - drag.startY) > DRAG_THRESHOLD;
+}
+
+function createDragProxy(block) {
   const proxy = document.createElement("div");
   proxy.className = "drag-proxy";
-  proxy.textContent = sourceElement.textContent;
-  
-  // 複製底色樣式
-  const style = window.getComputedStyle(sourceElement);
+  proxy.setAttribute("aria-hidden", "true");
+  proxy.textContent = block.textContent;
+  const style = window.getComputedStyle(block);
   proxy.style.background = style.background;
   proxy.style.boxShadow = style.boxShadow;
-  
-  proxy.style.left = `${x}px`;
-  proxy.style.top = `${y}px`;
-  
+  proxy.style.width = style.width;
+  proxy.style.height = style.height;
+  proxy.style.fontSize = style.fontSize;
   document.body.appendChild(proxy);
-  activeTouchProxy = proxy;
+  return proxy;
 }
 
-function setupDropZone() {
-  const dropZone = document.getElementById("drop-zone");
-  if (!dropZone) return;
+function moveBlockDrag(event) {
+  const drag = activeDrag;
+  if (drag?.pointerId !== event.pointerId) return;
+  if (!drag.proxy) {
+    if (!movedFromStart(drag, event)) return;
+    drag.proxy = createDragProxy(drag.block);
+    drag.block.classList.add("dragging");
+  }
+  drag.proxy.style.left = `${event.clientX}px`;
+  drag.proxy.style.top = `${event.clientY}px`;
+  const over = isOverZone(drag.zone, event);
+  drag.zone.classList.toggle("drag-over", over);
+  if (over && drag.hoverTimer === null) {
+    drag.hoverTimer = setTimeout(() => {
+      if (activeDrag === drag) submitBlockDrag();
+    }, HOVER_MATCH_DELAY);
+  } else if (!over) {
+    clearTimeout(drag.hoverTimer);
+    drag.hoverTimer = null;
+  }
+}
 
-  dropZone.addEventListener("dragover", (e) => {
-    e.preventDefault();
-    if (isCurrentQuestionAnswered) return;
-    dropZone.classList.add("drag-over");
+// 手指移出按鈕時，部分瀏覽器會把後續事件送到手指下的元素。
+document.addEventListener("pointermove", moveBlockDrag);
+document.addEventListener("pointerup", event => {
+  if (activeDrag?.pointerId !== event.pointerId) return;
+  const tap = !activeDrag.proxy && !movedFromStart(activeDrag, event);
+  if (tap || isOverZone(activeDrag.zone, event)) submitBlockDrag();
+  else clearBlockDrag();
+});
+document.addEventListener("pointercancel", event => {
+  if (activeDrag?.pointerId === event.pointerId) clearBlockDrag();
+});
+
+function setupDragEvents(block) {
+  block.addEventListener("pointerdown", event => {
+    if (activeDrag || isCurrentQuestionAnswered || !event.isPrimary || event.button !== 0) return;
+    initAudioContext();
+    activeDrag = {
+      block, pointerId: event.pointerId, startX: event.clientX, startY: event.clientY,
+      zone: document.getElementById("drop-zone"), proxy: null, hoverTimer: null
+    };
+    block.setPointerCapture(event.pointerId);
   });
 
-  dropZone.addEventListener("dragleave", () => {
-    dropZone.classList.remove("drag-over");
+  block.addEventListener("lostpointercapture", event => {
+    if (activeDrag?.block === block && activeDrag.pointerId === event.pointerId) clearBlockDrag();
   });
 
-  dropZone.addEventListener("drop", (e) => {
-    e.preventDefault();
-    dropZone.classList.remove("drag-over");
-    if (isCurrentQuestionAnswered) return;
-    const letter = e.dataTransfer.getData("text/plain");
-    handleDrop(letter);
+  // 鍵盤和輔助工具可直接啟用按鈕；實體指標已在放手或懸停時處理。
+  block.addEventListener("click", event => {
+    if (event.detail !== 0 || isCurrentQuestionAnswered) return;
+    initAudioContext();
+    handleDrop(block.dataset.letter);
   });
 }
+
+window.addEventListener("blur", clearBlockDrag);
+window.addEventListener("pagehide", clearBlockDrag);
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) clearBlockDrag();
+});
 
 // ==========================================
 // 7. 遊戲核心邏輯控制
@@ -1120,23 +1100,23 @@ function isMagicE(word) {
 }
 
 function longVowelPracticeWords() {
-  const words = WORD_DATABASE.long_vowels;
-  return longVowelScope === "magic-e" ? words.filter(isMagicE) : words;
+  return WORD_DATABASE.long_vowels.filter(word => {
+    if (isMagicE(word)) return longVowelScope === "magic-e";
+    return longVowelScope === (word.adv ? "advanced" : "regular");
+  });
 }
 
-// 五個母音各抽兩題；綜合測驗的兩題使用不同拼法。
-function drawLongVowelQuestions(pool, quiz) {
+// 每個母音抽兩個不同單字，有多種拼法時各抽一種。
+function drawLongVowelQuestions(pool) {
   const shuffled = shuffleArray([...pool]);
-  const advancedExample = quiz === "mixed" ? shuffled.find(word => word.adv) : null;
   const questions = [];
   for (const vowel of Object.keys(PHONICS_DATA.long_vowels.sounds)) {
     const words = shuffled.filter(word => word.vowel === vowel);
-    if (quiz === "magic-e") {
-      questions.push(...words.slice(0, 2));
-    } else {
-      const other = advancedExample?.vowel === vowel ? advancedExample : words.find(word => !isMagicE(word));
-      questions.push(words.find(isMagicE), other);
+    const pair = words.slice(0, 2);
+    if (pair.length === 2) {
+      pair[1] = words.find(word => word.spelling !== pair[0].spelling) || pair[1];
     }
+    questions.push(...pair);
   }
   return shuffleArray(questions);
 }
@@ -1152,7 +1132,7 @@ function startGame(category) {
   const isLongVowelGame = category === "long_vowels";
   gamePool = isLongVowelGame ? longVowelPracticeWords() : WORD_DATABASE[category];
   currentQuestions = isLongVowelGame
-    ? drawLongVowelQuestions(gamePool, longVowelScope)
+    ? drawLongVowelQuestions(gamePool)
     : shuffleArray([...gamePool]).slice(0, QUESTIONS_PER_GAME);
 
   // 切換畫面
@@ -1173,6 +1153,7 @@ function startGame(category) {
 
 // 載入題目
 function loadQuestion() {
+  clearBlockDrag();
   clearTimeout(questionTransition);
   window.PronunciationAudio.stop();
   isCurrentQuestionAnswered = false;
@@ -1191,14 +1172,12 @@ function loadQuestion() {
 
   // 生成雲朵單字結構
   const wordContainer = document.getElementById("word-container");
+  document.getElementById("game-word-meaning").textContent = WORD_MEANINGS[currentQ.word];
   wordContainer.innerHTML = `
     <span class="word-letter">${currentQ.clue[0]}</span>
     <div id="drop-zone" class="drop-zone">?</div>
     <span class="word-letter">${currentQ.clue[1]}</span>
   `;
-
-  // 設定放置區事件監聽
-  setupDropZone();
 
   // 生成選項積木
   generateOptions(currentQ);
@@ -1247,21 +1226,14 @@ function generateOptions(question) {
 
   // 渲染積木
   options.forEach((letter) => {
-    const block = document.createElement("div");
+    const block = document.createElement("button");
+    block.type = "button";
     block.className = "block";
-    block.setAttribute("draggable", "true");
     block.setAttribute("data-letter", letter);
     block.textContent = letter;
     
     // 綁定拖曳事件
     setupDragEvents(block);
-
-    // 點擊直接作答（不須拖到框格）
-    block.addEventListener("click", () => {
-      if (isCurrentQuestionAnswered) return;
-      initAudioContext();
-      handleDrop(letter);
-    });
 
     container.appendChild(block);
   });
@@ -1269,6 +1241,7 @@ function generateOptions(question) {
 
 // 處理放置判斷
 function handleDrop(letter) {
+  clearBlockDrag();
   if (isCurrentQuestionAnswered) return;
   const currentQ = currentQuestions[currentQuestionIndex];
   const dropZone = document.getElementById("drop-zone");
@@ -1276,6 +1249,7 @@ function handleDrop(letter) {
   if (letter === currentQ.missing) {
     // 答對了！
     isCurrentQuestionAnswered = true;
+    clearTimeout(questionTransition);
     clearInterval(timerInterval);
     combo++;
     
@@ -1287,9 +1261,7 @@ function handleDrop(letter) {
     createCelebrationBurst();
 
     // 更新 UI 狀態
-    const displayLetter = letter.replace(/ \[.*?\]/, "");
-    const start = currentQ.clue[0].length;
-    dropZone.textContent = currentQ.display?.slice(start, start + displayLetter.length) || displayLetter;
+    dropZone.textContent = answerLetters(currentQ);
     dropZone.className = "drop-zone correct";
     updateHUD();
 
@@ -1306,50 +1278,40 @@ function handleDrop(letter) {
     });
 
   } else {
-    // 答錯了！
-    combo = 0; // 中斷連擊
-    lives--;
-    playSound("wrong");
-
-    // 扣命紅框特效
-    dropZone.className = "drop-zone wrong";
-    setTimeout(() => {
-      if (!isCurrentQuestionAnswered) {
-        dropZone.className = "drop-zone";
-      }
-    }, 500);
-
-    updateHUD();
-    
-    // 檢查生命值
-    if (lives <= 0) {
-      clearInterval(timerInterval);
-      questionTransition = setTimeout(showGameOver, 800);
-    }
+    loseLife(false);
   }
 }
 
 // 時間到未答
 function handleTimeout() {
+  clearBlockDrag();
   if (isCurrentQuestionAnswered) return;
+  loseLife(true);
+}
+
+function loseLife(timedOut) {
+  clearTimeout(questionTransition);
   combo = 0;
   lives--;
+  isCurrentQuestionAnswered = timedOut || lives === 0;
+  if (isCurrentQuestionAnswered) clearInterval(timerInterval);
+  navigator.vibrate?.(100);
   playSound("wrong");
   updateHUD();
 
   const dropZone = document.getElementById("drop-zone");
-  if (dropZone) {
-    dropZone.className = "drop-zone wrong";
-    dropZone.textContent = "⏰";
-  }
+  dropZone.className = "drop-zone wrong";
+  const shake = dropZone.getAnimations().find(animation => animation.animationName === "shake");
+  if (shake) shake.currentTime = 0;
+  if (timedOut) dropZone.textContent = "⏰";
 
-  questionTransition = setTimeout(() => {
-    if (lives <= 0) {
-      showGameOver();
-    } else {
-      nextQuestion();
-    }
-  }, 1200);
+  if (lives === 0) {
+    questionTransition = setTimeout(showGameOver, 550);
+  } else if (timedOut) {
+    questionTransition = setTimeout(nextQuestion, 1200);
+  } else {
+    questionTransition = setTimeout(() => dropZone.classList.remove("wrong"), 500);
+  }
 }
 
 // 下一題
@@ -1383,6 +1345,7 @@ function updateHUD() {
 // ==========================================
 
 function showLevelClear() {
+  clearBlockDrag();
   window.PronunciationAudio.stop();
   playSound("clear");
   const overlay = document.getElementById("modal-overlay");
@@ -1392,10 +1355,11 @@ function showLevelClear() {
   modalClear.classList.remove("hidden");
 
   // 本地紀錄更新
-  // 各範圍沿用原有字尾 e 與含進階拼法的成績紀錄。
+  // 舊版 long_vowels_advanced 是混合題庫的成績，拆章後分開計算。
   let scoreKey = currentCategory;
   if (currentCategory === "long_vowels") {
-    scoreKey = longVowelScope === "magic-e" ? "long_vowels_magic_e" : "long_vowels_advanced";
+    const suffix = { "magic-e": "magic_e", regular: "regular", advanced: "advanced_only" };
+    scoreKey = `long_vowels_${suffix[longVowelScope]}`;
   }
   let previousHigh = highScores[scoreKey] || 0;
   if (score > previousHigh) {
@@ -1435,15 +1399,23 @@ function showLevelClear() {
 }
 
 function showGameOver() {
+  clearBlockDrag();
   window.PronunciationAudio.stop();
   playSound("gameover");
   const overlay = document.getElementById("modal-overlay");
   const modalGameOver = document.getElementById("modal-gameover");
+  const question = currentQuestions[currentQuestionIndex];
+  document.getElementById("fail-tile").textContent = question.missing;
+  document.getElementById("fail-word").innerHTML = highlightedSpelling(question);
+  document.getElementById("fail-meaning").textContent = WORD_MEANINGS[question.word];
   
   overlay.classList.remove("hidden");
   modalGameOver.classList.remove("hidden");
 
   document.getElementById("fail-score").textContent = score;
+  document.querySelector(".app-container").inert = true;
+  modalGameOver.scrollTop = 0;
+  document.getElementById("fail-title").focus({ preventScroll: true });
 }
 
 function hideModal() {
@@ -1455,6 +1427,7 @@ function hideModal() {
 }
 
 function exitToLobby() {
+  clearBlockDrag();
   clearInterval(timerInterval);
   clearTimeout(questionTransition);
   window.PronunciationAudio.stop();
@@ -1506,7 +1479,7 @@ function showStudyRule(html, anchor) {
 
 document.querySelector(".rule-close").addEventListener("click", () => hideStudyRule(true));
 document.addEventListener("keydown", event => {
-  if (event.key === "Escape" && studyRuleAnchor) hideStudyRule(true);
+  if (event.key === "Escape" && studyRuleAnchor && !event.target.closest(".word-focus-dialog")) hideStudyRule(true);
 });
 
 window.addEventListener("accentchange", () => {
@@ -1577,13 +1550,20 @@ function startStudy(category) {
 }
 
 // ---- 共用小工具 ----
-// 單字 chip：高亮目標拼法（如 cl<u>ou</u>d）並可點擊發音
-function wordChipHtml(w) {
+function answerLetters(w) {
+  const word = w.display || w.word;
+  return word.slice(w.clue[0].length, word.length - w.clue[1].length);
+}
+
+function highlightedSpelling(w) {
   const before = w.clue[0];
   const suffix = w.clue[1];
   const after = isMagicE(w) ? suffix.slice(0, -1) + "<u>e</u>" : suffix;
-  const focus = (w.display || w.word).slice(before.length, before.length + w.missing.length);
-  return `<button type="button" class="word-chip" data-word="${w.word}">${before}<u>${focus}</u>${after} 🔊</button>`;
+  return `${before}<u>${answerLetters(w)}</u>${after}`;
+}
+
+function wordChipHtml(w) {
+  return `<button type="button" class="word-chip" data-word="${w.word}"><span lang="en">${highlightedSpelling(w)}</span> 🔊<span class="study-meaning">${WORD_MEANINGS[w.word]}</span></button>`;
 }
 
 // 把長母音拼法轉成好懂的標籤
@@ -1659,7 +1639,8 @@ function renderVowelCompare(activeType, longWords = WORD_DATABASE.long_vowels) {
     const words = isLong ? longWords : WORD_DATABASE.short_vowels;
     ["a", "e", "i", "o", "u"].forEach((v) => {
       const letter = v.toUpperCase();
-      const example = words.find(word => word.vowel === v && !word.ipa);
+      const example = words.find(word => word.vowel === v &&
+        (!isLong || window.AccentPhonics.longVowelKey(word, r.sounds[v]) === r.sounds[v]));
       const tile = document.createElement("button");
       tile.type = "button";
       tile.className = `study-tile ${r.cls}`;
@@ -1668,7 +1649,9 @@ function renderVowelCompare(activeType, longWords = WORD_DATABASE.long_vowels) {
       tile.setAttribute("aria-label", isLong ? `長母音 ${letter}，聽字母名稱` : `聽短母音 ${letter}`);
       tile.addEventListener("click", () => {
         window.PronunciationAudio.playVowel(isLong ? "letter" : "phoneme-single", isLong ? letter : r.sounds[v]);
-        showStudyRule(isLong ? longVowelRule(example) : shortVowelRule(example), tile);
+        const rule = example ? (isLong ? longVowelRule(example) : shortVowelRule(example))
+          : `字母 ${letter} 的名字唸 ${window.AccentPhonics.label(r.sounds[v])}。`;
+        showStudyRule(rule, tile);
       });
       row.appendChild(tile);
     });
@@ -1717,8 +1700,10 @@ function renderLongVowels(studyData) {
   c.appendChild(renderVowelCompare("long", pool));
 
   Object.entries(studyData.sounds).forEach(([v, key]) => {
-    const name = `長 ${v.toUpperCase()} ${window.AccentPhonics.label(key)}`;
     const words = pool.filter(w => w.vowel === v);
+    const example = words.find(w => window.AccentPhonics.longVowelKey(w, key) === key) || words[0];
+    const exampleKey = window.AccentPhonics.longVowelKey(example, key);
+    const name = `長 ${v.toUpperCase()} ${window.AccentPhonics.label(exampleKey)}`;
 
     // 相同拼法在不同單字裡可能有不同的音，例如 new 和 few 的 ew。
     const rows = new Map();
@@ -1741,7 +1726,7 @@ function renderLongVowels(studyData) {
     const group = document.createElement("div");
     group.className = "vgroup";
     group.innerHTML = `
-      <button type="button" class="vgroup-head long-head" data-ipa="${key}" data-example="${words.find(word => !word.ipa).word}">${name} 🔊</button>
+      <button type="button" class="vgroup-head long-head" data-ipa="${exampleKey}" data-example="${example.word}">${name} 🔊</button>
       <div class="vgroup-body">${rowsHtml}</div>
     `;
     bindVowelButtons(group, words, longVowelRule);
@@ -1771,7 +1756,7 @@ function renderSpecialVowelTable(studyData) {
       .join("");
 
     const wordsHtml = words
-      .map((w) => `<button type="button" class="vt-word" data-word="${w.word}">${w.clue[0]}<u>${w.missing}</u>${w.clue[1]} 🔊</button>`)
+      .map((w) => `<button type="button" class="vt-word" data-word="${w.word}"><span lang="en">${highlightedSpelling(w)}</span> 🔊<span class="study-meaning">${WORD_MEANINGS[w.word]}</span></button>`)
       .join("");
 
     const tr = document.createElement("tr");
@@ -1881,12 +1866,12 @@ function renderSchwaLearn() {
     card.type = "button";
     card.className = "schwa-learn-card";
     card.dataset.word = item.word;
-    card.setAttribute("aria-label", `播放單字 ${item.word}，查看弱化母音`);
+    card.setAttribute("aria-label", `播放 ${item.word}，${WORD_MEANINGS[item.word]}，查看弱化母音`);
     card.appendChild(schwaSyllNode(item));
 
     const meta = document.createElement("span");
     meta.className = "schwa-zh";
-    meta.textContent = `${item.zh} 🔊`;
+    meta.textContent = `${WORD_MEANINGS[item.word]} 🔊`;
     card.appendChild(meta);
 
     card.addEventListener("click", () => {
@@ -1969,6 +1954,10 @@ function loadSchwaQuestion() {
 
   const wordNode = schwaWordNode(item, { asButtons: true });
   quiz.appendChild(wordNode);
+  const meaning = document.createElement("p");
+  meaning.className = "schwa-zh";
+  meaning.textContent = WORD_MEANINGS[item.word];
+  quiz.appendChild(meaning);
 
   const bar = document.createElement("div");
   bar.className = "schwa-bar";
@@ -2151,14 +2140,11 @@ function renderStudyWords() {
     const card = document.createElement("button");
     card.type = "button";
     card.className = "study-word-card";
-    card.setAttribute("aria-label", `播放單字 ${word.word}`);
-
-    // 格式化單字，高亮目標拼音部分（如 cl<u>ou</u>d）
-    const displayMissing = word.missing.replace(/ \[.*?\]/, "");
-    const highlightedHtml = `${word.clue[0]}<u>${displayMissing}</u>${word.clue[1]}`;
+    card.dataset.word = word.word;
+    card.setAttribute("aria-label", `播放 ${word.word}，${WORD_MEANINGS[word.word]}`);
 
     card.innerHTML = `
-      <div class="study-word-text">${highlightedHtml}</div>
+      <span><span class="study-word-text" lang="en">${highlightedSpelling(word)}</span><span class="study-meaning">${WORD_MEANINGS[word.word]}</span></span>
       <span class="study-word-speaker" aria-hidden="true">
         <svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18 6a8.5 8.5 0 0 1 0 12"/></svg>
       </span>

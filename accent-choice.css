@@ -55,6 +55,15 @@
 
 .nav-caption .nav-key { margin-left: 10px; }
 
+.audio-credit {
+  margin: 12px 0;
+  color: #29445d;
+  font-size: .85rem;
+  text-align: center;
+}
+
+.audio-credit a { color: inherit; }
+
 @media (max-width: 410px) {
   .nav-caption { flex-wrap: wrap; gap: 5px; }
   .nav-caption .accent-heading { display: none; }

@@ -1,8 +1,10 @@
 # 澳洲英語發音來源
 
+三種口音共用的子音錄音另列於[子音示範錄音來源](../ATTRIBUTION.md)。
+
 ## 長短母音的真人錄音
 
-下表的 12 個 `phoneme/` 示範取自 Commander Keane 在 Wikimedia Commons 發表的澳洲英語單字錄音。製作時擷取母音，去除低頻雜音，以 Praat 的音高同步疊加法調整時長，再將兩次示範編排成一個 MP3。`phoneme-single/` 中的 5 個短母音取自同名示範的第一聲。原作與這些衍生音檔都採用 [Creative Commons 姓名標示－相同方式分享 4.0 國際授權](https://creativecommons.org/licenses/by-sa/4.0/)。錄音副本取自 [Wiktionary 英語發音資料集](https://huggingface.co/datasets/Reza2kn/wiktionary-ipa-audio-en)。
+下表的 12 個 `phoneme/` 示範取自 Commander Keane 在 Wikimedia Commons 發表的澳洲英語單字錄音。製作時擷取母音，去除低頻雜音，以 Praat 的音高同步疊加法調整時長。每個 MP3 保留一聲完整示範，`phoneme-single/` 中的 5 個短母音與同名示範相同。原作與這些衍生音檔都採用 [Creative Commons 姓名標示－相同方式分享 4.0 國際授權](https://creativecommons.org/licenses/by-sa/4.0/)。錄音副本取自 [Wiktionary 英語發音資料集](https://huggingface.co/datasets/Reza2kn/wiktionary-ipa-audio-en)。
 
 | 教學音 | 檔名 | Commander Keane 的原始錄音 |
 |---|---|---|
@@ -31,9 +33,13 @@
 | `word/wool.mp3` | 第一音節 wool | [woolly](https://commons.wikimedia.org/wiki/File:En-au-woolly.ogg) |
 | `word/lake.mp3` | 將字首 /l/ 和 lake 的韻部交叉淡化銜接 | [lid](https://commons.wikimedia.org/wiki/File:En-au-lid.ogg)、[jake](https://commons.wikimedia.org/wiki/File:En-au-jake.ogg) |
 
+## 字母 Q 的名稱
+
+`letter/Q.mp3` 採用 Commander Keane 親錄的澳式英語 queue，與字母 Q 同音。剪輯時去除前後靜音、轉為單聲道並調整音量。原作與此衍生音檔均採用 CC BY-SA 4.0 授權。[原始錄音](https://commons.wikimedia.org/wiki/File:En-au-queue.ogg) · [授權條款](https://creativecommons.org/licenses/by-sa/4.0/)
+
 ## 合成的單字、字母名稱與其他音素
 
-其餘音檔由 Data Craftsman 的 `en_AU-librivox-medium` 模型合成。主要聲線 Banjo 的訓練錄音來自 LibriVox 志工 Timothy Ferguson。`word/argue.mp3` 使用 LibriVox 朗讀者 Algy Pug 的聲線。教學音檔經過片段擷取、音量調整及 MP3 編碼。[模型與語音示例](https://huggingface.co/DataCraftsmanAustralia/piper-en_AU-librivox-medium)
+除上述真人錄音與三種口音共用的子音示範外，澳洲英語音檔由 Data Craftsman 的 `en_AU-librivox-medium` 模型合成。主要聲線 Banjo 的訓練錄音來自 LibriVox 志工 Timothy Ferguson。`word/argue.mp3` 使用 LibriVox 朗讀者 Algy Pug 的聲線。教學音檔經過片段擷取、音量調整及 MP3 編碼。[模型與語音示例](https://huggingface.co/DataCraftsmanAustralia/piper-en_AU-librivox-medium)
 
 Data Craftsman 以 Creative Commons 姓名標示 4.0 國際授權釋出模型。基礎模型 `en_GB-jenny_dioco-medium` 使用 Jenny（Dioco）錄製的 Jenny TTS 資料集。[模型授權](https://creativecommons.org/licenses/by/4.0/) · [作者完整署名與資料來源](https://huggingface.co/DataCraftsmanAustralia/piper-en_AU-librivox-medium/blob/main/ATTRIBUTION.md) · [Jenny TTS 資料集](https://github.com/dioco-group/jenny-tts-dataset)
 
